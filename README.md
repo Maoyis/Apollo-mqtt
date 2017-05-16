@@ -1,14 +1,23 @@
 #MQTT开发记录
+
+
 **作者：**雷巧勋
+
+
 ##前言
+
 每一次学习都应该有所收获，为了方便以后回顾，避免重复造轮记录下学习中摸索的过程是很有必要的。为了研究MQTT该次选择了Apache-Apollo提供的broker来进行研究,其次该网站也可以了解mqtt相关的一些特点。[详情](http://activemq.apache.org/apollo/index.html)
+
 ##目录
+
 * [前言](##前言)
 * [JAVA_HOME配置](##JAVA_HOME配置)
 * [搭建Broker](##搭建Baoker)
 * [体验Mqtt](##体验Mqtt)
 
+
 ##JAVA_HOME配置
+
 一般开发电脑可能都有java环境，万一没有就[安转](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)一下。
 
 1. 查看java版本 ,没有下载
@@ -69,12 +78,15 @@
 **PS:卸载旧版本**
 
 		rm -rf jdk1.8.0_06.jdk
+
 ##搭建Baoker
+
 鉴于[Apache-apollo](http://activemq.apache.org/apollo/download.html)较之[Mosquitto](http://mosquitto.org)而言比较方便与直观，该次broker决定用Apache-apollo来作为Mqtt的broker；
 
 **PS:该文这针对Mac其他系统请去[官方](http://activemq.apache.org/apollo)详细了解**
 
 ###下载Apollo
+
 1. 此处由于之针对自己macbook而言选择[OS X](http://apache.fayea.com/activemq/activemq-apollo/1.7.1/apache-apollo-1.7.1-unix-distro.tar.gz)版本下载
 2. 将下载好的文件解压到适当的目录（最好单独新建一个方便后续整理）。解压后会apache-apollo-xxx文件夹，该文件夹默认为环境变量${APOLLO_HOME}；
 3. 接下来创建broker，有两种方式
@@ -126,6 +138,8 @@
 至此属于我们自己的Broker就算搭建完成了
 
 ##体验Mqtt
+
+
 再一次进入初始解压目录中，打开/examples 其中有一些简单客户端。我们打开其中的mqtt/websocket/index.html即可 点击 connect 后回到broker的可视化观测界面我们就能够看到我们刚刚建立的链接，以及发布的主题（Topic）
 
 进一步开发看你想用哪一种语言咯，mqtt个人感觉在弱网络环境下进行实时通讯是一个绝佳选择（例如被用于智能家居上）
