@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Mqtt</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0">MQTT开发记录</h1>
+
+<p><strong>作者：</strong>雷巧勋</p>
+
+<h2 id="toc_1">前言</h2>
+
+<p>每一次学习都应该有所收获，为了方便以后回顾，避免重复造轮记录下学习中摸索的过程是很有必要的。为了研究MQTT该次选择了Apache-Apollo提供的broker来进行研究,其次该网站也可以了解mqtt相关的一些特点。<a href="http://activemq.apache.org/apollo/index.html">详情</a></p>
+
+<h2 id="toc_2">目录</h2>
+
+<ul>
+<li><a href="##%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="##JAVA_HOME%E9%85%8D%E7%BD%AE">JAVA_HOME配置</a></li>
+<li><a href="##%E6%90%AD%E5%BB%BABaoker">搭建Broker</a></li>
+<li><a href="##%E4%BD%93%E9%AA%8CMqtt">体验Mqtt</a></li>
+</ul>
+
+<h2 id="toc_3">JAVA_HOME配置</h2>
+
+<p>一般开发电脑可能都有java环境，万一没有就<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">安转</a>一下。</p>
+
+<ol>
+<li><p>查看java版本 ,没有下载
+//在终端输入下面命令来查看是否有java环境有则显示版本，没有弹出提示框，点详情下载安转即可
+java -version
+下载安装成功后再次输入，结果如下：</p>
+
+<div><pre><code class="language-none">//视下载jdk版本有所不同
+java version &quot;1.8.0_131&quot;
+Java(TM) SE Runtime Environment (build 1.8.0_131-b11)
+Java HotSpot(TM) 64-Bit Server VM (build 25.131-b11, mixed mode)</code></pre></div></li>
+<li><p>查看JAVA_HOME</p>
+
+<div><pre><code class="language-none">cd $JAVA_HOME
+//结果
+macbook:Home pro$ </code></pre></div></li>
+<li><p>如果第2步失败，
+参考苹果官方说明：<a href="https://developer.apple.com/library/content/qa/qa1170/_index.html">Important Java Directories on Mac OS X</a></p>
+
+<div><pre><code class="language-none">ls -l /usr/libexec/java_home
+//result:
+lrwxr-xr-x  1 root  wheel  79  1 11 21:16 /usr/libexec/java_home -&gt; /System/Library/Frameworks/JavaVM.framework/Versions/Current/Commands/java_home </code></pre></div>
+
+<p>事实上这并没有定位到真实路径（原因：Mac OSX 10.9以后系统就自带了Java 6的环境，路径在:/Library/Java/JavaVirtualMachines文件夹下）</p>
+
+<div><pre><code class="language-none">$cd /Library/Java/JavaVirtualMachines
+$ls
+//result:
+jdk1.8.0_131.jdk//(终于找到我们安转的jdk了)
+
+$/usr/libexec/java_home
+//result:这次就是真实路径
+/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home
+
+$/usr/libexec/java_home -V 
+//result:全部版本JAVA_HOME
+Matching Java Virtual Machines (1):
+1.8.0_131, x86_64:  &quot;Java SE 8&quot; /Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home
+
+/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home</code></pre></div></li>
+<li><p>如果2成功找到路径可忽略，否则就需要设置JAVA_HOME了</p>
+
+<div><pre><code class="language-none">//跳转到根目录显示查看所有.a配置文件
+cd
+ls -a
+
+添加java_home到.bash_profile文件中
+export JAVA_HOME=$(/usr/libexec/java_home)
+export PATH=$JAVA_HOME/bin:$PATH
+export CLASS_PATH=$JAVA_HOME/lib</code></pre></div>
+
+<p><em>(PS:Mac OSX 10.5之后苹果就建议设置$JAVA<em>HOME变量到/usr/libexec/java</em>home)</em></p></li>
+</ol>
+
+<p>再次执行2成功则说明：我们就已经配置好了全局的java的path和classpath环境变量</p>
+
+<p><strong>PS:卸载旧版本</strong></p>
+
+<div><pre><code class="language-none">    rm -rf jdk1.8.0_06.jdk</code></pre></div>
+
+<h2 id="toc_4">搭建Baoker</h2>
+
+<p>鉴于<a href="http://activemq.apache.org/apollo/download.html">Apache-apollo</a>较之<a href="http://mosquitto.org">Mosquitto</a>而言比较方便与直观，该次broker决定用Apache-apollo来作为Mqtt的broker；</p>
+
+<p><strong>PS:该文这针对Mac其他系统请去<a href="http://activemq.apache.org/apollo">官方</a>详细了解</strong></p>
+
+<h3 id="toc_5">下载Apollo</h3>
+
+<ol>
+<li>此处由于之针对自己macbook而言选择<a href="http://apache.fayea.com/activemq/activemq-apollo/1.7.1/apache-apollo-1.7.1-unix-distro.tar.gz">OS X</a>版本下载</li>
+<li>将下载好的文件解压到适当的目录（最好单独新建一个方便后续整理）。解压后会apache-apollo-xxx文件夹，该文件夹默认为环境变量${APOLLO_HOME}；</li>
+<li><p>接下来创建broker，有两种方式</p>
+
+<div><pre><code class="language-none">cd 放置broker路径（建议就放在2创建的文件夹中方便以后查看或整理）
+方法一：通过环境变量 （相对路径）创建
+${APOLLO_HOME}/bin/apollo create MyBroker
+//上面是通过环境变量直接创建，如果失败说明之前操作有些问题导致环境变量配置失败。
+方法二：将apollo拖入终端用绝对地址 创建
+xxx/bin/apollo create MyBroker #在当前目录下生成一个mqtt_test目录,其下面包含:
+
+*****运行结果*******
+Creating apollo instance at: MyBroker
+Generating ssl keystore...
+
+You can now start the broker by executing:  
+ &quot;/Users/lqx/Desktop/未命名文件夹/MyBroker/bin/apollo-broker&quot; run
+
+Or you can run the broker in the background using:
+ &quot;/Users/lqx/Desktop/未命名文件夹/MyBroker/bin/apollo-broker-service&quot; start</code></pre></div>
+
+<p><em>PS：此处需要java环境，参考上文JAVA_HOME配置</em></p>
+
+<p>成功后文件目录大致应该是这个样子：</p>
+
+<p><strong>bin</strong>  运行脚本</p>
+
+<p><strong>etc</strong> 环境配置</p>
+
+<p><strong>data</strong> 存储持久化数据</p>
+
+<p><strong>log</strong>  运行日志</p>
+
+<p><strong>tmp</strong> 临时文件</p></li>
+<li><p>接下来运行我们的broker</p>
+
+<div><pre><code class="language-none">cd MyBroker(3创建的文件夹)
+apollo-broker run</code></pre></div>
+
+<p><img src="img/apollo-run-result.png" alt="apollo运行结果"></p></li>
+<li><p>由于apollo提供了可视化web界面（这也就是我选择他的原因），我们在safari中输入
+<a href="http://127.0.0.1:61680/">http://127.0.0.1:61680/</a>（http访问） 或者 <a href="https://127.0.0.1:61681/">https://127.0.0.1:61681/</a>（https访问，可用于研究mqtt+ssl）输入用户名密码即可登录（默认用户名：admin 密码：password）</p></li>
+</ol>
+
+<p>至此属于我们自己的Broker就算搭建完成了</p>
+
+<h2 id="toc_6">体验Mqtt</h2>
+
+<p>再一次进入初始解压目录中，打开/examples 其中有一些简单客户端。我们打开其中的mqtt/websocket/index.html即可 点击 connect 后回到broker的可视化观测界面我们就能够看到我们刚刚建立的链接，以及发布的主题（Topic）</p>
+
+<p>进一步开发看你想用哪一种语言咯，mqtt个人感觉在弱网络环境下进行实时通讯是一个绝佳选择（例如被用于智能家居上）</p>
+
+
+
+
+</body>
+
+</html>

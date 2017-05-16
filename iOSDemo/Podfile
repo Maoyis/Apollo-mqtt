@@ -1,0 +1,6 @@
+platform:ios,'7.0'
+
+pod 'MQTTClient', '~> 0.8.5'
+pod 'FontAwesomeKit', '~> 2.2.0'
+pod 'ARCGPathFromString', '~> 1.0.0'
+
