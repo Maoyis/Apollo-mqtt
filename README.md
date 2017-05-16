@@ -142,7 +142,21 @@
 
 再一次进入初始解压目录中，打开/examples 其中有一些简单客户端。我们打开其中的mqtt/websocket/index.html即可 点击 connect 后回到broker的可视化观测界面我们就能够看到我们刚刚建立的链接，以及发布的主题（Topic）
 
+
 进一步开发看你想用哪一种语言咯，mqtt个人感觉在弱网络环境下进行实时通讯是一个绝佳选择（例如被用于智能家居上）
+
+## demo简介
+demo是之前随意写来研究MQTT各个特性的，所以有些粗糙，但用于了解和体验MQTT还是可以的，其中证书无法通用便删掉了同时也注释了ssl部分。
+
+![demo](img/app.png)
+
+"ios" = 订阅Topic
+
+“fkl” = 发布topic
+
+下载后如果需要真机运行，请现更改 LoginVC与ChartVC 文件中 的 HOST 值
+
+
 
 
 		
