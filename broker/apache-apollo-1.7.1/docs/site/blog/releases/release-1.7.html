@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd"> 
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  Architecture
+-->
+<html lang="en">
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta content="ActiveMQ's next generation of messaging" name="description"/>
+    <meta content="messaging,stomp,jms,activemq,apollo" name="keywords"/>
+    <meta content="Apollo" name="author"/>
+    <script src="../../scripts/jquery.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../styles/impact/css/pygmentize.css"/>
+    <link type="text/css" rel="stylesheet" href="../../styles/impact/css/site.css"/>
+    <title>Apollo 1.7</title>
+  </head>
+  <body>
+    <div id="navigation">
+      <div class="wrapper">
+<ul>
+<li><a href="../../index.html">Apollo 1.7.1</a></li>
+<li><a href="../../community/developers.html">Developers</a></li>
+<li><a href="../../community/index.html">Community</a></li>
+<li><a href="../../download.html">Download</a></li>
+</ul>        <div></div>
+      </div>
+    </div>
+    <div id="content">
+      <div class="wrapper">
+<p>The <a href="http://activemq.apache.org">Apache ActiveMQ Project</a> is pleased to announce the 
+availability of Apollo 1.7. ActiveMQ Apollo is a faster, more reliable, easier 
+to maintain messaging broker built from the foundations of the original ActiveMQ. </p>
+
+<p>This release fixes several bugs:</p>
+
+<ul>
+<li>[APLO-287] - SSL errors with Java 7 (Diffie-Hellman cypher suite sessions)</li>
+<li>[APLO-305] - Wrong exist status codes in the init scripts!</li>
+<li>[APLO-308] - Filesystem permissions in released package are broken..</li>
+<li>[APLO-310] - Wildcard durable subs do not receive messages from topics created after the durable sub is created.</li>
+<li>[APLO-315] - Apollo should protect itself against clients that send many frames with receipt requests, but which do not read the socket for those receipts.</li>
+<li>[APLO-319] - Don't auto delete Topics if it's holding retained messages</li>
+<li>[APLO-320] - Occasionally on restart 'Invalid log position:' warning messages get logged</li>
+<li>[APLO-328] - cors_origin configuration attribute of the the web connectors not properly setting the Access-Control-Allow-Headers</li>
+<li>[APLO-330] - Support using a different Authorizer Authenticator implementations.</li>
+<li>[APLO-338] - PeriodStat buffer in Broker grows infinitely</li>
+<li>[APLO-339] - java.nio.channels.CancelledKeyException</li>
+<li>[APLO-346] - Debug log doesn't log a deleting queue</li>
+<li>[APLO-347] - Action not Authorized Errors when viewing admin interface over HTTPS</li>
+<li>[APLO-349] - Empty STOMP Header Name is Allowed</li>
+</ul>
+
+<p>And introduces improvements like:</p>
+
+<ul>
+<li>[APLO-296] - Support configuring the LevelDB auto compaction frequency</li>
+<li>[APLO-312] - Apollo fails to bumb up the ulimit!</li>
+<li>[APLO-325] - Allow larger text messages on websocket connection</li>
+<li>[APLO-348] - Decouple cli argument parsing from the Karaf version used using Airline to parse the args</li>
+<li>[APLO-213] - Support an option to set the JMSXUserID openwire header based on the authenticated user.</li>
+<li>[APLO-313] - Avoid blocking producers if consumers are not likely to catch up within a few seconds.</li>
+<li>[APLO-314] - If the leveldb paranoid_checks option is enabled, verify the integrity of index when it's copied/checkpointed
+<ul>
+<li>[APLO-301] - Add a &ldquo;ttl&rdquo; header to control message expiration</li>
+</ul></li>
+</ul>
+
+<p>For further information see:</p>
+
+<ul>
+<li><a href="http://activemq.apache.org/apollo/download.html">Download</a></li>
+<li><a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?version=12322515&amp;styleName=Text&amp;projectId=12311310&amp;Create=Create">Issues Fixed</a></li>
+<li><a href="http://activemq.apache.org/apollo/versions/1.7/website/documentation">Documentation</a></li>
+</ul>
+
+<p><a href="http://activemq.apache.org/community/index.html">Feedback</a> is always welcomed!</p>
+        <div></div>
+      </div>
+    </div>
+  </body>
+</html>

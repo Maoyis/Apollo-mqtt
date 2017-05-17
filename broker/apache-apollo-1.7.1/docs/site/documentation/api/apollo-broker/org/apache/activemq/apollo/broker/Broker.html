@@ -1,0 +1,1404 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>Broker - apollo-broker 1.7.1 API - org.apache.activemq.apollo.broker.Broker</title>
+          <meta name="description" content="Broker - apollo - broker 1.7.1 API - org.apache.activemq.apollo.broker.Broker" />
+          <meta name="keywords" content="Broker apollo broker 1.7.1 API org.apache.activemq.apollo.broker.Broker" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../../../../index.html';
+            var hash = 'org.apache.activemq.apollo.broker.Broker';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="type">
+      <div id="definition">
+        <a href="Broker$.html" title="Go to companion"><img src="../../../../../lib/class_to_object_big.png" /></a>
+        <p id="owner"><a href="../../../../package.html" class="extype" name="org">org</a>.<a href="../../../package.html" class="extype" name="org.apache">apache</a>.<a href="../../package.html" class="extype" name="org.apache.activemq">activemq</a>.<a href="../package.html" class="extype" name="org.apache.activemq.apollo">apollo</a>.<a href="package.html" class="extype" name="org.apache.activemq.apollo.broker">broker</a></p>
+        <h1><a href="Broker$.html" title="Go to companion">Broker</a></h1>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Broker</span><span class="result"> extends <span class="extype" name="org.apache.activemq.apollo.util.BaseService">BaseService</span> with <a href="security/SecuredResource.html" class="extype" name="org.apache.activemq.apollo.broker.security.SecuredResource">SecuredResource</a> with <a href="PluginStateSupport.html" class="extype" name="org.apache.activemq.apollo.broker.PluginStateSupport">PluginStateSupport</a></span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A Broker is parent object of all services assoicated with the serverside of
+a message passing system.  It keeps track of all running connections,
+virtual hosts and assoicated messaging destintations.</p></div><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><a href="PluginStateSupport.html" class="extype" name="org.apache.activemq.apollo.broker.PluginStateSupport">PluginStateSupport</a>, <a href="security/SecuredResource.html" class="extype" name="org.apache.activemq.apollo.broker.security.SecuredResource">SecuredResource</a>, <span class="extype" name="org.apache.activemq.apollo.util.BaseService">BaseService</span>, <span class="extype" name="org.apache.activemq.apollo.util.Dispatched">Dispatched</span>, <span class="extype" name="org.apache.activemq.apollo.util.Service">Service</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="org.apache.activemq.apollo.broker.Broker"><span>Broker</span></li><li class="in" name="org.apache.activemq.apollo.broker.PluginStateSupport"><span>PluginStateSupport</span></li><li class="in" name="org.apache.activemq.apollo.broker.security.SecuredResource"><span>SecuredResource</span></li><li class="in" name="org.apache.activemq.apollo.util.BaseService"><span>BaseService</span></li><li class="in" name="org.apache.activemq.apollo.util.Dispatched"><span>Dispatched</span></li><li class="in" name="org.apache.activemq.apollo.util.Service"><span>Service</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        <div id="constructors" class="members">
+              <h3>Instance Constructors</h3>
+              <ol><li name="org.apache.activemq.apollo.broker.Broker#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="&lt;init&gt;():org.apache.activemq.apollo.broker.Broker"></a>
+      <a id="&lt;init&gt;:Broker"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">new</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Broker</span><span class="params">()</span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="org.apache.activemq.apollo.util.BaseService.CREATED" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="CREATEDextendsBaseService.this.State"></a>
+      <a id="CREATED:CREATED"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">CREATED</span><span class="result"> extends <span class="extype" name="org.apache.activemq.apollo.util.BaseService.State">State</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>BaseService</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.BaseService.FAILED" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="FAILEDextendsBaseService.this.State"></a>
+      <a id="FAILED:FAILED"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">FAILED</span><span class="result"> extends <span class="extype" name="org.apache.activemq.apollo.util.BaseService.State">State</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>BaseService</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.Broker.PeriodStat" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PeriodStatextendsObject"></a>
+      <a id="PeriodStat:PeriodStat"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Broker$PeriodStat.html"><span class="name">PeriodStat</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.util.BaseService.STARTED" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="STARTEDextendsBaseService.this.State"></a>
+      <a id="STARTED:STARTED"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">STARTED</span><span class="result"> extends <span class="extype" name="org.apache.activemq.apollo.util.BaseService.State">State</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>BaseService</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.BaseService.STARTING" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="STARTINGextendsBaseService.this.State"></a>
+      <a id="STARTING:STARTING"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">STARTING</span><span class="result"> extends <span class="extype" name="org.apache.activemq.apollo.util.BaseService.State">State</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>BaseService</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.BaseService.STOPPED" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="STOPPEDextendsBaseService.this.State"></a>
+      <a id="STOPPED:STOPPED"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">STOPPED</span><span class="result"> extends <span class="extype" name="org.apache.activemq.apollo.util.BaseService.State">State</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>BaseService</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.BaseService.STOPPING" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="STOPPINGextendsBaseService.this.State"></a>
+      <a id="STOPPING:STOPPING"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">STOPPING</span><span class="result"> extends <span class="extype" name="org.apache.activemq.apollo.util.BaseService.State">State</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>BaseService</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.BaseService.State" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="StateextendsObject"></a>
+      <a id="State:State"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">State</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>BaseService</dd></dl></div>
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:AnyRef):Boolean"></a>
+      <a id="!=(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a>
+      <a id="!=(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
+      <a id="##():Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:AnyRef):Boolean"></a>
+      <a id="==(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a>
+      <a id="==(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.Broker.PeriodStat" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PeriodStat"></a>
+      <a id="PeriodStat:PeriodStat"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Broker$PeriodStat$.html"><span class="name">PeriodStat</span></a>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.util.BaseService#_service_failure" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_service_failure:Throwable"></a>
+      <a id="_service_failure:Throwable"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">_service_failure</span><span class="result">: <span class="extype" name="scala.Throwable">Throwable</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>BaseService</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.BaseService#_service_state" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_service_state:BaseService.this.State"></a>
+      <a id="_service_state:State"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">_service_state</span><span class="result">: <a href="#StateextendsObject" class="extmbr" name="org.apache.activemq.apollo.broker.Broker.State">State</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>BaseService</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.Broker#_start" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_start(on_completed:org.fusesource.hawtdispatch.Task):Unit"></a>
+      <a id="_start(Task):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">_start</span><span class="params">(<span name="on_completed">on_completed: <span class="extype" name="org.fusesource.hawtdispatch.Task">Task</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.apache.activemq.apollo.broker.Broker">Broker</a> → BaseService</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.BaseService#_start_transition_counter" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_start_transition_counter:Int"></a>
+      <a id="_start_transition_counter:Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">_start_transition_counter</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>BaseService</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.Broker#_stop" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_stop(on_completed:org.fusesource.hawtdispatch.Task):Unit"></a>
+      <a id="_stop(Task):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">_stop</span><span class="params">(<span name="on_completed">on_completed: <span class="extype" name="org.fusesource.hawtdispatch.Task">Task</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.apache.activemq.apollo.broker.Broker">Broker</a> → BaseService</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.Broker#accepting_connector" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="accepting_connector(id:String):Option[org.apache.activemq.apollo.broker.AcceptingConnector]"></a>
+      <a id="accepting_connector(String):Option[AcceptingConnector]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">accepting_connector</span><span class="params">(<span name="id">id: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<a href="AcceptingConnector.html" class="extype" name="org.apache.activemq.apollo.broker.AcceptingConnector">AcceptingConnector</a>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#apply_update" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply_update(tracker:org.apache.activemq.apollo.util.LoggingTracker):Unit"></a>
+      <a id="apply_update(LoggingTracker):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">apply_update</span><span class="params">(<span name="tracker">tracker: <span class="extype" name="org.apache.activemq.apollo.util.LoggingTracker">LoggingTracker</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
+      <a id="asInstanceOf[T0]:T0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.Dispatched#assert_executing" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="assert_executing:Unit"></a>
+      <a id="assert_executing:Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">assert_executing</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Dispatched</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.Broker#audit_log" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="audit_log:org.apache.activemq.apollo.util.Log"></a>
+      <a id="audit_log:Log"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">audit_log</span><span class="result">: <span class="extype" name="org.apache.activemq.apollo.util.Log">Log</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#authenticator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="authenticator:org.apache.activemq.apollo.broker.security.Authenticator"></a>
+      <a id="authenticator:Authenticator"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">authenticator</span><span class="result">: <a href="security/Authenticator.html" class="extype" name="org.apache.activemq.apollo.broker.security.Authenticator">Authenticator</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#authorizer" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="authorizer:org.apache.activemq.apollo.broker.security.Authorizer"></a>
+      <a id="authorizer:Authorizer"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">authorizer</span><span class="result">: <a href="security/Authorizer.html" class="extype" name="org.apache.activemq.apollo.broker.security.Authorizer">Authorizer</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#auto_tuned_send_receiver_buffer_size" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="auto_tuned_send_receiver_buffer_size:Int"></a>
+      <a id="auto_tuned_send_receiver_buffer_size:Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">auto_tuned_send_receiver_buffer_size</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.PluginStateSupport#clear_plugin_state" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clear_plugin_state[T](clazz:Class[T]):T"></a>
+      <a id="clear_plugin_state[T](Class[T]):T"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">clear_plugin_state</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="clazz">clazz: <span class="extype" name="scala.Predef.Class">Class</span>[<span class="extype" name="org.apache.activemq.apollo.broker.PluginStateSupport.clear_plugin_state.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="org.apache.activemq.apollo.broker.PluginStateSupport.clear_plugin_state.T">T</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Used to clear out previously set plugin state.</p><div class="fullcomment"><div class="comment cmt"><p>Used to clear out previously set plugin state.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="PluginStateSupport.html" class="extype" name="org.apache.activemq.apollo.broker.PluginStateSupport">PluginStateSupport</a></dd></dl></div>
+    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a>
+      <a id="clone():AnyRef"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.Broker#config" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="config:org.apache.activemq.apollo.dto.BrokerDTO"></a>
+      <a id="config:BrokerDTO"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">config</span><span class="result">: <span class="extype" name="org.apache.activemq.apollo.dto.BrokerDTO">BrokerDTO</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#config_log" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="config_log:org.apache.activemq.apollo.util.Log"></a>
+      <a id="config_log:Log"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">config_log</span><span class="result">: <span class="extype" name="org.apache.activemq.apollo.util.Log">Log</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#connection_id_counter" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="connection_id_counter:org.apache.activemq.apollo.util.LongCounter"></a>
+      <a id="connection_id_counter:LongCounter"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">connection_id_counter</span><span class="result">: <span class="extype" name="org.apache.activemq.apollo.util.LongCounter">LongCounter</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#connection_log" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="connection_log:org.apache.activemq.apollo.util.Log"></a>
+      <a id="connection_log:Log"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">connection_log</span><span class="result">: <span class="extype" name="org.apache.activemq.apollo.util.Log">Log</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#connections" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="connections:scala.collection.mutable.LinkedHashMap[Long,org.apache.activemq.apollo.broker.BrokerConnection]"></a>
+      <a id="connections:LinkedHashMap[Long,BrokerConnection]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">connections</span><span class="result">: <span class="extype" name="scala.collection.mutable.LinkedHashMap">LinkedHashMap</span>[<span class="extype" name="scala.Long">Long</span>, <a href="BrokerConnection.html" class="extype" name="org.apache.activemq.apollo.broker.BrokerConnection">BrokerConnection</a>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#connectors" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="connectors:scala.collection.mutable.LinkedHashMap[String,org.apache.activemq.apollo.broker.Connector]"></a>
+      <a id="connectors:LinkedHashMap[String,Connector]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">connectors</span><span class="result">: <span class="extype" name="scala.collection.mutable.LinkedHashMap">LinkedHashMap</span>[<span class="extype" name="java.lang.String">String</span>, <a href="Connector.html" class="extype" name="org.apache.activemq.apollo.broker.Connector">Connector</a>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#console_log" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="console_log:org.apache.activemq.apollo.util.Log"></a>
+      <a id="console_log:Log"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">console_log</span><span class="result">: <span class="extype" name="org.apache.activemq.apollo.util.Log">Log</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#container" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="container:AnyRef"></a>
+      <a id="container:AnyRef"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">container</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">A reference to a container that created the broker.</p><div class="fullcomment"><div class="comment cmt"><p>A reference to a container that created the broker.
+This might something like an ServletContext or an OSGi service factory.
+</p></div></div>
+    </li><li name="org.apache.activemq.apollo.broker.Broker#cow_virtual_hosts_by_hostname" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="cow_virtual_hosts_by_hostname:scala.collection.immutable.Map[org.fusesource.hawtbuf.AsciiBuffer,org.apache.activemq.apollo.broker.VirtualHost]"></a>
+      <a id="cow_virtual_hosts_by_hostname:Map[AsciiBuffer,VirtualHost]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">cow_virtual_hosts_by_hostname</span><span class="result">: <span class="extype" name="scala.collection.immutable.Map">Map</span>[<span class="extype" name="org.fusesource.hawtbuf.AsciiBuffer">AsciiBuffer</span>, <a href="VirtualHost.html" class="extype" name="org.apache.activemq.apollo.broker.VirtualHost">VirtualHost</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">This is a copy of the virtual_hosts_by_hostname variable which
+can be accessed by any thread.</p>
+    </li><li name="org.apache.activemq.apollo.broker.Broker#current_period" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="current_period:Broker.this.PeriodStat"></a>
+      <a id="current_period:PeriodStat"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">current_period</span><span class="result">: <a href="Broker$PeriodStat.html" class="extype" name="org.apache.activemq.apollo.broker.Broker.PeriodStat">PeriodStat</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#default_virtual_host" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="default_virtual_host:org.apache.activemq.apollo.broker.VirtualHost"></a>
+      <a id="default_virtual_host:VirtualHost"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">default_virtual_host</span><span class="result">: <a href="VirtualHost.html" class="extype" name="org.apache.activemq.apollo.broker.VirtualHost">VirtualHost</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#dispatch_queue" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="dispatch_queue:org.fusesource.hawtdispatch.DispatchQueue"></a>
+      <a id="dispatch_queue:DispatchQueue"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">dispatch_queue</span><span class="result">: <span class="extype" name="org.fusesource.hawtdispatch.DispatchQueue">DispatchQueue</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.apache.activemq.apollo.broker.Broker">Broker</a> → Dispatched</dd></dl></div>
+    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a>
+      <a id="eq(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a>
+      <a id="equals(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
+      <a id="finalize():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.Broker#first_accepting_connector" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="first_accepting_connector:Option[org.apache.activemq.apollo.broker.AcceptingConnector]"></a>
+      <a id="first_accepting_connector:Option[AcceptingConnector]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">first_accepting_connector</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<a href="AcceptingConnector.html" class="extype" name="org.apache.activemq.apollo.broker.AcceptingConnector">AcceptingConnector</a>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClass():Class[_]"></a>
+      <a id="getClass():Class[_]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.Broker#getConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="getConfig():org.apache.activemq.apollo.dto.BrokerDTO"></a>
+      <a id="getConfig():BrokerDTO"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getConfig</span><span class="params">()</span><span class="result">: <span class="extype" name="org.apache.activemq.apollo.dto.BrokerDTO">BrokerDTO</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#getTmp" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="getTmp():java.io.File"></a>
+      <a id="getTmp():File"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getTmp</span><span class="params">()</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#get_connect_address" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="get_connect_address:String"></a>
+      <a id="get_connect_address:String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">get_connect_address</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#get_default_virtual_host" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="get_default_virtual_host:org.apache.activemq.apollo.broker.VirtualHost"></a>
+      <a id="get_default_virtual_host:VirtualHost"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">get_default_virtual_host</span><span class="result">: <a href="VirtualHost.html" class="extype" name="org.apache.activemq.apollo.broker.VirtualHost">VirtualHost</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#get_socket_address" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="get_socket_address(id:String):java.net.SocketAddress"></a>
+      <a id="get_socket_address(String):SocketAddress"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">get_socket_address</span><span class="params">(<span name="id">id: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.net.SocketAddress">SocketAddress</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#get_socket_address" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="get_socket_address:java.net.SocketAddress"></a>
+      <a id="get_socket_address:SocketAddress"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">get_socket_address</span><span class="result">: <span class="extype" name="java.net.SocketAddress">SocketAddress</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#get_virtual_host" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="get_virtual_host(name:org.fusesource.hawtbuf.AsciiBuffer):org.apache.activemq.apollo.broker.VirtualHost"></a>
+      <a id="get_virtual_host(AsciiBuffer):VirtualHost"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">get_virtual_host</span><span class="params">(<span name="name">name: <span class="extype" name="org.fusesource.hawtbuf.AsciiBuffer">AsciiBuffer</span></span>)</span><span class="result">: <a href="VirtualHost.html" class="extype" name="org.apache.activemq.apollo.broker.VirtualHost">VirtualHost</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hashCode():Int"></a>
+      <a id="hashCode():Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.Broker#id" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="id:String"></a>
+      <a id="id:String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">id</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.apache.activemq.apollo.broker.Broker">Broker</a> → <a href="security/SecuredResource.html" class="extype" name="org.apache.activemq.apollo.broker.security.SecuredResource">SecuredResource</a></dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.Broker#init_logs" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="init_logs:Unit"></a>
+      <a id="init_logs:Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">init_logs</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.Broker#key_storage" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="key_storage:org.apache.activemq.apollo.broker.KeyStorage"></a>
+      <a id="key_storage:KeyStorage"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">key_storage</span><span class="result">: <a href="KeyStorage.html" class="extype" name="org.apache.activemq.apollo.broker.KeyStorage">KeyStorage</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#max_connections_in_5min" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="max_connections_in_5min:Int"></a>
+      <a id="max_connections_in_5min:Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">max_connections_in_5min</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a>
+      <a id="ne(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
+      <a id="notify():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
+      <a id="notifyAll():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.Broker#now" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="now:Long"></a>
+      <a id="now:Long"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">now</span><span class="result">: <span class="extype" name="scala.Long">Long</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@volatile</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.PluginStateSupport#plugin_state" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="plugin_state[T](factory:=&gt;T,clazz:Class[T]):T"></a>
+      <a id="plugin_state[T](⇒T,Class[T]):T"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">plugin_state</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="factory">factory: ⇒ <span class="extype" name="org.apache.activemq.apollo.broker.PluginStateSupport.plugin_state.T">T</span></span>, <span name="clazz">clazz: <span class="extype" name="scala.Predef.Class">Class</span>[<span class="extype" name="org.apache.activemq.apollo.broker.PluginStateSupport.plugin_state.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="org.apache.activemq.apollo.broker.PluginStateSupport.plugin_state.T">T</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Plugins can associate state data with the virtual host instance
+using this method.</p><div class="fullcomment"><div class="comment cmt"><p>Plugins can associate state data with the virtual host instance
+using this method.  The factory will be used to create the state
+if it does not yet exist.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="PluginStateSupport.html" class="extype" name="org.apache.activemq.apollo.broker.PluginStateSupport">PluginStateSupport</a></dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.Broker#resource_kind" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="resource_kind:org.apache.activemq.apollo.broker.security.SecuredResource.BrokerKind.type"></a>
+      <a id="resource_kind:BrokerKind.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">resource_kind</span><span class="result">: <a href="security/SecuredResource$$BrokerKind$.html" class="extype" name="org.apache.activemq.apollo.broker.security.SecuredResource.BrokerKind">BrokerKind</a>.type</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.apache.activemq.apollo.broker.Broker">Broker</a> → <a href="security/SecuredResource.html" class="extype" name="org.apache.activemq.apollo.broker.security.SecuredResource">SecuredResource</a></dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.Broker#roll_current_period" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="roll_current_period:Unit"></a>
+      <a id="roll_current_period:Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">roll_current_period</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.security.SecuredResource#rules_cache" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="rules_cache:org.apache.activemq.apollo.broker.security.SecuredResource.SecurityRules"></a>
+      <a id="rules_cache:SecurityRules"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">rules_cache</span><span class="result">: <a href="security/SecuredResource$$SecurityRules.html" class="extype" name="org.apache.activemq.apollo.broker.security.SecuredResource.SecurityRules">SecurityRules</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="security/SecuredResource.html" class="extype" name="org.apache.activemq.apollo.broker.security.SecuredResource">SecuredResource</a></dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.BaseService#schedule_reoccurring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="schedule_reoccurring(time:Long,unit:java.util.concurrent.TimeUnit)(func:=&gt;Unit):Unit"></a>
+      <a id="schedule_reoccurring(Long,TimeUnit)(⇒Unit):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">schedule_reoccurring</span><span class="params">(<span name="time">time: <span class="extype" name="scala.Long">Long</span></span>, <span name="unit">unit: <span class="extype" name="java.util.concurrent.TimeUnit">TimeUnit</span></span>)</span><span class="params">(<span name="func">func: ⇒ <span class="extype" name="scala.Unit">Unit</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>BaseService</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.Broker#security_log" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="security_log:org.apache.activemq.apollo.util.Log"></a>
+      <a id="security_log:Log"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">security_log</span><span class="result">: <span class="extype" name="org.apache.activemq.apollo.util.Log">Log</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.util.BaseService#service_failure" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="service_failure():Throwable"></a>
+      <a id="service_failure():Throwable"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">service_failure</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Throwable">Throwable</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>BaseService → Service</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.BaseService#service_state" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="service_state:BaseService.this.State"></a>
+      <a id="service_state:State"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">service_state</span><span class="result">: <a href="#StateextendsObject" class="extmbr" name="org.apache.activemq.apollo.broker.Broker.State">State</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>BaseService</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.Broker#services" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="services:scala.collection.immutable.Map[org.apache.activemq.apollo.dto.CustomServiceDTO,org.apache.activemq.apollo.util.Service]"></a>
+      <a id="services:Map[CustomServiceDTO,Service]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">services</span><span class="result">: <span class="extype" name="scala.collection.immutable.Map">Map</span>[<span class="extype" name="org.apache.activemq.apollo.dto.CustomServiceDTO">CustomServiceDTO</span>, <span class="extype" name="org.apache.activemq.apollo.util.Service">Service</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#setConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="setConfig(x$1:org.apache.activemq.apollo.dto.BrokerDTO):Unit"></a>
+      <a id="setConfig(BrokerDTO):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">setConfig</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="org.apache.activemq.apollo.dto.BrokerDTO">BrokerDTO</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#setTmp" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="setTmp(x$1:java.io.File):Unit"></a>
+      <a id="setTmp(File):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">setTmp</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#ssl_context" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ssl_context(protocol:String):javax.net.ssl.SSLContext"></a>
+      <a id="ssl_context(String):SSLContext"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ssl_context</span><span class="params">(<span name="protocol">protocol: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="javax.net.ssl.SSLContext">SSLContext</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#start" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="start(on_completed:org.fusesource.hawtdispatch.Task):Unit"></a>
+      <a id="start(Task):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">start</span><span class="params">(<span name="on_completed">on_completed: <span class="extype" name="org.fusesource.hawtdispatch.Task">Task</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.apache.activemq.apollo.broker.Broker">Broker</a> → BaseService → Service</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.Broker#start" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="start(on_completed:Runnable):Unit"></a>
+      <a id="start(Runnable):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">start</span><span class="params">(<span name="on_completed">on_completed: <span class="extype" name="java.lang.Runnable">Runnable</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#stats_of_5min" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="stats_of_5min:org.apache.activemq.apollo.util.CircularBuffer[Broker.this.PeriodStat]"></a>
+      <a id="stats_of_5min:CircularBuffer[PeriodStat]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">stats_of_5min</span><span class="result">: <span class="extype" name="org.apache.activemq.apollo.util.CircularBuffer">CircularBuffer</span>[<a href="Broker$PeriodStat.html" class="extype" name="org.apache.activemq.apollo.broker.Broker.PeriodStat">PeriodStat</a>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#stop" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="stop(on_completed:org.fusesource.hawtdispatch.Task):Unit"></a>
+      <a id="stop(Task):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">stop</span><span class="params">(<span name="on_completed">on_completed: <span class="extype" name="org.fusesource.hawtdispatch.Task">Task</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.apache.activemq.apollo.broker.Broker">Broker</a> → BaseService → Service</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.Broker#stop" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="stop(on_completed:Runnable):Unit"></a>
+      <a id="stop(Runnable):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">stop</span><span class="params">(<span name="on_completed">on_completed: <span class="extype" name="java.lang.Runnable">Runnable</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
+      <a id="synchronized[T0](⇒T0):T0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.Broker#tmp" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="tmp:java.io.File"></a>
+      <a id="tmp:File"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">tmp</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
+      <a id="toString():String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.apache.activemq.apollo.broker.Broker">Broker</a> → AnyRef → Any</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.Broker#tune_send_receive_buffers" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="tune_send_receive_buffers:Unit"></a>
+      <a id="tune_send_receive_buffers:Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">tune_send_receive_buffers</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#update" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="update(config:org.apache.activemq.apollo.dto.BrokerDTO,on_completed:org.fusesource.hawtdispatch.Task):Unit"></a>
+      <a id="update(BrokerDTO,Task):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">update</span><span class="params">(<span name="config">config: <span class="extype" name="org.apache.activemq.apollo.dto.BrokerDTO">BrokerDTO</span></span>, <span name="on_completed">on_completed: <span class="extype" name="org.fusesource.hawtdispatch.Task">Task</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Validates and then applies the configuration.</p>
+    </li><li name="org.apache.activemq.apollo.broker.Broker#update" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="update(config:org.apache.activemq.apollo.dto.BrokerDTO,on_completed:Runnable):Unit"></a>
+      <a id="update(BrokerDTO,Runnable):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">update</span><span class="params">(<span name="config">config: <span class="extype" name="org.apache.activemq.apollo.dto.BrokerDTO">BrokerDTO</span></span>, <span name="on_completed">on_completed: <span class="extype" name="java.lang.Runnable">Runnable</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#virtual_hosts" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="virtual_hosts:scala.collection.mutable.LinkedHashMap[org.fusesource.hawtbuf.AsciiBuffer,org.apache.activemq.apollo.broker.VirtualHost]"></a>
+      <a id="virtual_hosts:LinkedHashMap[AsciiBuffer,VirtualHost]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">virtual_hosts</span><span class="result">: <span class="extype" name="scala.collection.mutable.LinkedHashMap">LinkedHashMap</span>[<span class="extype" name="org.fusesource.hawtbuf.AsciiBuffer">AsciiBuffer</span>, <a href="VirtualHost.html" class="extype" name="org.apache.activemq.apollo.broker.VirtualHost">VirtualHost</a>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#virtual_hosts_by_hostname" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="virtual_hosts_by_hostname:scala.collection.mutable.LinkedHashMap[org.fusesource.hawtbuf.AsciiBuffer,org.apache.activemq.apollo.broker.VirtualHost]"></a>
+      <a id="virtual_hosts_by_hostname:LinkedHashMap[AsciiBuffer,VirtualHost]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">virtual_hosts_by_hostname</span><span class="result">: <span class="extype" name="scala.collection.mutable.LinkedHashMap">LinkedHashMap</span>[<span class="extype" name="org.fusesource.hawtbuf.AsciiBuffer">AsciiBuffer</span>, <a href="VirtualHost.html" class="extype" name="org.apache.activemq.apollo.broker.VirtualHost">VirtualHost</a>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#virtualhost_maintenance" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="virtualhost_maintenance:Unit"></a>
+      <a id="virtualhost_maintenance:Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">virtualhost_maintenance</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
+      <a id="wait():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a>
+      <a id="wait(Long,Int):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a>
+      <a id="wait(Long):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.Broker#web_admin_url" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="web_admin_url:String"></a>
+      <a id="web_admin_url:String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">web_admin_url</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.Broker#web_server" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="web_server:org.apache.activemq.apollo.broker.web.WebServer"></a>
+      <a id="web_server:WebServer"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">web_server</span><span class="result">: <a href="web/WebServer.html" class="extype" name="org.apache.activemq.apollo.broker.web.WebServer">WebServer</a></span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="org.apache.activemq.apollo.broker.PluginStateSupport">
+              <h3>Inherited from <a href="PluginStateSupport.html" class="extype" name="org.apache.activemq.apollo.broker.PluginStateSupport">PluginStateSupport</a></h3>
+            </div><div class="parent" name="org.apache.activemq.apollo.broker.security.SecuredResource">
+              <h3>Inherited from <a href="security/SecuredResource.html" class="extype" name="org.apache.activemq.apollo.broker.security.SecuredResource">SecuredResource</a></h3>
+            </div><div class="parent" name="org.apache.activemq.apollo.util.BaseService">
+              <h3>Inherited from <span class="extype" name="org.apache.activemq.apollo.util.BaseService">BaseService</span></h3>
+            </div><div class="parent" name="org.apache.activemq.apollo.util.Dispatched">
+              <h3>Inherited from <span class="extype" name="org.apache.activemq.apollo.util.Dispatched">Dispatched</span></h3>
+            </div><div class="parent" name="org.apache.activemq.apollo.util.Service">
+              <h3>Inherited from <span class="extype" name="org.apache.activemq.apollo.util.Service">Service</span></h3>
+            </div><div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>

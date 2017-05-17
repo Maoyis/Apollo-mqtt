@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd"> 
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  Architecture
+-->
+<html lang="en">
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta content="ActiveMQ's next generation of messaging" name="description"/>
+    <meta content="messaging,stomp,jms,activemq,apollo" name="keywords"/>
+    <meta content="Apollo" name="author"/>
+    <script src="../../scripts/jquery.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../styles/impact/css/pygmentize.css"/>
+    <link type="text/css" rel="stylesheet" href="../../styles/impact/css/site.css"/>
+    <title>Apollo 1.0 Beta 4 Released</title>
+  </head>
+  <body>
+    <div id="navigation">
+      <div class="wrapper">
+<ul>
+<li><a href="../../index.html">Apollo 1.7.1</a></li>
+<li><a href="../../community/developers.html">Developers</a></li>
+<li><a href="../../community/index.html">Community</a></li>
+<li><a href="../../download.html">Download</a></li>
+</ul>        <div></div>
+      </div>
+    </div>
+    <div id="content">
+      <div class="wrapper">
+<p>The <a href="http://activemq.apache.org">Apache ActiveMQ Project</a> is pleased to announce the 
+availability of Apollo 1.0 Beta 4. ActiveMQ Apollo is a faster, more reliable, easier 
+to maintain messaging broker built from the foundations of the original ActiveMQ. It is
+focused on being the fastest most reliable STOMP 1.1 and 1.0 server available.</p>
+
+<p>Apollo Features:</p>
+
+<ul>
+<li><a href="http://stomp.github.com/stomp-specification-1.0.html">Stomp 1.0</a> Protocol
+Support</li>
+<li><a href="http://stomp.github.com/stomp-specification-1.1.html">Stomp 1.1</a> Protocol
+Support</li>
+<li><a href="http://activemq.apache.org/apollo/documentation/user-manual.html#Destination&#95;Types">Topics and Queues</a></li>
+<li><a href="http://activemq.apache.org/apollo/documentation/user-manual.html#Browsing&#95;Subscriptions">Queue Browsers</a></li>
+<li><a href="http://activemq.apache.org/apollo/documentation/user-manual.html#Topic&#95;Durable&#95;Subscriptions">Durable Subscriptions on Topics</a></li>
+<li><a href="http://activemq.apache.org/apollo/documentation/user-manual.html#Reliable&#95;Messaging">Reliable Messaging</a></li>
+<li>Message swapping</li>
+<li><a href="http://activemq.apache.org/apollo/documentation/user-manual.html#Message&#95;Selectors">Message Selectors</a></li>
+<li><a href="http://activemq.apache.org/apollo/documentation/user-manual.html#Authentication">JAAS Authentication</a></li>
+<li><a href="http://activemq.apache.org/apollo/documentation/user-manual.html#Authorization">ACL Authorization</a></li>
+<li><a href="http://activemq.apache.org/apollo/documentation/user-manual.html#Using&#95;SSL&#95;TLS">SSL/TLS Support</a></li>
+<li><a href="http://activemq.apache.org/apollo/documentation/architecture.html#REST&#95;Based&#95;Management">REST Based Management</a></li>
+</ul>
+
+<p>Noteworthy changes since the last beta include:</p>
+
+<ul>
+<li>APLO-17 - Support message expiration</li>
+<li>APLO-39 - Apply configuration updates to a broker without needing a restart</li>
+<li>APLO-40 - Web interface should support editing all the apollo configuration files (log4j, jaas, etc.)</li>
+<li>APLO-41 - Expose JVM Status/Metrics via REST API</li>
+<li>APLO-43 - Create an XSD to validate the apollo.xml configuration file.</li>
+<li>APLO-45 - Support auto deleting idle queues and topics</li>
+<li>APLO-47 - Add connection<em>counter, consumer</em>counter, and producer_counter metrics to the management interface</li>
+<li>APLO-50 - Support pre-creating durable subscriptions via the broker config file</li>
+<li>APLO-55 - Add an option to enable strict validation of the configuration XML</li>
+<li>APLO-57 - Track desired service state so you can stop a service which is still starting</li>
+<li>APLO-60 - Support regular expressions in destination wildcards.</li>
+<li>APLO-42 - File based JAAS login modules should cache file contents until changed.</li>
+<li>APLO-44 - Eagerly create destinations which are explicitly defined in the server configuration file.</li>
+<li>APLO-46 - Include current/total page info when the REST interface returns a paged result set</li>
+</ul>
+
+<p>Further information:</p>
+
+<ul>
+<li><a href="http://activemq.apache.org/apollo/download.html">Download</a></li>
+<li><a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?version=12316522&amp;styleName=Text&amp;projectId=12311310&amp;Create=Create">Issues Fixed</a></li>
+<li><a href="http://activemq.apache.org/apollo/versions/1.0-beta4/website/documentation">Documentation</a></li>
+</ul>
+
+<p><a href="http://activemq.apache.org/community/index.html">Feedback</a> is always welcome!</p>
+        <div></div>
+      </div>
+    </div>
+  </body>
+</html>

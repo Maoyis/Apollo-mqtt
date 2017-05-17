@@ -1,0 +1,1808 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd"> 
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  Architecture
+-->
+<html lang="en">
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta content="ActiveMQ's next generation of messaging" name="description"/>
+    <meta content="messaging,stomp,jms,activemq,apollo" name="keywords"/>
+    <meta content="Apollo" name="author"/>
+    <script src="../scripts/jquery.js"></script>
+    <link type="text/css" rel="stylesheet" href="../styles/impact/css/pygmentize.css"/>
+    <link type="text/css" rel="stylesheet" href="../styles/impact/css/site.css"/>
+<style type='text/css'>
+  /* <![CDATA[ */
+    table.reference tr th {
+      text-align:left;
+    }
+    tr.even {
+      background-color: #eee;
+    }
+    table.reference tr td {
+      text-align:left;
+      padding: .4em;
+      vertical-align:top;
+      font-size:90%;
+    }
+    table.reference tr td p {
+      margin: 0 0 .5em 0;
+    }
+    td.methods {
+      font-weight:bold;
+    }
+  /* ]]> */
+</style>
+
+    <title></title>
+  </head>
+  <body>
+    <div id="navigation">
+      <div class="wrapper">
+<ul>
+<li><a href="../index.html">Apollo 1.7.1</a></li>
+<li><a href="../community/developers.html">Developers</a></li>
+<li><a href="../community/index.html">Community</a></li>
+<li><a href="../download.html">Download</a></li>
+</ul>        <div></div>
+      </div>
+    </div>
+    <div id="content">
+      <div class="wrapper">
+<h1 id = "Apollo_1_7_1_Management_API">Apollo 1.7.1 Management API</h1>
+
+<p><div class="toc"><ul style="list-style:none;">
+  <li><a href="#Overview">Overview</a></li>
+  <li><ul style="list-style:none;">
+    <li><a href="#Authentication">Authentication</a></li>
+    <li><a href="#JSON_Representation">JSON Representation</a></li>
+    <li><a href="#Response_Codes">Response Codes</a></li>
+    <li><a href="#Working_with_Tabular_Results">Working with Tabular Results</a></li>
+  </ul></li>
+  <li><a href="#Route_Reference">Route Reference</a></li>
+  <li><ul style="list-style:none;">
+    <li><a href="#Broker&#95;Management">Broker Management</a></li>
+    <li><a href="#Virtual&#95;Host&#95;Management">Virtual Host Management</a></li>
+    <li><a href="#Connection&#95;Management">Connection Management</a></li>
+    <li><a href="#Broker&#95;Configuration&#95;Management">Broker Configuration Management</a></li>
+    <li><a href="#Session&#95;Management">Session Management</a></li>
+  </ul></li>
+</ul></div></p>
+
+<h2 id = "Overview">Overview</h2>
+
+<p>Apollo's REST API runs on port 61680 or via SSL on port 61681. If your
+running an Apollo broker on your local machine, you could access the
+API at the following HTTP URLs:</p>
+
+<pre><code>http://localhost:61680
+https://localhost:61681</code></pre>
+
+<p>For all of the rest of this document, we will be leaving off that part,
+since it is the same for every API call.</p>
+
+<h3 id = "Authentication">Authentication</h3>
+
+<p>The broker requires all requests against the management API to supply
+user credentials which have administration privileges.</p>
+
+<p>The user credentials can be supplied using via HTTP basic
+authentication. Example:</p>
+
+<pre><code>$ curl -u "admin:password" http://localhost:61680/broker</code></pre>
+
+<h3 id = "JSON_Representation">JSON Representation</h3>
+
+<p>The API routes are intended to be access programmatically as JSON
+services but they also provide an HTML representation so that the API
+services can easily be browsed using a standard web browser.</p>
+
+<p>You must either set the HTTP <code>Accept</code> header to <code>application/json</code> or
+append <code>.json</code> to the URL to get the JSON representation of the data. 
+Example:</p>
+
+<pre><code>$ curl -H "Accept: application/json" -u "admin:password" \
+http://localhost:61680/broker
+
+$ curl -u "admin:password" http://localhost:61680/broker.json</code></pre>
+
+<h3 id = "Response_Codes">Response Codes</h3>
+
+<p>You can use the HTTP response code to determine if your request
+succeeded or failed.  Expect the following:</p>
+
+<ul>
+<li><em><code>200</code></em>: If a GET, PUT, or DELETE request succeeds.</li>
+<li><em><code>303</code></em>: If a POST request succeeds.</li>
+<li><em><code>304</code></em>: If the resource cannot be modified at the current time.</li>
+<li><em><code>400</code></em>: The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.</li>
+<li><em><code>404</code></em>: If the resource cannot be found.</li>
+<li><em><code>401</code></em>: If the user does not have access to the resource.</li>
+<li><em><code>50x</code></em>: If an internal server error occurs while processing the request.</li>
+</ul>
+
+<p>If your get a <em><code>40x</code></em> or <em><code>50x</code></em> response code, the response message
+will contain a document describing the failure.  For example, if we try
+to use invalid query syntax you would get:</p>
+
+<pre><code>$ curl -i -u "admin:password" `echo 'http://localhost:61680/broker/virtual-hosts/apollo-01/queues.json?f=id&amp;q=foo(id=="foo")'`
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+Transfer-Encoding: chunked
+
+{"message":"Unable to find function (method): \"foo(java.lang.Boolean)\" in any user-defined function handlers or the default function handler"}</code></pre>
+
+<h3 id = "Working_with_Tabular_Results">Working with Tabular Results</h3>
+
+<p>Many of the resource routes provided by the broker implement
+a selectable paged tabular interface.  A good example of such
+a resource route is the connections list.  It's route is:</p>
+
+<pre><code>/broker/connections</code></pre>
+
+<p>Example:</p>
+
+<pre><code>$ curl -u "admin:password" \
+'http://localhost:61680/broker/connections.json'</code></pre>
+
+<p>Results in a <a href="./api/apollo-dto/org/apache/activemq/apollo/dto/DataPageDTO.html">Data Page</a> :</p>
+
+<div class="syntax"><pre name='code' class='brush: js; gutter: false;'><code>
+{
+  &quot;page&quot;:0,
+  &quot;page_size&quot;:100,
+  &quot;total_pages&quot;:1,
+  &quot;total_rows&quot;:2,
+  &quot;headers&quot;:[
+    &quot;*&quot;
+  ],
+  &quot;rows&quot;:[
+    {
+      &quot;id&quot;:&quot;4&quot;,
+      &quot;state&quot;:&quot;STARTED&quot;,
+      &quot;state_since&quot;:1306848325102,
+      &quot;read_counter&quot;:103,
+      &quot;write_counter&quot;:239110628,
+      &quot;connector&quot;:&quot;tcp&quot;,
+      &quot;protocol&quot;:&quot;stomp&quot;,
+      &quot;remote_address&quot;:&quot;/127.0.0.1:61775&quot;,
+      &quot;protocol_version&quot;:&quot;1.0&quot;,
+      &quot;user&quot;:&quot;admin&quot;,
+      &quot;waiting_on&quot;:&quot;client request&quot;,
+      &quot;subscription_count&quot;:1
+    },
+    {
+      &quot;id&quot;:&quot;5&quot;,
+      &quot;state&quot;:&quot;STARTED&quot;,
+      &quot;state_since&quot;:1306848325102,
+      &quot;read_counter&quot;:227739229,
+      &quot;write_counter&quot;:113,
+      &quot;connector:&quot;tcp&quot;,
+      &quot;protocol&quot;:&quot;stomp&quot;,
+      &quot;remote_address&quot;:&quot;/127.0.0.1:61776&quot;,
+      &quot;protocol_version&quot;:&quot;1.0&quot;,
+      &quot;user&quot;:&quot;admin&quot;,
+      &quot;waiting_on&quot;:&quot;blocked sending to: org.apache.activemq.apollo.broker.Queue$$anon$1@13765e9b&quot;,
+      &quot;subscription_count&quot;:0
+    }
+  ]
+}
+</code></pre></div>
+
+<p>The <code>*</code> header field means the record was selected. To narrow down the selected fields you can add
+multiple <code>f</code> query parameters to pick the fields you want to retrieve.</p>
+
+<p>Example:</p>
+
+<pre><code>$ curl -u "admin:password" \
+'http://localhost:61680/broker/connections.json?f=id&amp;f=read_counter'</code></pre>
+
+<p>Results in :</p>
+
+<div class="syntax"><pre name='code' class='brush: js; gutter: false;'><code>
+{
+  &quot;page&quot;:0,
+  &quot;page_size&quot;:100,
+  &quot;total_pages&quot;:1,
+  &quot;total_rows&quot;:2,
+  &quot;headers&quot;:[
+    &quot;id&quot;,
+    &quot;read_counter&quot;
+  ],
+  &quot;rows&quot;:[
+    [
+      &quot;7&quot;,
+      110733109
+    ],
+    [
+      &quot;6&quot;,
+      103
+    ]
+  ]
+}
+</code></pre></div>
+
+<p>If you want to narrow down the records which get selected, you can set a <code>q</code>
+query parameter to SQL 92 style where clause which uses the record's fields
+to filter down the selected records.</p>
+
+<p>For example to only view local connection, you would want to use a where
+clause like <code>remote_address LIKE "/127.0.0.01:%"</code> which to execute with
+<code>curl</code> you would run:</p>
+
+<pre><code>curl -u "admin:password" \
+'http://localhost:61680/broker/connections.json?q=remote_address%20LIKE%20"/127.0.0.1:%"'</code></pre>
+
+<p>The records are paged. The default page size is 100, so only the first 100
+records will be displayed. If you want to view subsequent results, you must
+set the <code>p</code> query parameter to the page you wish to access. You can change
+the page size by setting the <code>ps</code> query parameter.</p>
+
+<p>The results are typically return in the order in which the records were original
+created.  If you want to retrieve them in a different order, use the <code>o</code> query
+parameter to define the order in which they are returned.  Example:</p>
+
+<pre><code>curl -u "admin:password" \
+'http://localhost:61680/broker/connections.json?o=write_counter%20DESC&amp;o=id'</code></pre>
+
+<h2 id = "Route_Reference">Route Reference</h2>
+
+<h3 id = "Broker&#95;Management">Broker Management</h3>
+
+<table class="reference">
+  <tr>
+    <th></th>
+    <th>Route</th>
+    <th>On Success</th>
+  </tr>
+<tr class="even">
+  <td class="methods" rowspan="2">
+    <code>
+      POST
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/action/shutdown.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      303
+    </code>
+  </td>
+</tr>
+<tr class="even">
+  <td class="description" colspan="2">
+<p>Shuts down the JVM.</p>
+
+  </td>
+</tr>
+<tr class="odd">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/BrokerStatusDTO.html">
+        BrokerStatusDTO
+      </a>
+    </code>
+  </td>
+</tr>
+<tr class="odd">
+  <td class="description" colspan="2">
+<p>General information about the broker, JVM, and OS status. Example: </p>
+
+<p><code>curl -u "admin:password" http://localhost:61680/broker.json</code></p>
+
+<div class="syntax"><pre name='code' class='brush: js; gutter: false;'><code>
+{
+  &quot;id&quot;: &quot;default&quot;,
+  &quot;state&quot;: &quot;STARTED&quot;,
+  &quot;state_since&quot;: 1314573353753,
+  &quot;version&quot;: &quot;1.7.1&quot;,
+  &quot;jvm_metrics&quot;: {
+    &quot;heap_memory&quot;: {
+      &quot;used&quot;: 22165160,
+      &quot;alloc&quot;: 162201600,
+      &quot;max&quot;: 954466304
+    },
+    &quot;non_heap_memory&quot;: {
+      &quot;used&quot;: 44522128,
+      &quot;alloc&quot;: 45944832,
+      &quot;max&quot;: 136314880
+    },
+    &quot;classes_loaded&quot;: 5776,
+    &quot;classes_unloaded&quot;: 0,
+    &quot;threads_current&quot;: 21,
+    &quot;threads_peak&quot;: 22,
+    &quot;os_arch&quot;: &quot;x86_64&quot;,
+    &quot;os_name&quot;: &quot;Mac OS X 10.7&quot;,
+    &quot;os_memory_total&quot;: 8589934592,
+    &quot;os_memory_free&quot;: 3339231232,
+    &quot;os_swap_total&quot;: 0,
+    &quot;os_swap_free&quot;: 2147483648,
+    &quot;os_fd_open&quot;: 111,
+    &quot;os_fd_max&quot;: 10240,
+    &quot;os_load_average&quot;: 0.99267578125,
+    &quot;os_cpu_time&quot;: 5630000000,
+    &quot;os_processors&quot;: 4,
+    &quot;runtime_name&quot;: &quot;86739@chirino-mbp.local&quot;,
+    &quot;jvm_name&quot;: &quot;Java HotSpot(TM) 64-Bit Server VM 1.6.0_26 (Apple Inc.)&quot;,
+    &quot;uptime&quot;: 37761,
+    &quot;start_time&quot;: 1314573351000
+  },
+  &quot;current_time&quot;: 1314573388707,
+  &quot;virtual_hosts&quot;: [&quot;default&quot;],
+  &quot;connectors&quot;: [&quot;tls&quot;, &quot;tcp&quot;],
+  &quot;connection_counter&quot;: 0
+}
+</code></pre></div>
+
+<p>You can the <code>?connections=true</code> query parameter to have a list of connections
+included n the result.</p>
+
+  </td>
+</tr>
+<tr class="even">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/queue-metrics.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/AggregateDestMetricsDTO.html">
+        AggregateDestMetricsDTO
+      </a>
+    </code>
+  </td>
+</tr>
+<tr class="even">
+  <td class="description" colspan="2">
+<p>Aggregates the messaging metrics for all the queue destinations.  Example:</p>
+
+<p><code>curl -u "admin:password" http://localhost:61680/broker/queue-metrics.json</code></p>
+
+<div class="syntax"><pre name='code' class='brush: js; gutter: false;'><code>
+{
+  &quot;current_time&quot;: 1314573698381,
+  &quot;enqueue_item_counter&quot;: 57343,
+  &quot;enqueue_size_counter&quot;: 63128582,
+  &quot;enqueue_ts&quot;: 1314573698478,
+  &quot;dequeue_item_counter&quot;: 55121,
+  &quot;dequeue_size_counter&quot;: 60681503,
+  &quot;dequeue_ts&quot;: 1314573698478,
+  &quot;producer_counter&quot;: 22,
+  &quot;consumer_counter&quot;: 16,
+  &quot;producer_count&quot;: 22,
+  &quot;consumer_count&quot;: 16,
+  &quot;expired_item_counter&quot;: 0,
+  &quot;expired_size_counter&quot;: 0,
+  &quot;expired_ts&quot;: 1314573695015,
+  &quot;nack_item_counter&quot;: 0,
+  &quot;nack_size_counter&quot;: 0,
+  &quot;nack_ts&quot;: 1314573695015,
+  &quot;queue_size&quot;: 2447079,
+  &quot;queue_items&quot;: 2222,
+  &quot;swapped_in_size_max&quot;: 5963776,
+  &quot;swapped_in_size&quot;: 5278341,
+  &quot;swapped_in_items&quot;: 4794,
+  &quot;swapping_in_size&quot;: 0,
+  &quot;swapping_out_size&quot;: 0,
+  &quot;swap_out_item_counter&quot;: 60,
+  &quot;swap_out_size_counter&quot;: 65931,
+  &quot;swap_in_item_counter&quot;: 60,
+  &quot;swap_in_size_counter&quot;: 65931,
+  &quot;objects&quot;: 10
+}
+</code></pre></div>
+
+  </td>
+</tr>
+<tr class="odd">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/topic-metrics.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/AggregateDestMetricsDTO.html">
+        AggregateDestMetricsDTO
+      </a>
+    </code>
+  </td>
+</tr>
+<tr class="odd">
+  <td class="description" colspan="2">
+<p>Aggregates the messaging metrics for all the topic destinations</p>
+
+  </td>
+</tr>
+<tr class="even">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/dsub-metrics.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/AggregateDestMetricsDTO.html">
+        AggregateDestMetricsDTO
+      </a>
+    </code>
+  </td>
+</tr>
+<tr class="even">
+  <td class="description" colspan="2">
+<p>Aggregates the messaging metrics for all the durable subscription destinations</p>
+
+  </td>
+</tr>
+<tr class="odd">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/dest-metrics.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/AggregateDestMetricsDTO.html">
+        AggregateDestMetricsDTO
+      </a>
+    </code>
+  </td>
+</tr>
+<tr class="odd">
+  <td class="description" colspan="2">
+<p>Aggregates the messaging metrics for all the destinations</p>
+
+  </td>
+</tr>
+</table>
+
+<div></div>
+
+<h3 id = "Virtual&#95;Host&#95;Management">Virtual Host Management</h3>
+
+<table class="reference">
+  <tr>
+    <th></th>
+    <th>Route</th>
+    <th>On Success</th>
+  </tr>
+<tr class="even">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/virtual-hosts.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/DataPageDTO.html">
+        DataPageDTO
+      </a>
+      paging
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/VirtualHostStatusDTO.html">
+        VirtualHostStatusDTO
+      </a>
+      <div></div>
+    </code>
+  </td>
+</tr>
+<tr class="even">
+  <td class="description" colspan="2">
+<p>Provides tabular access to all the virtual hosts.</p>
+
+  </td>
+</tr>
+<tr class="odd">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/virtual-hosts/{host}.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/VirtualHostStatusDTO.html">
+        VirtualHostStatusDTO
+      </a>
+    </code>
+  </td>
+</tr>
+<tr class="odd">
+  <td class="description" colspan="2">
+<p>General details about the <code>{host}</code> virtual host. Example: </p>
+
+<p><code>curl -u "admin:password" http://localhost:61680/broker/virtual-hosts/default.json</code></p>
+
+<div class="syntax"><pre name='code' class='brush: js; gutter: false;'><code>
+{
+  &quot;id&quot;: &quot;default&quot;,
+  &quot;state&quot;: &quot;STARTED&quot;,
+  &quot;state_since&quot;: 1314573798989,
+  &quot;topics&quot;: [],
+  &quot;queues&quot;: [&quot;example-4&quot;, &quot;example-7&quot;, &quot;example-6&quot;, &quot;example-0&quot;, 
+             &quot;example-3&quot;, &quot;example-8&quot;, &quot;example-1&quot;, &quot;example-5&quot;, 
+             &quot;example-9&quot;, &quot;example-2&quot;],
+  &quot;dsubs&quot;: [],
+  &quot;store&quot;: true,
+  &quot;host_names&quot;: [&quot;default&quot;, &quot;localhost&quot;, &quot;127.0.0.1&quot;]
+}
+</code></pre></div>
+
+  </td>
+</tr>
+<tr class="even">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/virtual-hosts/{host}/queue-metrics.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/AggregateDestMetricsDTO.html">
+        AggregateDestMetricsDTO
+      </a>
+    </code>
+  </td>
+</tr>
+<tr class="even">
+  <td class="description" colspan="2">
+<p>Aggregates the messaging metrics for all the queue destinations on the
+<code>{host}</code> virtual host.</p>
+
+  </td>
+</tr>
+<tr class="odd">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/virtual-hosts/{host}/topic-metrics.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/AggregateDestMetricsDTO.html">
+        AggregateDestMetricsDTO
+      </a>
+    </code>
+  </td>
+</tr>
+<tr class="odd">
+  <td class="description" colspan="2">
+<p>Aggregates the messaging metrics for all the topic destinations on the
+<code>{host}</code> virtual host.</p>
+
+  </td>
+</tr>
+<tr class="even">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/virtual-hosts/{host}/dsub-metrics.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/AggregateDestMetricsDTO.html">
+        AggregateDestMetricsDTO
+      </a>
+    </code>
+  </td>
+</tr>
+<tr class="even">
+  <td class="description" colspan="2">
+<p>Aggregates the messaging metrics for all the durable subscription destinations on the
+<code>{host}</code> virtual host.</p>
+
+  </td>
+</tr>
+<tr class="odd">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/virtual-hosts/{host}/dest-metrics.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/AggregateDestMetricsDTO.html">
+        AggregateDestMetricsDTO
+      </a>
+    </code>
+  </td>
+</tr>
+<tr class="odd">
+  <td class="description" colspan="2">
+<p>Aggregates the messaging metrics for all the destinations on the
+<code>{host}</code> virtual host.</p>
+
+  </td>
+</tr>
+<tr class="even">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/virtual-hosts/{host}/store.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/StoreStatusDTO.html">
+        StoreStatusDTO
+      </a>
+ sub class (depends on the store implementation)
+    </code>
+  </td>
+</tr>
+<tr class="even">
+  <td class="description" colspan="2">
+<p>Gets metrics about the status of the message store used by the <code>{host}</code> virtual host. Example:</p>
+
+<p><code>curl -u "admin:password" http://localhost:61680/broker/virtual-hosts/default/store.json</code></p>
+
+<div class="syntax"><pre name='code' class='brush: js; gutter: false;'><code>
+{
+  &quot;@class&quot;: &quot;bdb_store_status&quot;,
+  &quot;id&quot;: &quot;bdb store at /Users/chirino/opt/default/data&quot;,
+  &quot;state&quot;: &quot;STARTED&quot;,
+  &quot;state_since&quot;: 1314573798939,
+  &quot;canceled_message_counter&quot;: 0,
+  &quot;flushed_message_counter&quot;: 581034,
+  &quot;canceled_enqueue_counter&quot;: 0,
+  &quot;flushed_enqueue_counter&quot;: 581034,
+  &quot;message_load_latency&quot;: {
+    &quot;count&quot;: 0,
+    &quot;total&quot;: 0,
+    &quot;max&quot;: 0,
+    &quot;min&quot;: 0
+  },
+  &quot;flush_latency&quot;: {
+    &quot;count&quot;: 0,
+    &quot;total&quot;: 0,
+    &quot;max&quot;: 0,
+    &quot;min&quot;: 0
+  },
+  &quot;pending_stores&quot;: 0,
+  &quot;message_load_batch_size&quot;: {
+    &quot;count&quot;: 0,
+    &quot;total&quot;: 0,
+    &quot;max&quot;: -2147483648,
+    &quot;min&quot;: 2147483647
+  }
+}
+</code></pre></div>
+
+  </td>
+</tr>
+<tr class="odd">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/virtual-hosts/{host}/queues.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/DataPageDTO.html">
+        DataPageDTO
+      </a>
+      paging
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/QueueStatusDTO.html">
+        QueueStatusDTO
+      </a>
+      <div></div>
+    </code>
+  </td>
+</tr>
+<tr class="odd">
+  <td class="description" colspan="2">
+<p>Provides tabular access to all queue destinations on the <code>{host}</code> virtual host.</p>
+
+  </td>
+</tr>
+<tr class="even">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/virtual-hosts/{host}/queues/{dest}.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/QueueStatusDTO.html">
+        QueueStatusDTO
+      </a>
+    </code>
+  </td>
+</tr>
+<tr class="even">
+  <td class="description" colspan="2">
+<p>Gets metrics and details about the <code>{dest}</code> queue on the <code>{host}</code> virtual host. Example:</p>
+
+<p>You can the <code>?producers=true</code> query parameter to have a list of producers
+included n the result.
+You can the <code>?consumers=true</code> query parameter to have a list of consumers
+included n the result.</p>
+
+<p><code>curl -u "admin:password" http://localhost:61680/broker/virtual-hosts/default/queues/example-5.json?producers=true&amp;consumers=true</code></p>
+
+<div class="syntax"><pre name='code' class='brush: js; gutter: false;'><code>
+{
+  &quot;id&quot;: &quot;example-5&quot;,
+  &quot;state&quot;: &quot;STARTED&quot;,
+  &quot;state_since&quot;: 1314573814532,
+  &quot;config&quot;: {
+    &quot;other&quot;: []
+  },
+  &quot;binding&quot;: {
+    &quot;@class&quot;: &quot;queue_destination&quot;,
+    &quot;path&quot;: [&quot;example-5&quot;]
+  },
+  &quot;metrics&quot;: {
+    &quot;current_time&quot;: 1314574273342,
+    &quot;enqueue_item_counter&quot;: 878638,
+    &quot;enqueue_size_counter&quot;: 975430031,
+    &quot;enqueue_ts&quot;: 1314574273335,
+    &quot;dequeue_item_counter&quot;: 878522,
+    &quot;dequeue_size_counter&quot;: 975301271,
+    &quot;dequeue_ts&quot;: 1314574273328,
+    &quot;producer_counter&quot;: 4,
+    &quot;consumer_counter&quot;: 4,
+    &quot;producer_count&quot;: 2,
+    &quot;consumer_count&quot;: 2,
+    &quot;expired_item_counter&quot;: 0,
+    &quot;expired_size_counter&quot;: 0,
+    &quot;expired_ts&quot;: 1314573814488,
+    &quot;nack_item_counter&quot;: 118,
+    &quot;nack_size_counter&quot;: 131098,
+    &quot;nack_ts&quot;: 1314573928240,
+    &quot;queue_size&quot;: 128760,
+    &quot;queue_items&quot;: 116,
+    &quot;swapped_in_size_max&quot;: 688128,
+    &quot;swapped_in_size&quot;: 688200,
+    &quot;swapped_in_items&quot;: 620,
+    &quot;swapping_in_size&quot;: 0,
+    &quot;swapping_out_size&quot;: 0,
+    &quot;swap_out_item_counter&quot;: 605,
+    &quot;swap_out_size_counter&quot;: 671279,
+    &quot;swap_in_item_counter&quot;: 605,
+    &quot;swap_in_size_counter&quot;: 671279
+  },
+  &quot;entries&quot;: [],
+  &quot;producers&quot;: [{
+        &quot;kind&quot;: &quot;connection&quot;,
+        &quot;id&quot;: &quot;43&quot;,
+        &quot;label&quot;: &quot;/127.0.0.1:51632&quot;,
+        &quot;enqueue_item_counter&quot;: 12168,
+        &quot;enqueue_size_counter&quot;: 13495374,
+        &quot;enqueue_ts&quot;: 1314574273328
+      },
+      {
+        &quot;kind&quot;: &quot;connection&quot;,
+        &quot;id&quot;: &quot;76&quot;,
+        &quot;label&quot;: &quot;/127.0.0.1:51665&quot;,
+        &quot;enqueue_item_counter&quot;: 13663,
+        &quot;enqueue_size_counter&quot;: 15154824,
+        &quot;enqueue_ts&quot;: 1314574273336
+      }],
+  &quot;consumers&quot;: [{
+        &quot;kind&quot;: &quot;connection&quot;,
+        &quot;id&quot;: &quot;65&quot;,
+        &quot;label&quot;: &quot;/127.0.0.1:51654&quot;,
+        &quot;enqueue_item_counter&quot;: 12678,
+        &quot;enqueue_size_counter&quot;: 14060805,
+        &quot;enqueue_ts&quot;: 1314574273248,
+        &quot;position&quot;: 878615,
+        &quot;acquired_count&quot;: 60,
+        &quot;acquired_size&quot;: 66600,
+        &quot;total_ack_count&quot;: 12618,
+        &quot;total_nack_count&quot;: 0,
+        &quot;waiting_on&quot;: &quot;ack&quot;
+      },
+      {
+        &quot;kind&quot;: &quot;connection&quot;,
+        &quot;id&quot;: &quot;75&quot;,
+        &quot;label&quot;: &quot;/127.0.0.1:51664&quot;,
+        &quot;enqueue_item_counter&quot;: 13397,
+        &quot;enqueue_size_counter&quot;: 14860500,
+        &quot;enqueue_ts&quot;: 1314574273248,
+        &quot;position&quot;: 878639,
+        &quot;acquired_count&quot;: 56,
+        &quot;acquired_size&quot;: 62160,
+        &quot;total_ack_count&quot;: 13341,
+        &quot;total_nack_count&quot;: 0,
+        &quot;waiting_on&quot;: &quot;producer&quot;
+      }]
+}
+</code></pre></div>
+
+  </td>
+</tr>
+<tr class="odd">
+  <td class="methods" rowspan="2">
+    <code>
+      DELETE
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/virtual-hosts/{host}/queues/{dest}.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+    </code>
+  </td>
+</tr>
+<tr class="odd">
+  <td class="description" colspan="2">
+<p>Deletes the <code>{dest}</code> queue on the <code>{host}</code> virtual host.</p>
+
+  </td>
+</tr>
+<tr class="even">
+  <td class="methods" rowspan="2">
+    <code>
+      PUT
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/virtual-hosts/{host}/queues/{dest}.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+    </code>
+  </td>
+</tr>
+<tr class="even">
+  <td class="description" colspan="2">
+<p>Creates the <code>{dest}</code> queue on the <code>{host}</code> virtual host.</p>
+
+  </td>
+</tr>
+<tr class="odd">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/virtual-hosts/{host}/topics.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/DataPageDTO.html">
+        DataPageDTO
+      </a>
+      paging
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/TopicStatusDTO.html">
+        TopicStatusDTO
+      </a>
+      <div></div>
+    </code>
+  </td>
+</tr>
+<tr class="odd">
+  <td class="description" colspan="2">
+<p>Provides tabular access to all topic destinations on the <code>{host}</code> virtual host.</p>
+
+  </td>
+</tr>
+<tr class="even">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/virtual-hosts/{host}/topics/{dest}.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/TopicStatusDTO.html">
+        TopicStatusDTO
+      </a>
+    </code>
+  </td>
+</tr>
+<tr class="even">
+  <td class="description" colspan="2">
+<p>Gets metrics and details about the <code>{dest}</code> topic on the <code>{host}</code> virtual host.  Example:</p>
+
+<p>You can the <code>?producers=true</code> query parameter to have a list of producers
+included n the result.
+You can the <code>?consumers=true</code> query parameter to have a list of consumers
+included n the result.</p>
+
+<p><code>curl -u "admin:password" http://localhost:61680/broker/virtual-hosts/default/topics/example-2.json?producers=true&amp;consumers=true</code></p>
+
+<div class="syntax"><pre name='code' class='brush: js; gutter: false;'><code>
+{
+  &quot;id&quot;: &quot;example-2&quot;,
+  &quot;state&quot;: &quot;STARTED&quot;,
+  &quot;state_since&quot;: 1314574398831,
+  &quot;config&quot;: {
+    &quot;other&quot;: []
+  },
+  &quot;producers&quot;: [{
+    &quot;kind&quot;: &quot;connection&quot;,
+    &quot;id&quot;: &quot;78&quot;,
+    &quot;label&quot;: &quot;/127.0.0.1:51668&quot;,
+    &quot;enqueue_item_counter&quot;: 1133674,
+    &quot;enqueue_size_counter&quot;: 1259289609,
+    &quot;enqueue_ts&quot;: 1314574422110
+  }],
+  &quot;consumers&quot;: [{
+    &quot;kind&quot;: &quot;connection&quot;,
+    &quot;id&quot;: &quot;86&quot;,
+    &quot;label&quot;: &quot;/127.0.0.1:51677&quot;,
+    &quot;enqueue_item_counter&quot;: 566836,
+    &quot;enqueue_size_counter&quot;: 629643696,
+    &quot;enqueue_ts&quot;: 1314574422110
+  },
+  {
+    &quot;kind&quot;: &quot;connection&quot;,
+    &quot;id&quot;: &quot;82&quot;,
+    &quot;label&quot;: &quot;/127.0.0.1:51673&quot;,
+    &quot;enqueue_item_counter&quot;: 566838,
+    &quot;enqueue_size_counter&quot;: 629645913,
+    &quot;enqueue_ts&quot;: 1314574422110
+  }],
+  &quot;dsubs&quot;: [],
+  &quot;metrics&quot;: {
+    &quot;current_time&quot;: 0,
+    &quot;enqueue_item_counter&quot;: 1133674,
+    &quot;enqueue_size_counter&quot;: 1259289609,
+    &quot;enqueue_ts&quot;: 1314574422110,
+    &quot;dequeue_item_counter&quot;: 1133674,
+    &quot;dequeue_size_counter&quot;: 1259289609,
+    &quot;dequeue_ts&quot;: 1314574422110,
+    &quot;producer_counter&quot;: 1,
+    &quot;consumer_counter&quot;: 2,
+    &quot;producer_count&quot;: 1,
+    &quot;consumer_count&quot;: 2,
+    &quot;expired_item_counter&quot;: 0,
+    &quot;expired_size_counter&quot;: 0,
+    &quot;expired_ts&quot;: 0,
+    &quot;nack_item_counter&quot;: 0,
+    &quot;nack_size_counter&quot;: 0,
+    &quot;nack_ts&quot;: 0,
+    &quot;queue_size&quot;: 0,
+    &quot;queue_items&quot;: 0,
+    &quot;swapped_in_size_max&quot;: 0,
+    &quot;swapped_in_size&quot;: 0,
+    &quot;swapped_in_items&quot;: 0,
+    &quot;swapping_in_size&quot;: 0,
+    &quot;swapping_out_size&quot;: 0,
+    &quot;swap_out_item_counter&quot;: 0,
+    &quot;swap_out_size_counter&quot;: 0,
+    &quot;swap_in_item_counter&quot;: 0,
+    &quot;swap_in_size_counter&quot;: 0
+  }
+}
+</code></pre></div>
+
+  </td>
+</tr>
+<tr class="odd">
+  <td class="methods" rowspan="2">
+    <code>
+      DELETE
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/virtual-hosts/{host}/topics/{dest}.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+    </code>
+  </td>
+</tr>
+<tr class="odd">
+  <td class="description" colspan="2">
+<p>Deletes the <code>{dest}</code> topic on the <code>{host}</code> virtual host.  Returns a 304 (Not Modified) if the 
+topic is being used by any clients.</p>
+
+  </td>
+</tr>
+<tr class="even">
+  <td class="methods" rowspan="2">
+    <code>
+      PUT
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/virtual-hosts/{host}/topics/{dest}.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+    </code>
+  </td>
+</tr>
+<tr class="even">
+  <td class="description" colspan="2">
+<p>Creates the <code>{dest}</code> topic on the <code>{host}</code> virtual host.</p>
+
+  </td>
+</tr>
+<tr class="odd">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/virtual-hosts/{host}/topic-queues/{dest}/{queue}.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/QueueStatusDTO.html">
+        QueueStatusDTO
+      </a>
+    </code>
+  </td>
+</tr>
+<tr class="odd">
+  <td class="description" colspan="2">
+<p>Gets metrics and details about <code>{queue}</code> consumer queue which is being used to 
+spool messages being sent to the <code>{dest}</code> topic on the <code>{host}</code> virtual host.</p>
+
+  </td>
+</tr>
+<tr class="even">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/virtual-hosts/{host}/dsubs.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/DataPageDTO.html">
+        DataPageDTO
+      </a>
+      paging
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/QueueStatusDTO.html">
+        QueueStatusDTO
+      </a>
+      <div></div>
+    </code>
+  </td>
+</tr>
+<tr class="even">
+  <td class="description" colspan="2">
+<p>Provides tabular access to all durable subscription destinations on the <code>{host}</code> virtual host.</p>
+
+  </td>
+</tr>
+<tr class="odd">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/virtual-hosts/{host}/dsubs/{dest}.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/QueueStatusDTO.html">
+        QueueStatusDTO
+      </a>
+    </code>
+  </td>
+</tr>
+<tr class="odd">
+  <td class="description" colspan="2">
+<p>Gets metrics and details about the <code>{dest}</code> durable subscription on the <code>{host}</code> virtual host.</p>
+
+  </td>
+</tr>
+</table>
+
+<div></div>
+
+<h3 id = "Connection&#95;Management">Connection Management</h3>
+
+<table class="reference">
+  <tr>
+    <th></th>
+    <th>Route</th>
+    <th>On Success</th>
+  </tr>
+<tr class="even">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/connectors.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/DataPageDTO.html">
+        DataPageDTO
+      </a>
+      paging
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/ServiceStatusDTO.html">
+        ServiceStatusDTO
+      </a>
+      <div></div>
+    </code>
+  </td>
+</tr>
+<tr class="even">
+  <td class="description" colspan="2">
+<p>Provides tabular access to all connectors on the broker.</p>
+
+  </td>
+</tr>
+<tr class="odd">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/connectors/{connector}.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/ServiceStatusDTO.html">
+        ServiceStatusDTO
+      </a>
+    </code>
+  </td>
+</tr>
+<tr class="odd">
+  <td class="description" colspan="2">
+<p>Gets details about the <code>{connector}</code>.  Example:</p>
+
+<p><code>curl -u "admin:password" http://localhost:61680/broker/connectors/tcp.json</code></p>
+
+<div class="syntax"><pre name='code' class='brush: js; gutter: false;'><code>
+{
+  &quot;id&quot;: &quot;tcp&quot;,
+  &quot;state&quot;: &quot;STARTED&quot;,
+  &quot;state_since&quot;: 1314573798510,
+  &quot;local_address&quot;: &quot;/0.0.0.0:61613&quot;,
+  &quot;protocol&quot;: &quot;any&quot;,
+  &quot;connection_counter&quot;: 100,
+  &quot;connected&quot;: 12
+}
+</code></pre></div>
+
+<p>You can the <code>?connections=true</code> query parameter to have a list of connections
+included n the result.</p>
+
+  </td>
+</tr>
+<tr class="even">
+  <td class="methods" rowspan="2">
+    <code>
+      POST
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/connectors/{connector}/action/stop.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      303
+    </code>
+  </td>
+</tr>
+<tr class="even">
+  <td class="description" colspan="2">
+<p>Stops the <code>{connector}</code>.</p>
+
+  </td>
+</tr>
+<tr class="odd">
+  <td class="methods" rowspan="2">
+    <code>
+      POST
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/connectors/{connector}/action/start.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      303
+    </code>
+  </td>
+</tr>
+<tr class="odd">
+  <td class="description" colspan="2">
+<p>Starts the <code>{connector}</code>.</p>
+
+  </td>
+</tr>
+<tr class="even">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/connection-metrics.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/AggregateConnectionMetricsDTO.html">
+        AggregateConnectionMetricsDTO
+      </a>
+    </code>
+  </td>
+</tr>
+<tr class="even">
+  <td class="description" colspan="2">
+<p>Aggregates metrics about the connections.</p>
+
+  </td>
+</tr>
+<tr class="odd">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/connections.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/DataPageDTO.html">
+        DataPageDTO
+      </a>
+      paging
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/ConnectionStatusDTO.html">
+        ConnectionStatusDTO
+      </a>
+      <div></div>
+    </code>
+  </td>
+</tr>
+<tr class="odd">
+  <td class="description" colspan="2">
+<p>Provides tabular access to all connections on the broker.</p>
+
+  </td>
+</tr>
+<tr class="even">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/connections/{connection}.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/ConnectionStatusDTO.html">
+        ConnectionStatusDTO
+      </a>
+    </code>
+  </td>
+</tr>
+<tr class="even">
+  <td class="description" colspan="2">
+<p>Gets details about the <code>{connection}</code>.  Example:</p>
+
+<p><code>curl -u "admin:password" http://localhost:61680/broker/connections/108.json</code></p>
+
+<div class="syntax"><pre name='code' class='brush: js; gutter: false;'><code>
+{
+  &quot;id&quot;: &quot;108&quot;,
+  &quot;state&quot;: &quot;STARTED&quot;,
+  &quot;state_since&quot;: 1314574636579,
+  &quot;last_read_size&quot;: 0,
+  &quot;last_write_size&quot;: 32973,
+  &quot;read_counter&quot;: 106,
+  &quot;write_counter&quot;: 632923992,
+  &quot;connector: &quot;tcp&quot;,
+  &quot;protocol&quot;: &quot;stomp&quot;,
+  &quot;protocol_version&quot;: &quot;1.0&quot;,
+  &quot;remote_address&quot;: &quot;/127.0.0.1:51733&quot;,
+  &quot;local_address&quot;: &quot;/127.0.0.1:61613&quot;,
+  &quot;user&quot;: &quot;admin&quot;,
+  &quot;waiting_on&quot;: &quot;client request&quot;,
+  &quot;subscription_count&quot;: 1
+}
+</code></pre></div>
+
+  </td>
+</tr>
+<tr class="odd">
+  <td class="methods" rowspan="2">
+    <code>
+      DELETE
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/connections/{connection}.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+    </code>
+  </td>
+</tr>
+<tr class="odd">
+  <td class="description" colspan="2">
+<p>Deletes the <code>{connection}</code>.</p>
+
+  </td>
+</tr>
+<tr class="even">
+  <td class="methods" rowspan="2">
+    <code>
+      POST
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/connections/{connection}/action/delete.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      303
+    </code>
+  </td>
+</tr>
+<tr class="even">
+  <td class="description" colspan="2">
+<p>Deletes the <code>{connection}</code>.</p>
+
+  </td>
+</tr>
+</table>
+
+<div></div>
+
+<h3 id = "Broker&#95;Configuration&#95;Management">Broker Configuration Management</h3>
+
+<table class="reference">
+  <tr>
+    <th></th>
+    <th>Route</th>
+    <th>On Success</th>
+  </tr>
+<tr class="odd">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /config/runtime.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/BrokerDTO.html">
+        BrokerDTO
+      </a>
+    </code>
+  </td>
+</tr>
+<tr class="odd">
+  <td class="description" colspan="2">
+<p>The runtime configuration the broker using.  This version
+of the configuration has all property placeholders resolved
+and then password fields are cleared.</p>
+
+  </td>
+</tr>
+<tr class="even">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /config/runtime.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/BrokerDTO.html">
+        BrokerDTO
+      </a>
+    </code>
+  </td>
+</tr>
+<tr class="even">
+  <td class="description" colspan="2">
+<p>The runtime configuration the broker using.  This version
+of the configuration has all property placeholders resolved
+and then password fields are cleared.</p>
+
+  </td>
+</tr>
+<tr class="odd">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /config/files.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+string array
+    </code>
+  </td>
+</tr>
+<tr class="odd">
+  <td class="description" colspan="2">
+<p>A listing of the configuration files.</p>
+
+  </td>
+</tr>
+<tr class="even">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /config/files/{file}
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+bytes
+    </code>
+  </td>
+</tr>
+<tr class="even">
+  <td class="description" colspan="2">
+<p>Downloads the contents of the config file.</p>
+
+  </td>
+</tr>
+<tr class="odd">
+  <td class="methods" rowspan="2">
+    <code>
+      POST
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /config/files/{file}
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      303
+    </code>
+  </td>
+</tr>
+<tr class="odd">
+  <td class="description" colspan="2">
+<p>Updates the contents of the config file.  You can either post the raw bytes,
+or post a url encoded form with a field <code>config</code> set to the contents of the file.  In
+the latter case, the content type is expected to be <code>application/x-www-form-urlencoded</code></p>
+
+  </td>
+</tr>
+</table>
+
+<div></div>
+
+<h3 id = "Session&#95;Management">Session Management</h3>
+
+<table class="reference">
+  <tr>
+    <th></th>
+    <th>Route</th>
+    <th>On Success</th>
+  </tr>
+<tr class="even">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/whoami.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+      <and></and>
+      <a href="http://activemq.apache.org/apollo/versions/1.7.1/website/documentation/api/apollo-dto/org/apache/activemq/apollo/dto/PrincipalDTO.html">
+        PrincipalDTO
+      </a>
+array
+    </code>
+  </td>
+</tr>
+<tr class="even">
+  <td class="description" colspan="2">
+<p>Lists the principals associated with your username.  Example:
+curl -u &ldquo;admin:password&rdquo; http://localhost:61680/broker/whoami.json</p>
+
+<div class="syntax"><pre name='code' class='brush: js; gutter: false;'><code>
+[{
+  &quot;name&quot;: &quot;admin&quot;,
+  &quot;kind&quot;: &quot;org.apache.activemq.jaas.UserPrincipal&quot;
+}, {
+  &quot;name&quot;: &quot;admins&quot;,
+  &quot;kind&quot;: &quot;org.apache.activemq.jaas.GroupPrincipal&quot;
+}]
+</code></pre></div>
+
+  </td>
+</tr>
+<tr class="odd">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/signin.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+true
+    </code>
+  </td>
+</tr>
+<tr class="odd">
+  <td class="description" colspan="2">
+<p>Log you in using the <code>username</code> and <code>password</code> query parameters.
+creates a cookie based session.</p>
+
+  </td>
+</tr>
+<tr class="even">
+  <td class="methods" rowspan="2">
+    <code>
+      POST
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/signin.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+true
+    </code>
+  </td>
+</tr>
+<tr class="even">
+  <td class="description" colspan="2">
+<p>Signs you in using the <code>username</code> and <code>password</code> form parameters.
+Creates a cookie based session.</p>
+
+  </td>
+</tr>
+<tr class="odd">
+  <td class="methods" rowspan="2">
+    <code>
+      GET
+    </code>
+  </td>
+  <td class="path">
+    <code>
+      /broker/signout.json
+    </code>
+  </td>
+  <td class="codes">
+    <code>
+      200
+true
+    </code>
+  </td>
+</tr>
+<tr class="odd">
+  <td class="description" colspan="2">
+<p>Signs you off by invalidating your session.</p>
+
+  </td>
+</tr>
+</table>
+
+<div></div>
+        <div></div>
+      </div>
+    </div>
+  </body>
+</html>

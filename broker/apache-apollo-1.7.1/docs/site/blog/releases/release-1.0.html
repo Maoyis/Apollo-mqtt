@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd"> 
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  Architecture
+-->
+<html lang="en">
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta content="ActiveMQ's next generation of messaging" name="description"/>
+    <meta content="messaging,stomp,jms,activemq,apollo" name="keywords"/>
+    <meta content="Apollo" name="author"/>
+    <script src="../../scripts/jquery.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../styles/impact/css/pygmentize.css"/>
+    <link type="text/css" rel="stylesheet" href="../../styles/impact/css/site.css"/>
+    <title>Apollo 1.0</title>
+  </head>
+  <body>
+    <div id="navigation">
+      <div class="wrapper">
+<ul>
+<li><a href="../../index.html">Apollo 1.7.1</a></li>
+<li><a href="../../community/developers.html">Developers</a></li>
+<li><a href="../../community/index.html">Community</a></li>
+<li><a href="../../download.html">Download</a></li>
+</ul>        <div></div>
+      </div>
+    </div>
+    <div id="content">
+      <div class="wrapper">
+<p>The <a href="http://activemq.apache.org">Apache ActiveMQ Project</a> is pleased to announce the 
+availability of Apollo 1.0. ActiveMQ Apollo is a faster, more reliable, easier 
+to maintain messaging broker built from the foundations of the original ActiveMQ. 
+Apollo is the fastest and most robust STOMP server.</p>
+
+<p>Apollo Features:</p>
+
+<ul>
+<li><a href="http://stomp.github.com/stomp-specification-1.0.html">Stomp 1.0</a> Protocol Support</li>
+<li><a href="http://stomp.github.com/stomp-specification-1.1.html">Stomp 1.1</a> Protocol Support</li>
+<li><a href="http://activemq.apache.org/apollo/documentation/user-manual.html#Destination&#95;Types">Topics and Queues</a></li>
+<li><a href="http://activemq.apache.org/apollo/documentation/user-manual.html#Browsing&#95;Subscriptions">Queue Browsers</a></li>
+<li><a href="http://activemq.apache.org/apollo/documentation/user-manual.html#Topic&#95;Durable&#95;Subscriptions">Durable Subscriptions on Topics</a></li>
+<li><a href="http://activemq.apache.org/apollo/documentation/user-manual.html#Mirrored&#95;Queues">Mirrored Queues</a></li>
+<li><a href="http://activemq.apache.org/apollo/documentation/user-manual.html#Reliable&#95;Messaging">Reliable Messaging</a></li>
+<li><a href="http://activemq.apache.org/apollo/documentation/user-manual.html#Message&#95;Expiration">Message Expiration</a></li>
+<li><a href="http://activemq.apache.org/apollo/documentation/architecture.html#Message&#95;Swapping">Message Swapping</a></li>
+<li><a href="http://activemq.apache.org/apollo/documentation/user-manual.html#Message&#95;Selectors">Message Selectors</a></li>
+<li><a href="http://activemq.apache.org/apollo/documentation/user-manual.html#Authentication">JAAS Authentication</a></li>
+<li><a href="http://activemq.apache.org/apollo/documentation/user-manual.html#Authorization">ACL based Authorization</a></li>
+<li><a href="http://activemq.apache.org/apollo/documentation/user-manual.html#Using&#95;SSL&#95;TLS">SSL/TLS Support</a> and Certificate based Authentication</li>
+<li><a href="http://activemq.apache.org/apollo/documentation/management-api.html">REST Management API</a></li>
+</ul>
+
+<p>Noteworthy changes since the last beta include:</p>
+
+<ul>
+<li>[APLO-120] - Add a &mdash;with-ssl option to the apollo create command to control if an SSL enabled configuration is created.</li>
+<li>[APLO-134] - LevelDB store should use a file lock so a broker instance get exclusive access to the store data.</li>
+<li>[APLO-135] - Add example to the distro that shows how you can boot up an embedded broker in a Java app.</li>
+<li>[APLO-109] - Apollo should run with assertions enabled by default unless APOLLO_ASSERTIONS=false is set in the env.</li>
+<li>[APLO-110] - Provide more information in case of authentication failure</li>
+<li>[APLO-112] - Support for TLS 1.2</li>
+<li>[APLO-118] - All configuration attributes which configure memory/disk usage sizes should support values like &ldquo;1k&rdquo; &ldquo;2G&rdquo; etc.</li>
+<li>[APLO-124] - call the LoginModule.logout method</li>
+<li>[APLO-125] - Client authentication error message</li>
+<li>[APLO-128] - Simplify the leveldb-store's log record format so that every record has a checksum which can be used to quickly validate all read data in case your paranoid about data corruption in your FS</li>
+<li>[APLO-130] - Allow acquired queue entries to get swapped.  This is especially handy if the entry was already persisted anyways.</li>
+<li>[APLO-131] - Stores should track &ldquo;storage schema version number&rdquo; to detect when the store is incompatible with a new broker version.</li>
+<li>[APLO-136] - Support dots in a dsub name</li>
+<li>[APLO-141] - The connection screen displays 'transport: tcp' even though the connection came in over the tls port.</li>
+<li>[APLO-139] - Simplify the JSON encoding of the @class field</li>
+</ul>
+
+<p>Further information:</p>
+
+<ul>
+<li><a href="http://activemq.apache.org/apollo/download.html">Download</a></li>
+<li><a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?version=12316435&amp;styleName=Text&amp;projectId=12311310&amp;Create=Create">Issues Fixed</a></li>
+<li><a href="http://activemq.apache.org/apollo/versions/1.0/website/documentation">Documentation</a></li>
+</ul>
+
+<p><a href="http://activemq.apache.org/community/index.html">Feedback</a> is always welcome!</p>
+        <div></div>
+      </div>
+    </div>
+  </body>
+</html>

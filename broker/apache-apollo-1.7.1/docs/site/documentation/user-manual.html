@@ -1,0 +1,1356 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd"> 
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  Architecture
+-->
+<html lang="en">
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta content="ActiveMQ's next generation of messaging" name="description"/>
+    <meta content="messaging,stomp,jms,activemq,apollo" name="keywords"/>
+    <meta content="Apollo" name="author"/>
+    <script src="../scripts/jquery.js"></script>
+    <link type="text/css" rel="stylesheet" href="../styles/impact/css/pygmentize.css"/>
+    <link type="text/css" rel="stylesheet" href="../styles/impact/css/site.css"/>
+    <title></title>
+  </head>
+  <body>
+    <div id="navigation">
+      <div class="wrapper">
+<ul>
+<li><a href="../index.html">Apollo 1.7.1</a></li>
+<li><a href="../community/developers.html">Developers</a></li>
+<li><a href="../community/index.html">Community</a></li>
+<li><a href="../download.html">Download</a></li>
+</ul>        <div></div>
+      </div>
+    </div>
+    <div id="content">
+      <div class="wrapper">
+<h1 id = "Apollo_1_7_1_User_Manual">Apollo 1.7.1 User Manual</h1>
+
+<p><div class="toc"><ul style="list-style:none;">
+  <li><a href="#Creating_a_Broker">Creating a Broker</a></li>
+  <li><a href="#Broker_Configuration">Broker Configuration</a></li>
+  <li><ul style="list-style:none;">
+    <li><a href="#Automatic_Configuration_Reloading">Automatic Configuration Reloading</a></li>
+    <li><a href="#Adjusting_JVM_Settings">Adjusting JVM Settings</a></li>
+    <li><a href="#Understanding_the__code_apollo_xml__code__File">Understanding the <code>apollo.xml</code> File</a></li>
+    <li><ul style="list-style:none;">
+      <li><a href="#Connectors">Connectors</a></li>
+      <li><ul style="list-style:none;">
+        <li><a href="#TCP_Transports">TCP Transports</a></li>
+        <li><a href="#WebSocket_Transports">WebSocket Transports</a></li>
+        <li><a href="#UDP_Transports">UDP Transports</a></li>
+      </ul></li>
+      <li><a href="#Virtual_Hosts">Virtual Hosts</a></li>
+      <li><ul style="list-style:none;">
+        <li><a href="#Queues">Queues</a></li>
+        <li><a href="#Topics">Topics</a></li>
+        <li><a href="#Durable_Subscriptions">Durable Subscriptions</a></li>
+        <li><a href="#Mirrored_Queues">Mirrored Queues</a></li>
+        <li><a href="#Message_Stores">Message Stores</a></li>
+      </ul></li>
+    </ul></li>
+    <li><a href="#Support_Platforms">Support Platforms</a></li>
+    <li><a href="#Security">Security</a></li>
+    <li><a href="#Working_Around_Java_7_SSL_Bugs">Working Around Java 7 SSL Bugs</a></li>
+    <li><ul style="list-style:none;">
+      <li><a href="#The_SSL_TLS_Transport">The SSL/TLS Transport</a></li>
+      <li><a href="#Authentication">Authentication</a></li>
+      <li><ul style="list-style:none;">
+        <li><a href="#Using_Custom_Login_Modules">Using Custom Login Modules</a></li>
+      </ul></li>
+      <li><a href="#Authorization">Authorization</a></li>
+      <li><ul style="list-style:none;">
+        <li><a href="#Ordering">Ordering</a></li>
+      </ul></li>
+      <li><a href="#Resource_Actions">Resource Actions</a></li>
+      <li><a href="#Resource_Kinds">Resource Kinds</a></li>
+      <li><a href="#Encrypting_Passwords_in_the_Configuration">Encrypting Passwords in the Configuration</a></li>
+    </ul></li>
+    <li><a href="#Web_Based_Administration">Web Based Administration</a></li>
+  </ul></li>
+  <li><a href="#Managing_Brokers">Managing Brokers</a></li>
+  <li><ul style="list-style:none;">
+    <li><a href="#Running_a_Broker_Instance_in_the_Foreground">Running a Broker Instance in the Foreground</a></li>
+    <li><a href="#Managing_a_Background_Broker_Instance">Managing a Background Broker Instance</a></li>
+    <li><ul style="list-style:none;">
+      <li><a href="#On_Linux_Unix">On Linux/Unix</a></li>
+      <li><a href="#On_Windows">On Windows</a></li>
+    </ul></li>
+    <li><a href="#Viewing_Broker_State">Viewing Broker State</a></li>
+    <li><a href="#Exporting_Importing_Stores">Exporting/Importing Stores</a></li>
+  </ul></li>
+  <li><a href="#Messaging_Protocols_Manuals">Messaging Protocols Manuals</a></li>
+</ul></div></p>
+
+<h2 id = "Creating_a_Broker">Creating a Broker</h2>
+
+<p>A broker instance is the directory containing all the configuration and
+runtime data such as logs and data files associated with a broker process. It
+is recommended that you do <em>not</em> create the instance directory under the
+directory where the Apollo distribution is installed.</p>
+
+<p>On unix systems, it is a common convention to store this kind of runtime data
+under the <code>/var/lib</code> directory. For example, to create an instance at
+'/var/lib/mybroker', run:</p>
+
+<pre><code>cd /var/lib
+apollo create mybroker</code></pre>
+
+<p>A broker instance directory will contain the following sub directories:</p>
+
+<ul>
+<li><code>bin</code> : holds execution scripts associated with this instance.</li>
+<li><code>etc</code> : hold the instance configuration files</li>
+<li><code>data</code> : holds the data files used for storing persistent messages</li>
+<li><code>log</code> : holds rotating log files</li>
+<li><code>tmp</code> : holds temporary files that are safe to delete between broker runs</li>
+</ul>
+
+<p>At this point you may want to adjust the default configuration located in
+etc directory.</p>
+
+<h2 id = "Broker_Configuration">Broker Configuration</h2>
+
+<p>Each broker instance can be tuned and configured by editing one of the
+following files.</p>
+
+<ul>
+<li><code>bin/apollo-broker</code> : You can update the start script to control JVM level
+configuration options like JVM memory sizing.</li>
+<li><code>etc/apollo.xml</code> : The primary configuration file for the broker. It
+controls the opened ports, the queues, security, virtual host settings and
+more.</li>
+<li><code>etc/log4j.properties</code> : This is a standard 
+<a href="http://logging.apache.org/log4j/1.2/manual.html">log4j</a> configuration file
+which controls the broker's logging.</li>
+<li><code>etc/keystore</code> : A Java key store used to hold cryptographic security keys
+and certificates.  It is only need for brokers using SSL.</li>
+<li><code>etc/login.conf</code> : A standard JAAS [login.conf] configuration file used to
+define the JAAS authentication domains available to the broker.</li>
+<li><code>etc/users.properties</code> : Holds userid/password mappings of users that can 
+access the broker.  Referenced by the <code>etc/login.conf</code> file.</li>
+<li><code>etc/groups.properties</code> : Holds groups to users mappings so that you can
+simplify access control lists (ACL) by using group instead listing individual
+users.</li>
+<li><code>black-list.txt</code> : A list of IP address which are banned from connecting 
+to the broker.</li>
+</ul>
+
+<h3 id = "Automatic_Configuration_Reloading">Automatic Configuration Reloading</h3>
+
+<p>Once a broker is started, you can edit any of the configuration files in
+the <code>etc</code> directory and your changes will be automatically reloaded.  The
+configuration update will be applied in the least non-disruptive way possible.
+For example, if you removed a connector, the port that connector was listening
+on will be released and no new connections will be accepted. Connections that
+were previously accepted by that connector will continue to operate normally.</p>
+
+<h3 id = "Adjusting_JVM_Settings">Adjusting JVM Settings</h3>
+
+<p>You can define the following environment variables in the <code>bin/apollo-broker</code>
+start script to customize the JVM settings:</p>
+
+<ul>
+<li><code>JAVACMD</code> : The path to the java executable to use</li>
+<li><code>JVM_FLAGS</code> : The first JVM flags passed. Defaults to <code>-server -Xmx1G</code>, you
+may want to lower or raise the maximum memory based on your actual usage.</li>
+<li><code>APOLLO_OPTS</code> : Additional JVM options you can add</li>
+<li><code>APOLLO_DEBUG</code> : Set to true to enabled debugging on port 5005</li>
+<li><code>APOLLO_PROFILE</code> : Set to true to YourKit based profiling</li>
+<li><code>JMX_OPTS</code> : The JMX JVM options used, defaults to 
+-Dcom.sun.management.jmxremote</li>
+</ul>
+
+<p>Make sure you define the variables before the <code>apollo-broker</code> script
+executes <code>apollo</code> and that the variables get exported in the case of the
+unix script.</p>
+
+<h3 id = "Understanding_the__code_apollo_xml__code__File">Understanding the <code>apollo.xml</code> File</h3>
+
+<p>There are many XSD aware XML editors which make editing XML configuration
+files less error prone.  If you're using one of these editors, you can
+configure it to use this <a href="schema/apollo.xsd">apollo.xsd</a> file.</p>
+
+<p>The simplest valid <code>apollo.xml</code> defines a single virtual host and a
+single connector.</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>                           s
+&lt;broker xmlns=&quot;http://activemq.apache.org/schema/activemq/apollo&quot;&gt;
+
+  &lt;virtual_host id=&quot;default&quot;&gt;
+    &lt;host_name&gt;localhost&lt;/host_name&gt;
+    &lt;null_store/&gt;
+  &lt;/virtual_host&gt;
+
+  &lt;connector id=&quot;tcp&quot; bind=&quot;tcp://0.0.0.0:61613&quot;/&gt;
+
+&lt;/broker&gt;
+</code></pre></div>
+
+<p>The broker, virtual host, and connector are assigned an id which which
+is used to by the REST based administration console to identify 
+the corresponding runtime resource.  The virtual host will not persist
+any messages sent to it since it is using the <code>null_store</code>.</p>
+
+<p>Brokers can be configured with multiple virtual hosts and connectors.</p>
+
+<p>When a broker is first started up, it will validate the configuration
+file against the the <a href="schema/apollo.xsd">XSD Schema</a> and report any 
+errors/warnings it finds but it will continue to start the broker even 
+it finds problems.  You would want to the broker to abort starting up
+if any issues are found with the schema validation you should set
+the <code>broker</code> element's <code>validation</code> attribute to <code>strict</code>.  Example:</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+&lt;broker validation=&quot;strict&quot; 
+   xmlns=&quot;http://activemq.apache.org/schema/activemq/apollo&quot;&gt;
+  ...
+&lt;/broker&gt;
+</code></pre></div>
+
+<p>If you would like the broker to automatically trigger a Java
+heap garbage collection (GC) cycle periodically, add a <code>auto_gc</code>
+element within the <code>broker</code> element.  GC cycles will automatically
+kick in when they are needed, but if your monitoring broker
+heap usage with an external monitoring tool, then periodically
+forcing a GC cycle might be nice since then your monitoring
+tool can more accurate track actual heap usage.  Set the <code>interval</code>
+attribute of the <code>auto_gc</code> to the number of seconds between
+forced GC cycles.  If interval is not set, it will default to 30.</p>
+
+<p>Example:</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+&lt;broker&gt;
+  ...
+  &lt;auto_gc interval=&quot;10&quot;&gt;
+  ...
+&lt;/broker&gt;
+</code></pre></div>
+
+<h4 id = "Connectors">Connectors</h4>
+
+<p>A broker connector is used to accept new connections to the broker.
+A <code>connector</code> element can be configured with the following attributes</p>
+
+<ul>
+<li><p><code>enabled</code> : if set to false, then the connector host will be disabled.</p></li>
+<li><p><code>bind</code> : The transport that the connector will listen on, it includes the
+ip address and port that it will bind to.  Transports are specified using 
+a URI syntax.</p></li>
+<li><p><code>connection_limit</code> : The maximum number of concurrently open connections
+this connector will accept before it stops accepting additional
+connections.  If not set, then there is no limit.</p></li>
+<li><p><code>protocol</code> : Defaults to <code>any</code> which means that any of the broker's 
+supported protocols can connect via this transport.</p></li>
+<li><p><code>receive_buffer_size_auto_tune</code> : Sets whether or not to auto tune the internal
+socket receive buffer (aka the socket's SO_RCVBUF). Auto tuning happens
+every 1 second. Default is true</p></li>
+<li><p><code>send_buffer_size_auto_tune</code> : Sets whether or not to auto tune the internal
+socket send buffer (aka the socket's SO_SNDBUF). Auto tuning happens
+every 1 second. Default is true</p></li>
+</ul>
+
+<p>By default, the broker will 'auto-tune' a connector's transports to be between
+'64k' and '2k' based on the max number of connections established against the
+broker in the last 5 minutes and the size of the JVM heap. Set <code>receive_buffer_size_auto_tune</code>
+and <code>send_buffer_size_auto_tune</code> to false to disable this auto tuning.</p>
+
+<p>Furthermore, the connector element may contain protocol specific
+configuration elements. For example, to have the broker set the <code>user_id</code>
+header of messages to the id of user that sent the message, you would
+use the following configuration:</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+&lt;connector id=&quot;tcp&quot; bind=&quot;tcp://0.0.0.0:61613&quot;&gt;
+  &lt;stomp add_user_header=&quot;user_id&quot;/&gt;
+&lt;/connector&gt;
+</code></pre></div>
+
+<p>If you're using the <code>any</code> protocol then actual protocol being used will be
+detected by examining the client's initial request. You can use the
+<code>detect</code> element within a <code>connector</code> element to configure the protocol
+detection settings.  The <code>detect</code> element supports the following 
+attributes:</p>
+
+<ul>
+<li><code>timeout</code> : maximum amount of time (in milliseconds) that protocol
+detection is allowed to take.  Defaults to 5000 milliseconds.  If a 
+client does not send an initial request before the timeout expires,
+the connection is closed.</li>
+</ul>
+
+<p>Example of how to set the protocol detection timeout to 30 seconds:</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+&lt;connector id=&quot;tcp&quot; bind=&quot;tcp://0.0.0.0:61613&quot;&gt;
+  &lt;detect timeout=&quot;30000&quot;/&gt;
+&lt;/connector&gt;
+</code></pre></div>
+
+<h5 id = "TCP_Transports">TCP Transports</h5>
+
+<p>The TCP transport uses the <code>tcp://</code> URI scheme.  It uses the URI host
+and port to determine to which local interfaces to bind.  For example:</p>
+
+<ul>
+<li><code>tcp://0.0.0.0:61613</code> binds to all IPv4 interfaces on port 61613</li>
+<li><code>tcp://[::]:61613</code> binds to all IPv4 and IPv6 interfaces on port 61613</li>
+<li><code>tcp://127.0.0.1:0</code> binds to the loopback interface on a dynamic port</li>
+</ul>
+
+<p>The TCP URI also supports several query parameters to fine tune the
+settings used on the socket at the time of creation.  The supported parameters are:</p>
+
+<ul>
+<li><p><code>backlog</code> : Sets the listen backlog size.  Defaults to 100.</p></li>
+<li><p><code>keep_alive</code> : Enable or disable the SO_KEEPALIVE socket option <br/>
+(aka setting the socket's SO_KEEPALIVE). Defaults to true.</p></li>
+<li><p><code>traffic_class</code> : Sets traffic class or type-of-service octet in the IP 
+header for packets sent from the transport (aka setting the socket's IP_TOS). <br/>
+Defaults to <code>8</code> which means the traffic should be optimized for throughput.</p></li>
+<li><p><code>max_read_rate</code> : Sets the maximum bytes per second that this transport will
+receive data at.  This setting throttles reads so that the rate is not exceeded.
+Defaults to 0 which disables throttling.</p></li>
+<li><p><code>max_write_rate</code> : Sets the maximum bytes per second that this transport will
+send data at.  This setting throttles writes so that the rate is not exceeded.
+Defaults to 0 which disables throttling.</p></li>
+<li><code>receive_buffer_size</code> : Sets the initial size of the internal socket receive
+buffer (aka setting the socket's SO_RCVBUF)</li>
+<li><code>send_buffer_size</code> : Sets the initial size of the internal socket send buffer
+(aka setting the socket's SO_SNDBUF)</li>
+</ul>
+
+<p>Example which uses a couple of options:</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+&lt;connector id=&quot;tcp&quot; bind=&quot;tcp://0.0.0.0:61613?receive_buffer_size=1024&amp;amp;max_read_rate=65536&quot;/&gt;
+</code></pre></div>
+
+<p>Note that <div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>&amp;amp;</code></pre></div>
+was used to separate the option values instead of just <code>&amp;</code> since the
+URI is within an XML file. In the URI string, we specify what the buffer sizes
+should be when the socket is created, but their values can change if auto-tuning is enabled.</p>
+
+<h5 id = "WebSocket_Transports">WebSocket Transports</h5>
+
+<p>HTML 5 introduced WebSockets, as a standardized way to communicate
+asynchronously with the server from a web page. This is an ideal channel for
+implementing asynchronous messaging in web pages. It can be used to
+encapsulate other protocols like STOMP and it avoids needing to use Comet
+techniques like long polling to deliver data to the Browser. Furthermore,
+since JavaScript easily handles text and JSON formatted data, the STOMP
+protocol is a natural choice for the messaging protocol to be used over
+WebSocket.</p>
+
+<p>The WebSocket transport uses the <code>ws://</code> URI scheme and the secure WebSocket
+transport uses the <code>wss://</code> URI scheme. Like the TCP transport, this
+transport uses the URI host and port to determine to which local interfaces
+to bind. For example:</p>
+
+<ul>
+<li><code>ws://0.0.0.0:61623</code> binds to all IPv4 interfaces on port 61623</li>
+<li><code>ws://[::]:61623</code> binds to all IPv4 and IPv6 interfaces on port 61623</li>
+<li><code>wss://127.0.0.1:0</code> binds to the loopback interface on a dynamic port</li>
+</ul>
+
+<p>The WebSocket URI also supports the following query parameters to fine tune
+the settings used on the socket:</p>
+
+<ul>
+<li><code>binary_transfers</code> : Should data be sent to the client as binary blobs. Currently
+not all browsers support binary WebSocket data.  Defaults to false.</li>
+<li><code>cors_origin</code> : Specify cross-origin resource sharing limmitations, including <code>*</code> all or individual server
+names</li>
+<li><code>max_text_message_size</code> : Specify the size of text messages that the websocket connector can handle</li>
+<li><code>max_binary_message_size</code> : Specify the size of binary messages that the websocket connector can handle</li>
+<li><code>max_idle_time</code> : timeout limitations of the underlying websocket socket</li>
+</ul>
+
+<p>Example configuraiton:</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+&lt;connector id=&quot;ws&quot; bind=&quot;ws://0.0.0.0:61623?binary_transfers=false&quot;/&gt;
+</code></pre></div>
+
+<p>One thing worth noting is that web sockets (just as Ajax) implements the same
+origin policy, so by default you can access only brokers running on the same host as
+where the web page originated from.</p>
+
+<p>If you want to allow cross origin resource sharing (CORS) of the WebSocket connector,
+by different hosts then you should add <code>cors_origin</code> query parameter to the bind URI with 
+a common seperated list of domains that are allowed to access the WebSocket
+connector.  Use <code>*</code> to allow access from any domain.  Example:</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+&lt;connector id=&quot;ws&quot; bind=&quot;ws://0.0.0.0:61623?cors_origin=*&quot;/&gt;
+</code></pre></div>
+
+<h6 id = "WebSocket_Clients">WebSocket Clients</h6>
+
+<p>You can use one of the following JavaScript libraries to access
+the broker over WebSockets:</p>
+
+<ul>
+<li><a href="http://github.com/krukow/stomple">Stomple</a></li>
+<li><a href="http://github.com/jmesnil/stomp-websocket">stomp-websocket</a></li>
+</ul>
+
+<p>The Apollo distribution include a couple of simple WebSocket 
+based chat example in the following distribution directories:</p>
+
+<ul>
+<li><code>examples/stomp/websocket</code></li>
+<li><code>examples/mqtt/websocket</code></li>
+</ul>
+
+<h5 id = "UDP_Transports">UDP Transports</h5>
+
+<p>The UDP transport uses the <code>udp://</code> URI scheme.  It uses the URI host
+and port to determine to which local interfaces to bind.  For example:</p>
+
+<ul>
+<li><code>udp://0.0.0.0:61615</code> binds to all IPv4 interfaces on port 61615</li>
+<li><code>udp://[::]:61615</code> binds to all IPv4 and IPv6 interfaces on port 61615</li>
+<li><code>udp://127.0.0.1:0</code> binds to the loopback interface on a dynamic port</li>
+</ul>
+
+<p>The UDP transport MUST be configured to use a UDP specific protocol
+handler.  That is done by setting the <code>protocol</code> attribute on the 
+<code>connector</code> element.</p>
+
+<p>Example:</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+&lt;connector id=&quot;udp&quot; bind=&quot;udp://0.0.0.0:61615&quot; protocol=&quot;udp&quot;/&gt;
+</code></pre></div>
+
+<p>The supported protocols that can be used with the udp transport are:</p>
+
+<ul>
+<li><p><code>udp</code> : Takes the all the data in a received UDP datagram
+and forwards it as a binary message to a configured topic.
+This protocol can be configured by nesting a <code>udp</code> element
+within the <code>connector</code> element.  The supported options on
+the <code>udp</code> element are:</p>
+
+<ul>
+<li><code>topic</code> : The name of the topic to send messages.  Defaults
+to <code>udp</code>.</li>
+<li><code>buffer_size</code> : The amount of memory to use to buffer between the
+socket and topic endpoint.  Defaults to <code>640k</code>.</li>
+</ul></li>
+<li><p><code>stomp-udp</code> : Expects the received UDP datagram to contain a
+STOMP frame.  The STOMP frame is processed and routed just like any
+STOMP frame that would be received on a TCP transport.  This protocol can 
+be configured by nesting a <code>stomp</code> element within the <code>connector</code> element. 
+See the <a href="#Stomp&#95;Protocol&#95;Options">Stomp Protocol Options section</a> for more
+details.</p></li>
+</ul>
+
+<h4 id = "Virtual_Hosts">Virtual Hosts</h4>
+
+<p>A virtual hosts allows Apollo to support multi tenant style
+configurations. Each virtual host is highly isolated each with its own
+persistence, security, and runtime constraints configuration.</p>
+
+<p>Protocols like STOMP 1.1, inform the broker of which host the client is
+attempting to connect with. The broker will search its list of virtual hosts
+to find the first host who has a configured <code>host_name</code> that matches.
+Protocols which do NOT support virtual hosts, will just connect to the first
+virtual host defined in the configuration file.</p>
+
+<ul>
+<li><code>host_name</code> : a host name that the virtual host is known as.  This element
+should be repeated multiple times if the host has many host names.</li>
+</ul>
+
+<p>A <code>virtual_host</code> element may be configured with the following attributes:</p>
+
+<ul>
+<li><p><code>enabled</code> : if set to false, then the virtual host will be disabled.</p></li>
+<li><p><code>purge_on_startup</code> : if set to true, the persistent state of the broker
+will be purged when the broker is started up.</p></li>
+</ul>
+
+<p>The <code>virtual_host</code> can also define multiple <code>topic</code>, <code>queue</code>, and
+<code>dsub</code> elements to secure or tune how message delivery works
+for different topics or queues. If none are defined, then sensible default
+settings are used which allows destinations to be auto created as they get
+accessed by applications.</p>
+
+<p>Finally <code>virtual_host</code> configuration should also include a message store
+configuration element to enable message persistence on the virtual host.</p>
+
+<h5 id = "Queues">Queues</h5>
+
+<p>When a new queue is first created in the broker, its configuration will be
+determined by the first <code>queue</code> element which matches the queue being
+created. The attributes matched against are:</p>
+
+<ul>
+<li><code>id</code> : The name of the queue, you can use wild cards to match
+multiple or don't set to match all queues.</li>
+</ul>
+
+<p>If the queue definition is not using a wild card in the id, then the
+queue will be created when the broker first starts up.</p>
+
+<p>A <code>queue</code> element may be configured with the following attributes:</p>
+
+<ul>
+<li><p><code>mirrored</code> : If set to true, If set to true, then once the queue
+is created all messages sent to the queue will be mirrored to a 
+topic of the same name and all messages sent to the topic will be mirror
+to the queue.  See the
+<a href="Mirrored&#95;Queues">Mirrored Queues</a> documentation for more 
+details.  Defaults to false.</p></li>
+<li><p><code>tail_buffer</code> : The amount of memory buffer space allocated for holding
+freshly enqueued message.  Defaults to <code>640k</code>.</p></li>
+<li><p><code>persistent</code> : If set to false, then the queue will not persistently
+store its message.  Defaults to true.</p></li>
+<li><p><code>message_group_graceful_handoff</code> : When set to true, the queue
+will drain message group consumers of messages before
+allowing new messages to dispatched to messages groups which have been 
+moved to a different consumer due to re-balancing. Defaults to true.</p></li>
+<li><p><code>round_robin</code> : Should the destination dispatch messages to consumers
+using round robin distribution strategy?  Defaults to true.
+If set to false, then messages will be dispatched to the first attached 
+consumers until those consumers start throttling the broker.</p></li>
+<li><p><code>swap</code> : If set to false, then the queue will not swap messages out of 
+memory.  Defaults to true.</p></li>
+<li><p><code>swap_range_size</code> : The number max number of flushed queue entries to load
+from the store at a time. Note that Flushed entires are just reference
+pointers to the actual messages. When not loaded, the batch is referenced
+as sequence range to conserve memory.  Defaults to 10000.</p></li>
+<li><p><code>quota</code> : The maximum amount of disk space the queue is allowed
+to grow to.  If set to -1 then there is no limit.  You can
+use settings values like: <code>500mb</code> or <code>1g</code> just plain byte count
+like <code>1024000</code>.  Once the quota is Exceeded, the producers will
+block until the usage decreases.  Defaults to no limit.</p></li>
+<li><p><code>quota_messages</code> : The maximum number of messages queue is allowed
+to grow to.  If not set then there is no limit. Defaults to no limit.</p></li>
+<li><p><code>auto_delete_after</code>: If not set to <code>0</code> then the queue will automatically
+delete once there have been no consumers, producers or messages on it
+for the configured number of seconds.  Defaults to 30 if not set.</p></li>
+<li><p><code>fast_delivery_rate</code>: The message delivery rate (in bytes/sec) at which <br/>
+the queue considers the consumers fast enough to start slowing down enqueue
+rate to match the consumption rate if the consumers are at the 
+tail of the queue.  Defaults to <code>1M</code></p></li>
+<li><p><code>catchup_enqueue_rate</code>:  The rate that producers will be throttled to
+when queue consumers are considered to be fast.  This allows consumers 
+to catch up and reach the tail of the queue.  If not set, then it is
+computed to be 1/2 the current consumer delivery rate.</p></li>
+<li><p><code>max_enqueue_rate</code>: The maximum enqueue rate of the queue.  Producers
+will be flow controlled once this enqueue rate is reached.  If not set
+then it is disabled</p></li>
+<li><p><code>dlq</code>: Is the dead letter queue configured for the destination.  A 
+dead letter queue is used for storing messages that failed to get processed
+by consumers.  If not set, then messages that fail to get processed
+will be dropped.  If '*' appears in the name it will be replaced with 
+the queue's id.</p></li>
+<li><p><code>nak_limit</code>: Once a message has been nacked the configured
+number of times the message will be considered to be a
+poison message and will get moved to the dead letter queue if that's
+configured or dropped.  If set to less than one, then the message
+will never be considered to be a poison message. Defaults to zero.</p></li>
+<li><p><code>dlq_expired</code>: Should expired messages be sent to the dead letter queue? <br/>
+Defaults to false.</p></li>
+<li><p><code>full_policy</code>: Once the queue is full, the <code>full_policy</code> 
+controls how the   queue behaves when additional messages attempt to 
+be enqueued onto the queue.</p>
+
+<p>You can set it to one of the following options:</p>
+
+<ul>
+<li><code>block</code>: The producer blocks until some space frees up.</li>
+<li><code>drop tail</code>: Drops the new messages being enqueued on the queue.</li>
+<li><code>drop head</code>: Drops old messages at the front of the queue.</li>
+</ul>
+
+<p>If the queue is persistent then it is considered full when the max
+quota size is reached.  If the queue is not persistent then
+the queue is considered full once its <code>tail_buffer</code> fills up.
+Defaults to 'block' if not specified.</p></li>
+</ul>
+
+<p>Example configuraiton:</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+...
+  &lt;virtual_host id=&quot;default&quot;&gt;
+    ...
+    &lt;queue id=&quot;app1.**&quot; dlq=&quot;dlq.*&quot; nak_limit=&quot;3&quot; auto_delete_after=&quot;0&quot;/&gt;
+    ...
+  &lt;/virtual_host&gt;
+...
+</code></pre></div>
+
+<h5 id = "Topics">Topics</h5>
+
+<p>When a new topic is first created in the broker, its configuration will be
+determined by the first <code>topic</code> element which matches the topic being
+created. The attributes matched against are:</p>
+
+<ul>
+<li><code>id</code> : The name of the topic, you can use wild cards to match
+against multiple or don't set to match all topics.</li>
+</ul>
+
+<p>If the topic definition is not using a wild card in the id, then the
+topic will be created when the broker first starts up.</p>
+
+<p>A <code>topic</code> element may be configured with the following attributes:</p>
+
+<ul>
+<li><p><code>slow_consumer_policy</code> : Valid values are <code>block</code> and <code>queue</code>. Defaults to
+<code>block</code>. This setting defines how topic subscriptions are handled which
+affects slow consumer scenarios. If set to <code>queue</code> then each subscription
+gets a temporary queue which can swap messages to disk when you have a slow
+consumer so that produces do not slow down to the speed of the slowest
+consumer. If set to <code>block</code>, the producers block on slow consumers which
+makes producers only as fast as the slowest consumer on the topic.</p></li>
+<li><p><code>auto_delete_after</code>: If not set to <code>0</code> then the topic will automatically
+delete once there have been no consumers or producers on it
+for the configured number of seconds.  Defaults to 30 if not set.</p></li>
+</ul>
+
+<p>A <code>topic</code> that has the <code>slow_consumer_policy</code> set to <code>queue</code> can customize
+the settings of the per subscription queues by adding a nested <code>subscription</code>
+element.  The <code>subscription</code> element supports the following configuration
+attributes of the <code>queue</code> element: <code>tail_buffer</code>, <code>persistent</code>, <code>swap</code>
+<code>swap_range_size</code>, <code>quota</code>, <code>full_policy</code>, <code>fast_delivery_rate</code>, 
+<code>catchup_enqueue_rate</code>, <code>max_enqueue_rate</code>, <code>dlq</code>, <code>nak_limit</code>.  Example:</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+...
+  &lt;virtual_host id=&quot;default&quot;&gt;
+    ...
+    &lt;topic id=&quot;example&quot; slow_consumer_policy=&quot;queue&quot;&gt;
+      &lt;subscription tail_buffer=&quot;4k&quot;/&gt;
+    &lt;/topic&gt;
+    ...
+  &lt;/virtual_host&gt;
+...
+</code></pre></div>
+
+<h5 id = "Durable_Subscriptions">Durable Subscriptions</h5>
+
+<p>When a new durable subscription is first created in the broker, its
+configuration will be determined by the first <code>dsub</code> element
+which matches the durable subscription being created. The attributes matched
+against are:</p>
+
+<ul>
+<li><code>id</code> : The name of the subscription.</li>
+<li><code>id_regex</code> : A regular expression used to match against the subscription id</li>
+</ul>
+
+<p>If you want to create the durable subscription when the broker first starts up,
+then you must set the <code>topic</code> attribute and optionally the <code>selector</code> attribute.</p>
+
+<ul>
+<li><code>topic</code> : The topic which the durable subscription will subscribe to.</li>
+<li><code>selector</code> : A selector expression which filters out messages</li>
+</ul>
+
+<p>A <code>dsub</code> element may be configured with all the 
+attributes available on the <code>queue</code> element.</p>
+
+<h5 id = "Mirrored_Queues">Mirrored Queues</h5>
+
+<p>A mirrored queue, once create will copy all messages sent
+to the queue to a topic of the same name and conversely
+the queue will receive a copy of all messages sent to the topic.</p>
+
+<p>Mirrored queues can be used to mix queue and topic 
+behavior on one logical destination.  For example, let's assumed <code>foo</code> 
+is configured as a mirrored destination and you have 2 subscribers
+on queue <code>foo</code> and 2 subscribers on topic <code>foo</code>.  On the producer side,
+publishers can send either the queue or topic and get the same results.
+On the consumer side, the 2 consumers the the queue foo will get queue
+semantics and message from the queue will be load balanced between 
+the 2 consumers.  The 2 consumers on the topic foo will each 
+get a copy of every message sent.  You can even create durable subscriptions
+on the topic which then effectively becomes a queue which mirrors the 
+original queue.</p>
+
+<p>It is important to note that the mirroring will not start until the queue
+is created which typically happens you first send a message to the queue
+or subscribe to it.</p>
+
+<h5 id = "Message_Stores">Message Stores</h5>
+
+<p>A message store is used to implement reliable messaging and message
+swapping which are both optional features that disabled if no message
+store is configured on the virtual host. If no message store is
+configured, then all message routing is performed in memory and queue will
+quickly &ldquo;fill up&rdquo; when you have slow or no consumers since the messages
+cannot get swapped to disk.</p>
+
+<p>Apollo supports multiple message store implementations.  The 
+implementations currently supported are:</p>
+
+<ul>
+<li><a href="#LevelDB&#95;Store">LevelDB Store</a> : is a file based message store implemented using the 
+<a href="http://en.wikipedia.org/wiki/LevelDB">Google's LevelDB</a> library to maintain indexes into 
+log files holding the messages.  This the default implementation used.</li>
+<li><a href="#BDB&#95;Store">BDB Store</a> : is a file based message store implemented using the 
+<a href="http://en.wikipedia.org/wiki/Berkeley&#95;DB">Sleepycat BDB</a> library.
+This implemenation should work equally well on all platforms since it's a pure
+java implementation.</li>
+</ul>
+
+<h6 id = "LevelDB_Store">LevelDB Store</h6>
+
+<p>The LevelDB store is the default store which a newly created Broker instance
+will use.</p>
+
+<p>It is enabled when your <code>virtual_host</code> element contains a <code>leveldb_store</code> element.</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+  ...
+  &lt;virtual_host id=&quot;default&quot;&gt;
+    ...
+    &lt;leveldb_store directory=&quot;${apollo.base}/data&quot;/&gt;
+    ..
+  &lt;/virtual_host&gt;
+  ...
+</code></pre></div>
+
+<p>A <code>leveldb_store</code> element may be configured with the following attributes:</p>
+
+<ul>
+<li><code>directory</code> : The directory which the store will use to hold its data
+files. The store will create the directory if it does not already
+exist.</li>
+<li><code>flush_delay</code> : The flush delay is the amount of time in milliseconds
+that a store will delay persisting a messaging unit of work in hopes
+that it will be invalidated shortly thereafter by another unit of work
+which would negate the operation.  Defaults to 500.</li>
+<li><code>read_threads</code> : The number of concurrent IO reads to allow. The value 
+defaults to 10.</li>
+<li><code>sync</code> : If set to <code>false</code>, then the store does not sync logging operations to 
+disk. The value defaults to <code>true</code>.</li>
+<li><code>log_size</code> : The max size (in bytes) of each data log file before log file rotation
+occurs. The value defaults to 104857600 (100 MB).</li>
+<li><code>log_write_buffer_size</code>: That maximum amount of log data to build up before writing 
+to the file system. The value defaults to 4194304 (4 MB).</li>
+<li><code>verify_checksums</code> :  If set to <code>true</code> to force checksum verification of all 
+data that is read from the file system on behalf of a particular read. By 
+default, no such verification is done.</li>
+<li><code>paranoid_checks</code> : Make the store error out as soon as possible if it detects 
+internal corruption.  The value defaults to false.</li>
+<li><code>index_max_open_files</code> : Number of open files that can be used by the index. The 
+value defaults to 1000.</li>
+<li><code>index_block_restart_interval</code> : Number keys between restart points for delta 
+encoding of keys. The value defaults to 16.</li>
+<li><code>index_write_buffer_size</code> : Amount of index data to build up in memory before 
+converting to a sorted on-disk file. The value defaults to 4194304 (4 MB).</li>
+<li><code>index_block_size</code> : The size of index data packed per block. The value defaults 
+to 4096 (4 K).</li>
+<li><code>index_cache_size</code> : The maximum amount of memory to use to cache index blocks. 
+The value defaults to 268435456 (256 MB).</li>
+<li><code>index_compression</code> : The type of compression to apply to the index blocks. <br/>
+Can be <code>snappy</code> or <code>none</code>. The value defaults to <code>snappy</code>.</li>
+<li><code>log_compression</code> : The type of compression to apply to the log records. <br/>
+Can be <code>snappy</code> or <code>none</code>. The value defaults to <code>snappy</code>.</li>
+<li><code>auto_compaction_ratio</code>: This ratio is used to determine when to compact 
+the leveldb indexes.  When you take the ratio of disk space used by the leveldb 
+indexes to the number queue entries and it exceeds the configured 
+<code>auto_compaction_ratio</code> then the leveldb index will be scheduled for compaction.
+If set to 0, then auto compactions are disabled.  The value defaults to 100.</li>
+</ul>
+
+<h3 id = "Support_Platforms">Support Platforms</h3>
+
+<p>The LevelDB store uses a JNI driver on Linux, OS X, and supported Windows versions, 
+but falls back to an experimental pure Java driver on other platforms.</p>
+
+<p>The supported Windows versions are Vista, Server 2008 and later that have the 
+MS VC++ 2010 Redistributable package installed:</p>
+
+<ul>
+<li>If you're running a 32 bit JVM, install: <a href="http://www.microsoft.com/en-us/download/details.aspx?id=5555">Microsoft Visual C++ 2010 Redistributable Package (x86)</a></li>
+<li>If you're running a 64 bit JVM, install: <a href="http://www.microsoft.com/en-us/download/details.aspx?id=14632">Microsoft Visual C++ 2010 Redistributable Package (x64)</a></li>
+</ul>
+
+<h6 id = "BDB_Store">BDB Store</h6>
+
+<p>Apache cannot redistribute the BDB library due to the terms of its
+license, but you can easily get a free copy directly from Oracle. Before
+you can start using the BDB Store you must first download it from Oracle
+at <a href="http://download.oracle.com/maven/com/sleepycat/je/5.0.34/je-5.0.34.jar">je-5.0.34.jar</a>
+and then copy it into the <code>${APOLLO_HOME}/lib</code> directory.</p>
+
+<p>For those of you with curl installed, you can just run:</p>
+
+<pre><code>curl http://download.oracle.com/maven/com/sleepycat/je/5.0.34/je-5.0.34.jar &gt; ${APOLLO_HOME}/lib/je-5.0.34.jar</code></pre>
+
+<p>Once that is done, you can enable the store by adding a <code>bdb_store</code> element
+inside your <code>virtual_host</code>.  Example:</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+  ...
+  &lt;virtual_host id=&quot;default&quot;&gt;
+    ...
+    &lt;bdb_store directory=&quot;${apollo.base}/data&quot;/&gt;
+    ..
+  &lt;/virtual_host&gt;
+  ...
+</code></pre></div>
+
+<p>A <code>bdb_store</code> element may be configured with the following attributes:</p>
+
+<ul>
+<li><code>directory</code> : The directory which the store will use to hold its data
+files. The store will create the directory if it does not already
+exist.</li>
+<li><code>flush_delay</code> : The flush delay is the amount of time in milliseconds
+that a store will delay persisting a messaging unit of work in hopes
+that it will be invalidated shortly thereafter by another unit of work
+which would negate the operation. Defaults to 500.</li>
+<li><code>read_threads</code> : The number of concurrent read threads to use when
+accessing the store. The value defaults to 10.</li>
+</ul>
+
+<h3 id = "Security">Security</h3>
+
+<h3 id = "Working_Around_Java_7_SSL_Bugs">Working Around Java 7 SSL Bugs</h3>
+
+<p>As noted by issue <a href="https://issues.apache.org/jira/browse/APLO-287">APLO-287</a>, 
+it seems some versions of Java 7 have problems with SSL sessions that need
+to use the Diffie-Hellman cypher suite.   If you run into this issue,
+just copy the Bouncy Castle <a href="http://www.bouncycastle.org/download/bcprov-jdk15on-148.jar">bcprov-jdk15on-148.jar</a>
+to Apollo's lib directory and restart your broker.</p>
+
+<h4 id = "The_SSL_TLS_Transport">The SSL/TLS Transport</h4>
+
+<p>Apollo supports SSL/TLS for transport level security to avoid 3rd
+parties listening in on the communications between the broker and its
+clients. To enable it, you just need to add a connector which binds using
+on of the secure transports such as <code>ssl://</code>.  It also requires having a 
+<code>key_storage</code> configuration element under the <code>broker</code> to configure the where 
+the encryption keys and certificates are stored.</p>
+
+<p>Example:</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+  ...
+  &lt;key_storage 
+     file=&quot;${apollo.base}/etc/keystore&quot; 
+     password=&quot;password&quot; 
+     key_password=&quot;password&quot;/&gt;
+
+  &lt;connector id=&quot;stomp-secure&quot; bind=&quot;ssl://0.0.0.0:61614&quot;/&gt;
+  ...
+</code></pre></div>
+
+<p>The <code>connector</code> element's <code>bind</code> attribute controls which secure transport 
+algorithm gets used by the sever.  Supported values are:</p>
+
+<ul>
+<li><code>ssl://</code>    - Use the JVM default version of the SSL algorithm.</li>
+<li><code>sslv*://</code>  - Use a specific SSL version where <code>*</code> is a version
+supported by your JVM.  Example: <code>sslv3</code></li>
+<li><code>tls://</code>    - Use the JVM default version of the TLS algorithm.</li>
+<li><code>tlsv*://</code>  - Use a specific TLS version where <code>*</code> is a version
+supported by your JVM.  Example: <code>tlsv1.1</code></li>
+</ul>
+
+<p>The attributes that you can configure on the <code>key_storage</code> element are:</p>
+
+<ul>
+<li><code>file</code> : Path to where the key store is located.</li>
+<li><code>password</code> : The key store password</li>
+<li><code>key_alias</code> : The alias of private key to use.  Defaults to the first key found
+in the key store.</li>
+<li><code>key_password</code> : The password to the keys in the key store.</li>
+<li><code>store_type</code> : The type of key store, defaults to <code>JKS</code>.</li>
+<li><code>trust_algorithm</code> : The trust management algorithm, defaults to <code>SunX509</code>.</li>
+<li><code>key_algorithm</code> : The key management algorithm, defaults to <code>SunX509</code>.</li>
+</ul>
+
+<p>The SSL/TLS transport is an extension of the TCP transport and as such it supports
+all the same URI options which the TCP transport supports plus the following:</p>
+
+<ul>
+<li><code>client_auth</code> : can be set to one of the following: <code>want</code>, <code>need</code> or
+<code>none</code>.   Defaults to <code>want</code>.  If set to <code>need</code>, then the SSL connection
+will not be accepted if the client does not provide a certificate that
+is trusted by the key store.  If set to <code>none</code>, then we will not request
+the client to send his certificates.  If set to <code>want</code>, then we will
+request the client send his certficates but allow the connection to 
+continue even if the does not have any tusted certs.</li>
+</ul>
+
+<h4 id = "Authentication">Authentication</h4>
+
+<p>The first step to securing the broker is authenticating users. The default
+Apollo configurations use file based authentication. Authentication
+is performed using JAAS who's config file is located in the instance
+directory under <code>etc/login.conf</code>. JAAS configuration files can define
+multiple named authentication domains. The <code>broker</code> element and
+<code>virtual_host</code> elements can be configured to authenticate against these
+domains.</p>
+
+<p>The <code>authentication</code> element defined at the broker level will get used to 
+authenticate broker level administration functions and to authenticate 
+any virtual hosts which did not define an <code>authentication</code> element.  If you
+want to disable authentication in a virtual host, you set the <code>enable</code> attribute
+to <code>false</code>.</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+&lt;broker xmlns=&quot;http://activemq.apache.org/schema/activemq/apollo&quot;&gt;
+  &lt;authentication domain=&quot;internal&quot;/&gt;
+
+  &lt;virtual_host id=&quot;wine.com&quot;&gt;
+    &lt;authentication domain=&quot;external&quot;/&gt;
+    &lt;host_name&gt;wine.com&lt;/host_name&gt;
+  &lt;/virtual_host&gt;
+
+  &lt;virtual_host id=&quot;internal.wine.com&quot;&gt;
+    &lt;host_name&gt;internal.wine.com&lt;/host_name&gt;
+  &lt;/virtual_host&gt;
+
+  &lt;virtual_host id=&quot;test&quot;&gt;
+    &lt;authentication enabled=&quot;false&quot;/&gt;
+    &lt;host_name&gt;cheeze.com&lt;/host_name&gt;
+  &lt;/virtual_host&gt;
+
+  &lt;connector id=&quot;tcp&quot; bind=&quot;tcp://0.0.0.0:61613&quot;/&gt;
+&lt;/broker&gt;
+</code></pre></div>
+
+<p>The above example uses 2 JAAS domains, <code>internal</code> and <code>external</code>.  Broker 
+The <code>wine.com</code> host will use the external domain, the <code>internal.wine.com</code>
+host will use the internal domain and the <code>test</code> host will not authenticate
+users.</p>
+
+<h5 id = "Using_Custom_Login_Modules">Using Custom Login Modules</h5>
+
+<p>Apollo uses JAAS to control against which systems users
+authenticate. The default Apollo configurations use file based
+authentication but with a simple change of the JAAS configuration, you can be
+authenticating against local UNIX account or LDAP.  Please reference
+the <a href="http://download.oracle.com/javase/1.5.0/docs/guide/security/jaas/JAASRefGuide.html#AppendixB">JAAS documentation</a>
+for more details on how to edit the <code>etc/login.conf</code> file.</p>
+
+<p>Since different JAAS login modules produce principals of different class
+types, you may need to configure which of those class types to recognize as
+the user principal and the principal used to match against the access control
+lists (ACLs). </p>
+
+<p>The default user principal classes recognized are
+<code>org.apache.activemq.jaas.UserPrincipal</code> and
+<code>javax.security.auth.x500.X500Principal</code>. You can change the default by
+adding <code>user_principal_kind</code> elements under the <code>authentication</code> element.
+The first principal who's type matches this list will be selected as the
+user's identity for informational purposes.</p>
+
+<p>Similarly, default acl principal class recognized is
+<code>org.apache.activemq.jaas.GroupPrincipal</code>. You can configure it by adding
+<code>acl_principal_kinds elements under the</code>authentication` element. The ACL
+entries which do not have an explicit kind will default to using the the
+kinds listed here.</p>
+
+<p>Example of customizing the principal kinds used:</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+  ...
+  &lt;authentication domain=&quot;apollo&quot;&gt;
+    &lt;user_principal_kind&gt;com.sun.security.auth.UnixPrincipal&lt;/user_principal_kind&gt;
+    &lt;user_principal_kind&gt;com.sun.security.auth.LdapPrincipal&lt;/user_principal_kind&gt;
+    &lt;acl_principal_kind&gt;com.sun.security.auth.UnixPrincipal&lt;/acl_principal_kind&gt;
+    &lt;acl_principal_kind&gt;com.sun.security.auth.LdapPrincipal&lt;/acl_principal_kind&gt;
+  &lt;/authentication&gt;
+  ...
+&lt;/broker&gt;
+</code></pre></div>
+
+<h4 id = "Authorization">Authorization</h4>
+
+<p>User authorization to broker resources is accomplished by configuring an
+access control rules using a <code>access_rule</code> elements in the <code>broker</code> or
+<code>virtual_host</code> elements. The rules defines which principals are allowed or
+denied access to perform actions against server resources. An example list of
+rule is shown below:</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+&lt;broker&gt;
+  &lt;access_rule deny=&quot;guest&quot; action=&quot;send&quot;/&gt;
+  &lt;access_rule allow=&quot;*&quot;    action=&quot;send&quot;/&gt;
+  &lt;access_rule allow=&quot;app1&quot; action=&quot;receive&quot;/&gt;
+&lt;/broker&gt;
+</code></pre></div>
+
+<p>The <code>allow</code> and <code>deny</code> attributes define the principals which are allowed or
+denied access. If set to &ldquo;+" then it matches all principals but requires at
+at least one. If set to &ldquo;*" the it matches all principals and even matches
+the case where there are no principals associated with the subject.</p>
+
+<p>Either <code>allow</code> or <code>deny</code> must be defined. You can optionally define one or
+more of the following attributes to further narrow down when the rule matches
+an authorization check:</p>
+
+<ul>
+<li><p><code>separator</code>: If set, then the <code>allow</code> and <code>deny</code> fields will be interpreted
+to be a list of principles separated by the separator value.</p></li>
+<li><p><code>principal_kind</code>: A space separated list of class names of which will be
+matched against the principle type. If set to <code>*</code> then it matches all
+principal classes. Defaults to the default principal kinds configured on
+the broker or virtual host.</p></li>
+<li><p><code>action</code>: A space separated list of actions that will match the rule.
+Example 'create destroy'. You can use <code>*</code> to match all actions.  Defaults
+to <code>*</code>.</p></li>
+<li><p><code>kind</code>: A space separated list of broker resource types that will match
+this rule. You can use <code>*</code> to match all key. Example values 'broker queue'.
+Defaults to <code>*</code>.</p></li>
+<li><p><code>id</code>: The identifier of the resource that will match this rule. You can use
+<code>*</code> to match all resources. If the <code>kind</code> is set to <code>queue</code> or <code>topic</code> then
+you can use a destination wild card to match against the destination id.
+Defaults to <code>*</code></p></li>
+<li><p><code>id_regex</code>: A regular expression to be applied against the id of the
+resource.</p></li>
+<li><p><code>connector</code>: The id of the connector the user must be connected on for the
+rule to match. You can use <code>*</code> to match all connectors. Defaults to <code>*</code>.</p></li>
+</ul>
+
+<p>If no access rules match an authorization check then access is denied. </p>
+
+<h5 id = "Ordering">Ordering</h5>
+
+<p>The order in which rules are defined are significant. The first entry that
+matches determines if he will have access. For example, let's say a user is
+groups 'blue' and 'red', and you are matching against the following 
+rules:</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+&lt;access_rule deny=&quot;blue&quot; action=&quot;send&quot;/&gt;
+&lt;access_rule allow=&quot;red&quot; action=&quot;send&quot;/&gt;
+</code></pre></div>
+
+<p>Then the user would not be allowed to send since the deny rule was
+matched first. If the order in the ACL list were reversed, like
+so:</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+&lt;access_rule allow=&quot;red&quot; action=&quot;send&quot;/&gt;
+&lt;access_rule deny=&quot;blue&quot; action=&quot;send&quot;/&gt;
+</code></pre></div>
+
+<p>Then the user would be allowed access to the resource since the allow
+rule matched first.  When a single rule defines both <code>allow</code> and
+<code>deny</code> attributes and they both match then the action is denied.</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+&lt;access_rule deny=&quot;blue&quot; allow=&quot;red&quot; action=&quot;send&quot;/&gt;
+</code></pre></div>
+
+<h4 id = "Resource_Actions">Resource Actions</h4>
+
+<p>You can configure the <code>action</code> attribute of an access rules with
+one or more of the following values:</p>
+
+<ul>
+<li><code>admin</code> : use of the administrative web interface</li>
+<li><code>monitor</code> : read only use of the administrative web interface</li>
+<li><code>config</code> : use of the administrative web interface to access and change the
+broker configuration.</li>
+<li><code>connect</code> : allows connections to the connector or virtual host</li>
+<li><code>create</code> : allows creation</li>
+<li><code>destroy</code> : allows destruction</li>
+<li><code>send</code> : allows the user to send to the destination</li>
+<li><code>receive</code> : allows the user to send to do non-destructive reads from the
+destination</li>
+<li><code>consume</code> : allows the user to do destructive reads against a destination</li>
+<li><code>*</code> : All actions</li>
+</ul>
+
+<h4 id = "Resource_Kinds">Resource Kinds</h4>
+
+<p>You can configure the <code>kind</code> attribute of an access rules with one or more of
+the following values: <code>broker</code>, <code>connector</code>, <code>virtual_host</code>, <code>topic</code>,
+<code>queue</code>, <code>dsub</code>, or <code>*</code>. <code>*</code> matches all resource kinds.</p>
+
+<p>The <code>broker</code> and <code>connector</code> kinds can only be configured in rules
+defined in the <code>broker</code> element.</p>
+
+<h4 id = "Encrypting_Passwords_in_the_Configuration">Encrypting Passwords in the Configuration</h4>
+
+<p>The <code>etc/apollo.xml</code> file supports using <code>${&lt;property-name&gt;}</code> style
+syntax. You can use any system properties and if the
+<code>etc/apollo.xml.properties</code> file exists, then any of the properties
+defined there. Any of the properties values in the
+<code>etc/apollo.xml.properties</code> can be replaced with encrypted versions by
+using the <code>apollo encrypt</code> command.</p>
+
+<p>Let's say you your current <code>key_storage</code> contains plain text passwords that
+need to be replaced with encrypted versions:</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+  ...
+  &lt;key_storage 
+     file=&quot;${apollo.base}/etc/keystore&quot; 
+     password=&quot;open&quot; 
+     key_password=&quot;sesame&quot;/&gt;
+  ...
+</code></pre></div>
+
+<p>Let's first find out what the encrypted versions of the passwords would be.
+Apollo encrypts and decrypts values using the password stored in
+the <code>APOLLO_ENCRYPTION_PASSWORD</code> environment variable.</p>
+
+<p>The following is an example of how you can encrypt the previous
+passwords:</p>
+
+<pre><code>$ export APOLLO_ENCRYPTION_PASSWORD='keepmesafe'
+$ apollo encrypt open
+ENC(6r7HKCib0H8S+OuSfV+muQ==)
+$ apollo encrypt sesame
+ENC(FP+H2FIg++sSaOxg/ISknw==)</code></pre>
+
+<p>Once you have the encrypted passwords, you can add them to the
+<code>etc/apollo.xml.properties</code> file. Example:</p>
+
+<pre><code>store.pass=ENC(6r7HKCib0H8S+OuSfV+muQ==)
+key.pass=ENC(FP+H2FIg++sSaOxg/ISknw==)</code></pre>
+
+<p>Finally the last step of securing the configuration is to replace the plain
+text passwords with variable references to the corresponding property names:</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+  ...
+  &lt;key_storage 
+     file=&quot;${apollo.base}/etc/keystore&quot; 
+     password=&quot;${store.pass}&quot; 
+     key_password=&quot;${key.pass}&quot;/&gt;
+  ...
+</code></pre></div>
+
+<p>When you use encrypted passwords in your configuration, you MUST make
+sure that the <code>APOLLO_ENCRYPTION_PASSWORD</code> environment variable is set
+to the proper value before starting the broker.</p>
+
+<h3 id = "Web_Based_Administration">Web Based Administration</h3>
+
+<p>Apollo starts a web based administration interface on 
+<a href="http://127.0.0.1:61680"><code>http://127.0.0.1:61680</code></a> and 
+<a href="https://127.0.0.1:61681"><code>https://127.0.0.1:61681</code></a> by default.  Note
+that it binds to the loopback interface so that only local web 
+browsers can access the interface.</p>
+
+<p>If the broker has authentication enabled and has defined an ACL
+configuring the admins of the broker, then the web interface will 
+perform basic authentication and will only grant access to those users
+which are in the admin ACL.</p>
+
+<p>If you want to disable the web the interface then you should remove
+the <code>web_admin</code> configuration elements.  If you want to allow 
+remote administration, you should update the configuration so
+it bind either the <code>0.0.0.0</code> or <code>[::]</code> address.  </p>
+
+<p>For example:</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+&lt;broker xmlns=&quot;http://activemq.apache.org/schema/activemq/apollo&quot;&gt;
+  ...
+  &lt;web_admin bind=&quot;http://0.0.0.0:61680&quot;/&gt;
+  &lt;web_admin bind=&quot;https://0.0.0.0:61681&quot;/&gt;
+  ...
+&lt;/broker&gt;
+</code></pre></div>
+
+<p>A <code>web_admin</code> element may be configured with the following attributes:</p>
+
+<ul>
+<li><code>bind</code> : The address and port to bind the web interface on in URL syntax.</li>
+</ul>
+
+<p>If you want to allow cross origin resource sharing (CORS) of the web admin APIs,
+then you should add <code>cors_origin</code> query parameter to the bind URI with 
+a common seperated list of domains that are allowed to access the web 
+admin APIs.  Use <code>*</code> to allow access from any domain.  Example:</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+&lt;broker xmlns=&quot;http://activemq.apache.org/schema/activemq/apollo&quot;&gt;
+  ...
+  &lt;web_admin bind=&quot;http://0.0.0.0:61680?cors_origin=*&quot;/&gt;
+  &lt;web_admin bind=&quot;https://0.0.0.0:61681?cors_origin=www.foo.com,bar.com&quot;/&gt;
+  ...
+&lt;/broker&gt;
+</code></pre></div>
+
+<h2 id = "Managing_Brokers">Managing Brokers</h2>
+
+<p>The rest of this section's example assume that you have created a broker 
+instance under the <code>/var/lib/mybroker</code> directory or <code>c:\mybroker</code> directory
+if you're on Windows.</p>
+
+<h3 id = "Running_a_Broker_Instance_in_the_Foreground">Running a Broker Instance in the Foreground</h3>
+
+<p>To start the broker instance in the foreground simply execute
+<code>bin/apollo-broker run</code>. Example:</p>
+
+<pre><code>/var/lib/mybroker/bin/apollo-broker run</code></pre>
+
+<p>To stop it, press <code>Ctrl-C</code> to send the termination signal
+to the process.</p>
+
+<h3 id = "Managing_a_Background_Broker_Instance">Managing a Background Broker Instance</h3>
+
+<h4 id = "On_Linux_Unix">On Linux/Unix</h4>
+
+<p>If you are on Unix, you can use the <code>bin/apollo-broker-service</code> script
+to manage the broker service.  This script is compatible with the
+<code>/etc/init.d</code> style scripts most Unix/Linux systems use to control
+background services.</p>
+
+<p>On a Ubuntu OS, you install the service and have it run on start 
+up by running:</p>
+
+<pre><code>sudo ln -s /var/lib/mybroker/bin/apollo-broker-service /etc/init.d/apollo
+sudo update-rc.d apollo defaults</code></pre>
+
+<p>On a Redhat OS, you install the service and have it run on start 
+up by running:</p>
+
+<pre><code>sudo ln -s /var/lib/mybroker/bin/apollo-broker-service /etc/init.d/apollo
+sudo chkconfig apollo --add</code></pre>
+
+<p>On other Unixes, you install the service and have it run on start 
+up by running:</p>
+
+<pre><code>sudo ln -s /var/lib/mybroker/bin/apollo-broker-service /etc/init.d/apollo
+sudo ln -s /etc/init.d/apollo /etc/rc0.d/K80apollo
+sudo ln -s /etc/init.d/apollo /etc/rc1.d/K80apollo
+sudo ln -s /etc/init.d/apollo /etc/rc3.d/S20apollo
+sudo ln -s /etc/init.d/apollo /etc/rc5.d/S20apollo
+sudo ln -s /etc/init.d/apollo /etc/rc6.d/K80apollo</code></pre>
+
+<p>You can directly use the script to perform the following functions:</p>
+
+<ul>
+<li>starting: <code>apollo-broker-service start</code></li>
+<li>stopping: <code>apollo-broker-service stop</code></li>
+<li>restarting: <code>apollo-broker-service restart</code></li>
+<li>checking the status: <code>apollo-broker-service status</code></li>
+</ul>
+
+<p>When the broker is started in the background, it creates
+a <code>data/apollo.pid</code> file which contains the process id of
+the process executing the broker.  This file is typically 
+used to integrate with an external watch dog process
+such as <a href="http://mmonit.com/monit/">Monit</a>.</p>
+
+<h4 id = "On_Windows">On Windows</h4>
+
+<p>Windows users can install the broker as background service using the
+<code>bin\apollo-broker-service</code> executable.</p>
+
+<p>To install as a background service you would execute:</p>
+
+<pre><code>c:\mybroker\bin\apollo-broker-service install</code></pre>
+
+<p>Uninstalling the service is done using:</p>
+
+<pre><code>c:\mybroker\bin\apollo-broker-service uninstall</code></pre>
+
+<p>You can now use the standard Windows service tools to control
+starting and stopping the broker or you can also use the
+same executable to:</p>
+
+<ul>
+<li>start the service: <code>apollo-broker-service start</code></li>
+<li>stop the service: <code>apollo-broker-service stop</code></li>
+<li>check the status: <code>apollo-broker-service restart</code></li>
+</ul>
+
+<p>If you want to customize the JVM options use to start the background
+service, you will need to edit the <code>bin\apollo-broker-service.xml</code>
+file.  All service console and event logging perform by the background
+service are stored under <code>log\apollo-broker-service.*</code>.</p>
+
+<h3 id = "Viewing_Broker_State">Viewing Broker State</h3>
+
+<p>Apollo provides a web based interface for administrators to inspect
+the runtime state of the Broker.  If you're running the broker on your local
+machine, just open your web browser to <a href="http://localhost:61680"><code>http://localhost:61680</code></a>
+or <a href="httsp://localhost:61681"><code>https://localhost:61681</code></a>.</p>
+
+<p>The web interface will display the status of the the connectors and show
+attached connections.  It will also allow you to drill into each configured
+virtual host and view the topics and queues being used. </p>
+
+<p>Please see the <a href="management-api.html">Management API</a> documentation for more 
+information on how to use the web based interface as a RESTful API.</p>
+
+<h3 id = "Exporting_Importing_Stores">Exporting/Importing Stores</h3>
+
+<p>Exporting compresses all the data in a virtual host's message store in a zip
+archive. Importing reverses the export process and restore the exported data
+back to a virtual host's message store. Exporting/Importing is typically used
+to:</p>
+
+<ul>
+<li>backup a message store</li>
+<li>migrate between different message store implementations</li>
+</ul>
+
+<p>The stores which support exporting and importing are:</p>
+
+<ul>
+<li><a href="#BDB&#95;Store">BDB Store</a></li>
+<li><a href="#LevelDB&#95;Store">LevelDB Store</a></li>
+</ul>
+
+<p>The broker must be stopped before using the import or export commands. Be
+careful when importing an archive, since it will first purge the message
+store of any data! </p>
+
+<p>Use the <code>apollo-broker store-export</code> command to export the data. For example:</p>
+
+<pre><code>/var/lib/mybroker/bin/apollo-broker store-export myarchive.tgz</code></pre>
+
+<p>The above command will load the <code>mybroker</code>'s configuration and export the
+first virtual host's messages store to the <code>myarchive.tgz</code>. You can use the
+<code>--virtual-host</code> command line option to be more specific of which virtual
+host you wish to export.</p>
+
+<p>Use the <code>apollo-broker store-import</code> command to import the data.  For example:</p>
+
+<pre><code>/var/lib/mybroker/bin/apollo-broker store-import myarchive.tgz</code></pre>
+
+<p>Just like in the case of the <code>store-export</code> command, it will load the
+<code>mybroker</code>'s configuration and import the archive into the first virtual
+host's message store.</p>
+
+<h2 id = "Messaging_Protocols_Manuals">Messaging Protocols Manuals</h2>
+
+<ul>
+<li><a href="stomp-manual.html">STOMP Protocol Manual</a></li>
+<li><a href="amqp-manual.html">AMQP Protocol Manual</a></li>
+<li><a href="openwire-manual.html">OpenWire Protocol Manual</a></li>
+<li><a href="mqtt-manual.html">MQTT Protocol Manual</a></li>
+</ul>
+        <div></div>
+      </div>
+    </div>
+  </body>
+</html>

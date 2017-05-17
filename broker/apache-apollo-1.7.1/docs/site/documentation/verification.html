@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd"> 
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  Architecture
+-->
+<html lang="en">
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta content="ActiveMQ's next generation of messaging" name="description"/>
+    <meta content="messaging,stomp,jms,activemq,apollo" name="keywords"/>
+    <meta content="Apollo" name="author"/>
+    <script src="../scripts/jquery.js"></script>
+    <link type="text/css" rel="stylesheet" href="../styles/impact/css/pygmentize.css"/>
+    <link type="text/css" rel="stylesheet" href="../styles/impact/css/site.css"/>
+    <title></title>
+  </head>
+  <body>
+    <div id="navigation">
+      <div class="wrapper">
+<ul>
+<li><a href="../index.html">Apollo 1.7.1</a></li>
+<li><a href="../community/developers.html">Developers</a></li>
+<li><a href="../community/index.html">Community</a></li>
+<li><a href="../download.html">Download</a></li>
+</ul>        <div></div>
+      </div>
+    </div>
+    <div id="content">
+      <div class="wrapper">
+<h1 id = "Verification">Verification</h1>
+
+<p>You can use the ruby examples included in the distribution to verify that the 
+broker is operating correctly.</p>
+
+<p>If you have not already done so, install the <code>stomp</code> Ruby gem.</p>
+
+<pre><code>gem install stomp</code></pre>
+
+<p>Change to the <code>examples/stomp/ruby</code> directory that was included in the Apollo 
+distribution.  Then in a terminal window, run:</p>
+
+<div class="compare"><div class="compare-left"><h3>Unix/Linux/OS X</h3><div class="syntax"><pre name='code' class='brush: text; gutter: false;'><code>cd ${APOLLO_HOME}/examples/stomp/ruby
+ruby listener.rb</code></pre></div></div><div class="compare-right"><h3>Windows</h3><div class="syntax"><pre name='code' class='brush: text; gutter: false;'><code>cd %APOLLO_HOME%\examples\stomp\ruby
+ruby listener.rb
+</code></pre></div></div><br class="clear"/></div>
+
+<p>Then in a separate terminal window, run:</p>
+
+<div class="compare"><div class="compare-left"><h3>Unix/Linux/OS X</h3><div class="syntax"><pre name='code' class='brush: text; gutter: false;'><code>cd ${APOLLO_HOME}/examples/stomp/ruby
+ruby publisher.rb</code></pre></div></div><div class="compare-right"><h3>Windows</h3><div class="syntax"><pre name='code' class='brush: text; gutter: false;'><code>cd %APOLLO_HOME%\examples\stomp\ruby
+ruby publisher.rb
+</code></pre></div></div><br class="clear"/></div>
+
+<p>If everything is working well, the publisher should produce output similar to:</p>
+
+<pre><code>Sent 1000 messages
+Sent 1000 messages
+...</code></pre>
+
+<p>The consumer's output should look like:</p>
+
+<pre><code>Received 1000 messages.
+Received 2000 messages.
+...</code></pre>
+        <div></div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd"> 
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  Architecture
+-->
+<html lang="en">
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta content="ActiveMQ's next generation of messaging" name="description"/>
+    <meta content="messaging,stomp,jms,activemq,apollo" name="keywords"/>
+    <meta content="Apollo" name="author"/>
+    <script src="../../scripts/jquery.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../styles/impact/css/pygmentize.css"/>
+    <link type="text/css" rel="stylesheet" href="../../styles/impact/css/site.css"/>
+    <title>Apollo 1.5</title>
+  </head>
+  <body>
+    <div id="navigation">
+      <div class="wrapper">
+<ul>
+<li><a href="../../index.html">Apollo 1.7.1</a></li>
+<li><a href="../../community/developers.html">Developers</a></li>
+<li><a href="../../community/index.html">Community</a></li>
+<li><a href="../../download.html">Download</a></li>
+</ul>        <div></div>
+      </div>
+    </div>
+    <div id="content">
+      <div class="wrapper">
+<p>The <a href="http://activemq.apache.org">Apache ActiveMQ Project</a> is pleased to announce the 
+availability of Apollo 1.5. ActiveMQ Apollo is a faster, more reliable, easier 
+to maintain messaging broker built from the foundations of the original ActiveMQ. </p>
+
+<p>This release fixes several bugs especially around Openwire and WebSockets and introduces a few
+improvements like:</p>
+
+<ul>
+<li>[APLO-30] - Support the Openwire Protocol</li>
+<li>[APLO-177] - Add a UDP based protocol support to Apollo</li>
+<li>[APLO-232] - Add support for enforcing a message count based quota on queues</li>
+<li>[APLO-239] - Aggregate connection-level messages (and bytes) metrics at connector and broker level</li>
+<li>[APLO-242] - Support STOMP frames over UDP</li>
+<li>[APLO-260] - Contribute the FuseSource MQTT impl to Apache and included as part of the default Apollo distribution.</li>
+<li>[APLO-261] - Support the 1.2 STOMP spec.</li>
+<li>[APLO-163] - Auto tune the per-connection buffers (receive<em>buffer</em>size and send<em>buffer</em>size)</li>
+<li>[APLO-179] - Remove the list of connections from the toplevel REST URI</li>
+<li>[APLO-200] - Support configuring protocol filters</li>
+<li>[APLO-243] - Do not lower the maximum number of open files</li>
+<li>[APLO-250] - add<em>user</em>header should prevent forging</li>
+<li>[APLO-251] - Share a single queue for all consumers on topic configured with slow<em>consumer</em>policy="queue&rdquo;</li>
+<li>[APLO-259] - Support Telnet clients that send '\r\n' character to terminate a line</li>
+<li>[APLO-262] - Documented OpenWire features</li>
+<li>[APLO-263] - Remove slf4j from openwire examples</li>
+</ul>
+
+<p>For further information see:</p>
+
+<ul>
+<li><a href="http://activemq.apache.org/apollo/download.html">Download</a></li>
+<li><a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12311310&amp;version=12321266">Issues Fixed</a></li>
+<li><a href="http://activemq.apache.org/apollo/versions/1.5/website/documentation">Documentation</a></li>
+</ul>
+
+<p><a href="http://activemq.apache.org/community/index.html">Feedback</a> is always welcomed!</p>
+        <div></div>
+      </div>
+    </div>
+  </body>
+</html>

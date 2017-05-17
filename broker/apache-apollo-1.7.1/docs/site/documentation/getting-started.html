@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd"> 
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  Architecture
+-->
+<html lang="en">
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta content="ActiveMQ's next generation of messaging" name="description"/>
+    <meta content="messaging,stomp,jms,activemq,apollo" name="keywords"/>
+    <meta content="Apollo" name="author"/>
+    <script src="../scripts/jquery.js"></script>
+    <link type="text/css" rel="stylesheet" href="../styles/impact/css/pygmentize.css"/>
+    <link type="text/css" rel="stylesheet" href="../styles/impact/css/site.css"/>
+    <title></title>
+  </head>
+  <body>
+    <div id="navigation">
+      <div class="wrapper">
+<ul>
+<li><a href="../index.html">Apollo 1.7.1</a></li>
+<li><a href="../community/developers.html">Developers</a></li>
+<li><a href="../community/index.html">Community</a></li>
+<li><a href="../download.html">Download</a></li>
+</ul>        <div></div>
+      </div>
+    </div>
+    <div id="content">
+      <div class="wrapper">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  Architecture
+-->
+
+<h1 id = "Getting_Started_Guide">Getting Started Guide</h1>
+
+<p><div class="toc"><ul style="list-style:none;">
+  <li><a href="#Installation">Installation</a></li>
+  <li><ul style="list-style:none;">
+    <li><a href="#Optional_Windows_Prerequisites">Optional Windows Prerequisites</a></li>
+    <li><a href="#Creating_a_Broker_Instance">Creating a Broker Instance</a></li>
+    <li><a href="#Running_a_Broker_Instance">Running a Broker Instance</a></li>
+    <li><a href="#Web_Administration">Web Administration</a></li>
+  </ul></li>
+</ul></div></p>
+
+<p>This guide will help you install, setup and run an Apollo broker and validate
+that the broker is operating correctly.</p>
+
+<h2 id = "Installation">Installation</h2>
+
+<ol>
+<li><p><a href="../download.html">Download</a> the Apollo distribution that is 
+most appropriate for your operating system.</p></li>
+<li><p>Extract the distribution archive:</p>
+
+<div class="wide"><div class="compare"><div class="compare-left"><h3>Unix/Linux/OS X</h3><div class="syntax"><pre name='code' class='brush: text; gutter: false;'><code>tar -zxvf apache-apollo-1.7.1-unix-distro.tar.gz</code></pre></div></div><div class="compare-right"><h3>Windows</h3><div class="syntax"><pre name='code' class='brush: text; gutter: false;'><code>jar -xvf apache-apollo-1.7.1-windows-distro.zip
+</code></pre></div></div><br class="clear"/></div>
+</div></li>
+</ol>
+
+<p>The distribution will be extracted into a directory called, <code>apache-apollo-1.7.1</code>.
+The rest of this document will refer to the full path to this directory as <code>${APOLLO_HOME}</code>.</p>
+
+<h3 id = "Optional_Windows_Prerequisites">Optional Windows Prerequisites</h3>
+
+<p>If you're on Windows Vista, Server 2008, or later you should install the MS VC++ 2010 Redistributable
+package so that Apollo can use the JNI implementation of LevelDB.  </p>
+
+<ul>
+<li>If you're running a 32 bit JVM, install: <a href="http://www.microsoft.com/en-us/download/details.aspx?id=5555">Microsoft Visual C++ 2010 Redistributable Package (x86)</a></li>
+<li>If you're running a 64 bit JVM, install: <a href="http://www.microsoft.com/en-us/download/details.aspx?id=14632">Microsoft Visual C++ 2010 Redistributable Package (x64)</a></li>
+</ul>
+
+<h3 id = "Creating_a_Broker_Instance">Creating a Broker Instance</h3>
+
+<p>A broker instance is the directory containing all the configuration and runtime
+data, such as logs and data files, associated with a broker process.  It is recommended that
+you do <em>not</em> create the instance directory under <code>${APOLLO_HOME}</code>.  This separation is
+encouraged so that you can more easily upgrade when the next version of Apollo is released.</p>
+
+<p>On Unix systems, it is a common convention to store this kind of runtime data under 
+the <code>/var/lib</code> directory.  For example, to create an instance at '/var/lib/mybroker', run:</p>
+
+<pre><code>cd /var/lib
+${APOLLO_HOME}/bin/apollo create mybroker</code></pre>
+
+<p>A broker instance directory will contain the following sub directories:</p>
+
+<ul>
+<li><code>bin</code>: holds execution scripts associated with this instance.</li>
+<li><code>etc</code>: hold the instance configuration files</li>
+<li><code>data</code>: holds the data files used for storing persistent messages</li>
+<li><code>log</code>: holds rotating log files</li>
+<li><code>tmp</code>: holds temporary files that are safe to delete between broker runs</li>
+</ul>
+
+<p>At this point you may want to adjust the default configuration located in
+the <code>etc</code> directory.</p>
+
+<h3 id = "Running_a_Broker_Instance">Running a Broker Instance</h3>
+
+<p>Assuming you created the broker instance under <code>/var/lib/mybroker</code> all you need
+to do start running the broker instance is execute:</p>
+
+<pre><code>/var/lib/mybroker/bin/apollo-broker run</code></pre>
+
+<p>Now that the broker is running, you can optionally run some of the included 
+examples to <a href="verification.html">verify</a> the the broker is running properly.</p>
+
+<h3 id = "Web_Administration">Web Administration</h3>
+
+<p>Apollo provides a simple web interface to monitor the status of the broker.  Once
+the admin interface will be accessible at:</p>
+
+<ul>
+<li><a href="http://127.0.0.1:61680/">http://127.0.0.1:61680/</a> or <a href="https://127.0.0.1:61681/">https://127.0.0.1:61681/</a></li>
+</ul>
+
+<p>The default login id and password is <code>admin</code> and <code>password</code>.</p>
+        <div></div>
+      </div>
+    </div>
+  </body>
+</html>

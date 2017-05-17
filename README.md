@@ -68,9 +68,18 @@
 		ls -a
 		
 		添加java_home到.bash_profile文件中
+		$ touch .bash_profile  创建一个配置文件(如果存在就打开)
+
+		$ vi .bash_profile  使用vim编辑器编辑 .bash_profile文件
+		
+		//添加下面代码
 		export JAVA_HOME=$(/usr/libexec/java_home)
 		export PATH=$JAVA_HOME/bin:$PATH
 		export CLASS_PATH=$JAVA_HOME/lib
+		
+		添加完后点按esc(确认输入无效)后输入“:wq”(没引号)
+		//是配置生效
+		$source .bash_profile 
 *(PS:Mac OSX 10.5之后苹果就建议设置$JAVA_HOME变量到/usr/libexec/java_home)*
 
 再次执行2成功则说明：我们就已经配置好了全局的java的path和classpath环境变量

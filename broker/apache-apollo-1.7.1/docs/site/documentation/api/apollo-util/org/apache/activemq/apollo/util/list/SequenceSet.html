@@ -1,0 +1,745 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>SequenceSet - apollo-util 1.7.1 API - org.apache.activemq.apollo.util.list.SequenceSet</title>
+          <meta name="description" content="SequenceSet - apollo - util 1.7.1 API - org.apache.activemq.apollo.util.list.SequenceSet" />
+          <meta name="keywords" content="SequenceSet apollo util 1.7.1 API org.apache.activemq.apollo.util.list.SequenceSet" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../../../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../../../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../../../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../../../../../index.html';
+            var hash = 'org.apache.activemq.apollo.util.list.SequenceSet';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="type">
+      <div id="definition">
+        <img src="../../../../../../lib/class_big.png" />
+        <p id="owner"><a href="../../../../../package.html" class="extype" name="org">org</a>.<a href="../../../../package.html" class="extype" name="org.apache">apache</a>.<a href="../../../package.html" class="extype" name="org.apache.activemq">activemq</a>.<a href="../../package.html" class="extype" name="org.apache.activemq.apollo">apollo</a>.<a href="../package.html" class="extype" name="org.apache.activemq.apollo.util">util</a>.<a href="package.html" class="extype" name="org.apache.activemq.apollo.util.list">list</a></p>
+        <h1>SequenceSet</h1>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">SequenceSet</span><span class="result"> extends <a href="LinkedNodeList.html" class="extype" name="org.apache.activemq.apollo.util.list.LinkedNodeList">LinkedNodeList</a>[<a href="Sequence.html" class="extype" name="org.apache.activemq.apollo.util.list.Sequence">Sequence</a>]</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><a href="LinkedNodeList.html" class="extype" name="org.apache.activemq.apollo.util.list.LinkedNodeList">LinkedNodeList</a>[<a href="Sequence.html" class="extype" name="org.apache.activemq.apollo.util.list.Sequence">Sequence</a>], <span class="extype" name="java.lang.Iterable">Iterable</span>[<a href="Sequence.html" class="extype" name="org.apache.activemq.apollo.util.list.Sequence">Sequence</a>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="org.apache.activemq.apollo.util.list.SequenceSet"><span>SequenceSet</span></li><li class="in" name="org.apache.activemq.apollo.util.list.LinkedNodeList"><span>LinkedNodeList</span></li><li class="in" name="java.lang.Iterable"><span>Iterable</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        <div id="constructors" class="members">
+              <h3>Instance Constructors</h3>
+              <ol><li name="org.apache.activemq.apollo.util.list.SequenceSet#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="&lt;init&gt;():org.apache.activemq.apollo.util.list.SequenceSet"></a>
+      <a id="&lt;init&gt;:SequenceSet"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">new</span>
+      </span>
+      <span class="symbol">
+        <span class="name">SequenceSet</span><span class="params">()</span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
+
+        
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:AnyRef):Boolean"></a>
+      <a id="!=(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a>
+      <a id="!=(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
+      <a id="##():Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:AnyRef):Boolean"></a>
+      <a id="==(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a>
+      <a id="==(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.list.SequenceSet#add" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="add(value:Long):Boolean"></a>
+      <a id="add(Long):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">add</span><span class="params">(<span name="value">value: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.util.list.SequenceSet#add" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="add(value:org.apache.activemq.apollo.util.list.Sequence):Unit"></a>
+      <a id="add(Sequence):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">add</span><span class="params">(<span name="value">value: <a href="Sequence.html" class="extype" name="org.apache.activemq.apollo.util.list.Sequence">Sequence</a></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.util.list.LinkedNodeList#addFirst" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="addFirst(list:org.apache.activemq.apollo.util.list.LinkedNodeList[T]):Unit"></a>
+      <a id="addFirst(LinkedNodeList[Sequence]):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">addFirst</span><span class="params">(<span name="list">list: <a href="LinkedNodeList.html" class="extype" name="org.apache.activemq.apollo.util.list.LinkedNodeList">LinkedNodeList</a>[<a href="Sequence.html" class="extype" name="org.apache.activemq.apollo.util.list.Sequence">Sequence</a>]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="LinkedNodeList.html" class="extype" name="org.apache.activemq.apollo.util.list.LinkedNodeList">LinkedNodeList</a></dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.list.LinkedNodeList#addFirst" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="addFirst(node:T):Unit"></a>
+      <a id="addFirst(Sequence):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">addFirst</span><span class="params">(<span name="node">node: <a href="Sequence.html" class="extype" name="org.apache.activemq.apollo.util.list.Sequence">Sequence</a></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="LinkedNodeList.html" class="extype" name="org.apache.activemq.apollo.util.list.LinkedNodeList">LinkedNodeList</a></dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.list.LinkedNodeList#addLast" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="addLast(list:org.apache.activemq.apollo.util.list.LinkedNodeList[T]):Unit"></a>
+      <a id="addLast(LinkedNodeList[Sequence]):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">addLast</span><span class="params">(<span name="list">list: <a href="LinkedNodeList.html" class="extype" name="org.apache.activemq.apollo.util.list.LinkedNodeList">LinkedNodeList</a>[<a href="Sequence.html" class="extype" name="org.apache.activemq.apollo.util.list.Sequence">Sequence</a>]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="LinkedNodeList.html" class="extype" name="org.apache.activemq.apollo.util.list.LinkedNodeList">LinkedNodeList</a></dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.list.LinkedNodeList#addLast" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="addLast(node:T):Unit"></a>
+      <a id="addLast(Sequence):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">addLast</span><span class="params">(<span name="node">node: <a href="Sequence.html" class="extype" name="org.apache.activemq.apollo.util.list.Sequence">Sequence</a></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="LinkedNodeList.html" class="extype" name="org.apache.activemq.apollo.util.list.LinkedNodeList">LinkedNodeList</a></dd></dl></div>
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
+      <a id="asInstanceOf[T0]:T0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.list.LinkedNodeList#clear" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clear():Unit"></a>
+      <a id="clear():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">clear</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="LinkedNodeList.html" class="extype" name="org.apache.activemq.apollo.util.list.LinkedNodeList">LinkedNodeList</a></dd></dl></div>
+    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a>
+      <a id="clone():AnyRef"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.list.SequenceSet#contains" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="contains(first:Int,last:Int):Boolean"></a>
+      <a id="contains(Int,Int):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">contains</span><span class="params">(<span name="first">first: <span class="extype" name="scala.Int">Int</span></span>, <span name="last">last: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a>
+      <a id="eq(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a>
+      <a id="equals(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
+      <a id="finalize():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClass():Class[_]"></a>
+      <a id="getClass():Class[_]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.list.LinkedNodeList#getHead" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getHead():T"></a>
+      <a id="getHead():Sequence"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getHead</span><span class="params">()</span><span class="result">: <a href="Sequence.html" class="extype" name="org.apache.activemq.apollo.util.list.Sequence">Sequence</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="LinkedNodeList.html" class="extype" name="org.apache.activemq.apollo.util.list.LinkedNodeList">LinkedNodeList</a></dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.list.SequenceSet#getMissing" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="getMissing(first:Long,last:Long):java.util.List[org.apache.activemq.apollo.util.list.Sequence]"></a>
+      <a id="getMissing(Long,Long):List[Sequence]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getMissing</span><span class="params">(<span name="first">first: <span class="extype" name="scala.Long">Long</span></span>, <span name="last">last: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="java.util.List">List</span>[<a href="Sequence.html" class="extype" name="org.apache.activemq.apollo.util.list.Sequence">Sequence</a>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.util.list.SequenceSet#getReceived" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="getReceived():java.util.List[org.apache.activemq.apollo.util.list.Sequence]"></a>
+      <a id="getReceived():List[Sequence]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getReceived</span><span class="params">()</span><span class="result">: <span class="extype" name="java.util.List">List</span>[<a href="Sequence.html" class="extype" name="org.apache.activemq.apollo.util.list.Sequence">Sequence</a>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.util.list.LinkedNodeList#getTail" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getTail():T"></a>
+      <a id="getTail():Sequence"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getTail</span><span class="params">()</span><span class="result">: <a href="Sequence.html" class="extype" name="org.apache.activemq.apollo.util.list.Sequence">Sequence</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="LinkedNodeList.html" class="extype" name="org.apache.activemq.apollo.util.list.LinkedNodeList">LinkedNodeList</a></dd></dl></div>
+    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hashCode():Int"></a>
+      <a id="hashCode():Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.list.LinkedNodeList#isEmpty" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isEmpty():Boolean"></a>
+      <a id="isEmpty():Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">isEmpty</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="LinkedNodeList.html" class="extype" name="org.apache.activemq.apollo.util.list.LinkedNodeList">LinkedNodeList</a></dd></dl></div>
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.list.LinkedNodeList#iterator" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="iterator():java.util.Iterator[T]"></a>
+      <a id="iterator():Iterator[Sequence]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">iterator</span><span class="params">()</span><span class="result">: <span class="extype" name="java.util.Iterator">Iterator</span>[<a href="Sequence.html" class="extype" name="org.apache.activemq.apollo.util.list.Sequence">Sequence</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="LinkedNodeList.html" class="extype" name="org.apache.activemq.apollo.util.list.LinkedNodeList">LinkedNodeList</a> → Iterable</dd></dl></div>
+    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a>
+      <a id="ne(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
+      <a id="notify():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
+      <a id="notifyAll():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.list.SequenceSet#removeFirst" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="removeFirst():Long"></a>
+      <a id="removeFirst():Long"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">removeFirst</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Long">Long</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.util.list.SequenceSet#removeFirstSequence" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="removeFirstSequence(count:Long):org.apache.activemq.apollo.util.list.Sequence"></a>
+      <a id="removeFirstSequence(Long):Sequence"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">removeFirstSequence</span><span class="params">(<span name="count">count: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <a href="Sequence.html" class="extype" name="org.apache.activemq.apollo.util.list.Sequence">Sequence</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.util.list.SequenceSet#removeLastSequence" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="removeLastSequence():org.apache.activemq.apollo.util.list.Sequence"></a>
+      <a id="removeLastSequence():Sequence"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">removeLastSequence</span><span class="params">()</span><span class="result">: <a href="Sequence.html" class="extype" name="org.apache.activemq.apollo.util.list.Sequence">Sequence</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.util.list.LinkedNodeList#reparent" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="reparent(list:org.apache.activemq.apollo.util.list.LinkedNodeList[T]):T"></a>
+      <a id="reparent(LinkedNodeList[Sequence]):Sequence"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">reparent</span><span class="params">(<span name="list">list: <a href="LinkedNodeList.html" class="extype" name="org.apache.activemq.apollo.util.list.LinkedNodeList">LinkedNodeList</a>[<a href="Sequence.html" class="extype" name="org.apache.activemq.apollo.util.list.Sequence">Sequence</a>]</span>)</span><span class="result">: <a href="Sequence.html" class="extype" name="org.apache.activemq.apollo.util.list.Sequence">Sequence</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="LinkedNodeList.html" class="extype" name="org.apache.activemq.apollo.util.list.LinkedNodeList">LinkedNodeList</a></dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.list.LinkedNodeList#rotate" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="rotate():T"></a>
+      <a id="rotate():Sequence"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">rotate</span><span class="params">()</span><span class="result">: <a href="Sequence.html" class="extype" name="org.apache.activemq.apollo.util.list.Sequence">Sequence</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="LinkedNodeList.html" class="extype" name="org.apache.activemq.apollo.util.list.LinkedNodeList">LinkedNodeList</a></dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.list.LinkedNodeList#rotateTo" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="rotateTo(head:T):Unit"></a>
+      <a id="rotateTo(Sequence):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">rotateTo</span><span class="params">(<span name="head">head: <a href="Sequence.html" class="extype" name="org.apache.activemq.apollo.util.list.Sequence">Sequence</a></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="LinkedNodeList.html" class="extype" name="org.apache.activemq.apollo.util.list.LinkedNodeList">LinkedNodeList</a></dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.list.LinkedNodeList#size" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="size():Int"></a>
+      <a id="size():Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">size</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="LinkedNodeList.html" class="extype" name="org.apache.activemq.apollo.util.list.LinkedNodeList">LinkedNodeList</a></dd></dl></div>
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
+      <a id="synchronized[T0](⇒T0):T0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.list.LinkedNodeList#toArray" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toArray(array:Array[T]):Array[T]"></a>
+      <a id="toArray(Array[Sequence]):Array[Sequence]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">toArray</span><span class="params">(<span name="array">array: <span class="extype" name="scala.Array">Array</span>[<a href="Sequence.html" class="extype" name="org.apache.activemq.apollo.util.list.Sequence">Sequence</a>]</span>)</span><span class="result">: <span class="extype" name="scala.Array">Array</span>[<a href="Sequence.html" class="extype" name="org.apache.activemq.apollo.util.list.Sequence">Sequence</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="LinkedNodeList.html" class="extype" name="org.apache.activemq.apollo.util.list.LinkedNodeList">LinkedNodeList</a></dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.list.LinkedNodeList#toArrayList" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toArrayList():java.util.ArrayList[T]"></a>
+      <a id="toArrayList():ArrayList[Sequence]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">toArrayList</span><span class="params">()</span><span class="result">: <span class="extype" name="java.util.ArrayList">ArrayList</span>[<a href="Sequence.html" class="extype" name="org.apache.activemq.apollo.util.list.Sequence">Sequence</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="LinkedNodeList.html" class="extype" name="org.apache.activemq.apollo.util.list.LinkedNodeList">LinkedNodeList</a></dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.list.LinkedNodeList#toArrayListReversed" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toArrayListReversed():java.util.ArrayList[T]"></a>
+      <a id="toArrayListReversed():ArrayList[Sequence]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">toArrayListReversed</span><span class="params">()</span><span class="result">: <span class="extype" name="java.util.ArrayList">ArrayList</span>[<a href="Sequence.html" class="extype" name="org.apache.activemq.apollo.util.list.Sequence">Sequence</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="LinkedNodeList.html" class="extype" name="org.apache.activemq.apollo.util.list.LinkedNodeList">LinkedNodeList</a></dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.list.LinkedNodeList#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
+      <a id="toString():String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="LinkedNodeList.html" class="extype" name="org.apache.activemq.apollo.util.list.LinkedNodeList">LinkedNodeList</a> → AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
+      <a id="wait():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a>
+      <a id="wait(Long,Int):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a>
+      <a id="wait(Long):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="org.apache.activemq.apollo.util.list.LinkedNodeList">
+              <h3>Inherited from <a href="LinkedNodeList.html" class="extype" name="org.apache.activemq.apollo.util.list.LinkedNodeList">LinkedNodeList</a>[<a href="Sequence.html" class="extype" name="org.apache.activemq.apollo.util.list.Sequence">Sequence</a>]</h3>
+            </div><div class="parent" name="java.lang.Iterable">
+              <h3>Inherited from <span class="extype" name="java.lang.Iterable">Iterable</span>[<a href="Sequence.html" class="extype" name="org.apache.activemq.apollo.util.list.Sequence">Sequence</a>]</h3>
+            </div><div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>

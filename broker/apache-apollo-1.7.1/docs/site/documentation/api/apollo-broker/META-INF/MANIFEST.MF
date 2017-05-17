@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: chirino
+Build-Jdk: 1.7.0_45
+Specification-Title: apollo-broker
+Specification-Version: 1.7.1
+Specification-Vendor: The Apache Software Foundation
+Implementation-Title: apollo-broker
+Implementation-Version: 1.7.1
+Implementation-Vendor-Id: org.apache.activemq
+Implementation-Vendor: The Apache Software Foundation
+

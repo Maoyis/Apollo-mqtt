@@ -1,0 +1,1509 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>WsTransportServer - apollo-broker 1.7.1 API - org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer</title>
+          <meta name="description" content="WsTransportServer - apollo - broker 1.7.1 API - org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer" />
+          <meta name="keywords" content="WsTransportServer apollo broker 1.7.1 API org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../../../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../../../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../../../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../../../../../index.html';
+            var hash = 'org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory$$WsTransportServer';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="type">
+      <div id="definition">
+        <img src="../../../../../../lib/class_big.png" />
+        <p id="owner"><a href="../../../../../package.html" class="extype" name="org">org</a>.<a href="../../../../package.html" class="extype" name="org.apache">apache</a>.<a href="../../../package.html" class="extype" name="org.apache.activemq">activemq</a>.<a href="../../package.html" class="extype" name="org.apache.activemq.apollo">apollo</a>.<a href="../package.html" class="extype" name="org.apache.activemq.apollo.broker">broker</a>.<a href="package.html" class="extype" name="org.apache.activemq.apollo.broker.jetty">jetty</a>.<a href="WebSocketTransportFactory$.html" class="extype" name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory">WebSocketTransportFactory</a></p>
+        <h1>WsTransportServer</h1>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">WsTransportServer</span><span class="params">(<span name="uri">uri: <span class="extype" name="java.net.URI">URI</span></span>)</span><span class="result"> extends <span class="extype" name="org.eclipse.jetty.websocket.WebSocketServlet">WebSocketServlet</span> with <span class="extype" name="org.apache.activemq.apollo.util.BaseService">BaseService</span> with <span class="extype" name="org.fusesource.hawtdispatch.transport.TransportServer">TransportServer</span> with <a href="../BrokerAware.html" class="extype" name="org.apache.activemq.apollo.broker.BrokerAware">BrokerAware</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <a href="../BrokerAware.html" class="extype" name="org.apache.activemq.apollo.broker.BrokerAware">BrokerAware</a>, <span class="extype" name="org.fusesource.hawtdispatch.transport.TransportServer">TransportServer</span>, <span class="extype" name="org.apache.activemq.apollo.util.BaseService">BaseService</span>, <span class="extype" name="org.apache.activemq.apollo.util.Dispatched">Dispatched</span>, <span class="extype" name="org.apache.activemq.apollo.util.Service">Service</span>, <span class="extype" name="org.eclipse.jetty.websocket.WebSocketServlet">WebSocketServlet</span>, <span class="extype" name="org.eclipse.jetty.websocket.WebSocketFactory.Acceptor">Acceptor</span>, <span class="extype" name="javax.servlet.http.HttpServlet">HttpServlet</span>, <span class="extype" name="javax.servlet.GenericServlet">GenericServlet</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="javax.servlet.ServletConfig">ServletConfig</span>, <span class="extype" name="javax.servlet.Servlet">Servlet</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer"><span>WsTransportServer</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="org.apache.activemq.apollo.broker.BrokerAware"><span>BrokerAware</span></li><li class="in" name="org.fusesource.hawtdispatch.transport.TransportServer"><span>TransportServer</span></li><li class="in" name="org.apache.activemq.apollo.util.BaseService"><span>BaseService</span></li><li class="in" name="org.apache.activemq.apollo.util.Dispatched"><span>Dispatched</span></li><li class="in" name="org.apache.activemq.apollo.util.Service"><span>Service</span></li><li class="in" name="org.eclipse.jetty.websocket.WebSocketServlet"><span>WebSocketServlet</span></li><li class="in" name="org.eclipse.jetty.websocket.WebSocketFactory.Acceptor"><span>Acceptor</span></li><li class="in" name="javax.servlet.http.HttpServlet"><span>HttpServlet</span></li><li class="in" name="javax.servlet.GenericServlet"><span>GenericServlet</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="javax.servlet.ServletConfig"><span>ServletConfig</span></li><li class="in" name="javax.servlet.Servlet"><span>Servlet</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        <div id="constructors" class="members">
+              <h3>Instance Constructors</h3>
+              <ol><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="&lt;init&gt;(uri:java.net.URI):org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer"></a>
+      <a id="&lt;init&gt;:WsTransportServer"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">new</span>
+      </span>
+      <span class="symbol">
+        <span class="name">WsTransportServer</span><span class="params">(<span name="uri">uri: <span class="extype" name="java.net.URI">URI</span></span>)</span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="org.apache.activemq.apollo.util.BaseService.CREATED" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="CREATEDextendsBaseService.this.State"></a>
+      <a id="CREATED:CREATED"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">CREATED</span><span class="result"> extends <span class="extype" name="org.apache.activemq.apollo.util.BaseService.State">State</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>BaseService</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.BaseService.FAILED" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="FAILEDextendsBaseService.this.State"></a>
+      <a id="FAILED:FAILED"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">FAILED</span><span class="result"> extends <span class="extype" name="org.apache.activemq.apollo.util.BaseService.State">State</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>BaseService</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.BaseService.STARTED" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="STARTEDextendsBaseService.this.State"></a>
+      <a id="STARTED:STARTED"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">STARTED</span><span class="result"> extends <span class="extype" name="org.apache.activemq.apollo.util.BaseService.State">State</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>BaseService</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.BaseService.STARTING" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="STARTINGextendsBaseService.this.State"></a>
+      <a id="STARTING:STARTING"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">STARTING</span><span class="result"> extends <span class="extype" name="org.apache.activemq.apollo.util.BaseService.State">State</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>BaseService</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.BaseService.STOPPED" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="STOPPEDextendsBaseService.this.State"></a>
+      <a id="STOPPED:STOPPED"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">STOPPED</span><span class="result"> extends <span class="extype" name="org.apache.activemq.apollo.util.BaseService.State">State</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>BaseService</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.BaseService.STOPPING" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="STOPPINGextendsBaseService.this.State"></a>
+      <a id="STOPPING:STOPPING"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">STOPPING</span><span class="result"> extends <span class="extype" name="org.apache.activemq.apollo.util.BaseService.State">State</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>BaseService</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.BaseService.State" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="StateextendsObject"></a>
+      <a id="State:State"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">State</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>BaseService</dd></dl></div>
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:AnyRef):Boolean"></a>
+      <a id="!=(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a>
+      <a id="!=(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
+      <a id="##():Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:AnyRef):Boolean"></a>
+      <a id="==(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a>
+      <a id="==(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.BaseService#_service_failure" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_service_failure:Throwable"></a>
+      <a id="_service_failure:Throwable"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">_service_failure</span><span class="result">: <span class="extype" name="scala.Throwable">Throwable</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>BaseService</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.BaseService#_service_state" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_service_state:BaseService.this.State"></a>
+      <a id="_service_state:State"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">_service_state</span><span class="result">: <a href="#StateextendsObject" class="extmbr" name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer.State">State</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>BaseService</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#_start" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_start(on_completed:org.fusesource.hawtdispatch.Task):Unit"></a>
+      <a id="_start(Task):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">_start</span><span class="params">(<span name="on_completed">on_completed: <span class="extype" name="org.fusesource.hawtdispatch.Task">Task</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="" class="extype" name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer">WsTransportServer</a> → BaseService</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.BaseService#_start_transition_counter" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_start_transition_counter:Int"></a>
+      <a id="_start_transition_counter:Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">_start_transition_counter</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>BaseService</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#_stop" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_stop(on_complete:org.fusesource.hawtdispatch.Task):Unit"></a>
+      <a id="_stop(Task):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">_stop</span><span class="params">(<span name="on_complete">on_complete: <span class="extype" name="org.fusesource.hawtdispatch.Task">Task</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer">WsTransportServer</a> → BaseService</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#accept_dispatch_queue" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="accept_dispatch_queue:org.fusesource.hawtdispatch.DispatchQueue"></a>
+      <a id="accept_dispatch_queue:DispatchQueue"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">accept_dispatch_queue</span><span class="result">: <span class="extype" name="org.fusesource.hawtdispatch.DispatchQueue">DispatchQueue</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
+      <a id="asInstanceOf[T0]:T0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.Dispatched#assert_executing" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="assert_executing:Unit"></a>
+      <a id="assert_executing:Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">assert_executing</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Dispatched</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#binary_transfers" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="binary_transfers:Boolean"></a>
+      <a id="binary_transfers:Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">binary_transfers</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#blockingExecutor" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="blockingExecutor:java.util.concurrent.Executor"></a>
+      <a id="blockingExecutor:Executor"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">blockingExecutor</span><span class="result">: <span class="extype" name="java.util.concurrent.Executor">Executor</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#broker" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="broker:org.apache.activemq.apollo.broker.Broker"></a>
+      <a id="broker:Broker"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">broker</span><span class="result">: <a href="../Broker.html" class="extype" name="org.apache.activemq.apollo.broker.Broker">Broker</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.eclipse.jetty.websocket.WebSocketServlet#checkOrigin" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="checkOrigin(x$1:javax.servlet.http.HttpServletRequest,x$2:String):Boolean"></a>
+      <a id="checkOrigin(HttpServletRequest,String):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">checkOrigin</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="javax.servlet.http.HttpServletRequest">HttpServletRequest</span></span>, <span name="arg1">arg1: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>WebSocketServlet → Acceptor</dd></dl></div>
+    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a>
+      <a id="clone():AnyRef"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#connector" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="connector:org.eclipse.jetty.server.Connector"></a>
+      <a id="connector:eclipse.jetty.server.Connector"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">connector</span><span class="result">: <span class="extype" name="org.eclipse.jetty.server.Connector">eclipse.jetty.server.Connector</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#cors_origin" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="cors_origin:String"></a>
+      <a id="cors_origin:String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">cors_origin</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.eclipse.jetty.websocket.WebSocketServlet#destroy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="destroy():Unit"></a>
+      <a id="destroy():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">destroy</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>WebSocketServlet → GenericServlet → Servlet</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#dispatchQueue" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="dispatchQueue:org.fusesource.hawtdispatch.DispatchQueue"></a>
+      <a id="dispatchQueue:DispatchQueue"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">dispatchQueue</span><span class="result">: <span class="extype" name="org.fusesource.hawtdispatch.DispatchQueue">DispatchQueue</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#dispatch_queue" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="dispatch_queue:org.fusesource.hawtdispatch.DispatchQueue"></a>
+      <a id="dispatch_queue:DispatchQueue"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">dispatch_queue</span><span class="result">: <span class="extype" name="org.fusesource.hawtdispatch.DispatchQueue">DispatchQueue</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer">WsTransportServer</a> → Dispatched</dd></dl></div>
+    </li><li name="javax.servlet.http.HttpServlet#doDelete" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="doDelete(x$1:javax.servlet.http.HttpServletRequest,x$2:javax.servlet.http.HttpServletResponse):Unit"></a>
+      <a id="doDelete(HttpServletRequest,HttpServletResponse):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">doDelete</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="javax.servlet.http.HttpServletRequest">HttpServletRequest</span></span>, <span name="arg1">arg1: <span class="extype" name="javax.servlet.http.HttpServletResponse">HttpServletResponse</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="javax.servlet.http">javax.servlet.http</span>] </dd><dt>Definition Classes</dt><dd>HttpServlet</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#doGet" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="doGet(req:javax.servlet.http.HttpServletRequest,resp:javax.servlet.http.HttpServletResponse):Unit"></a>
+      <a id="doGet(HttpServletRequest,HttpServletResponse):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">doGet</span><span class="params">(<span name="req">req: <span class="extype" name="javax.servlet.http.HttpServletRequest">HttpServletRequest</span></span>, <span name="resp">resp: <span class="extype" name="javax.servlet.http.HttpServletResponse">HttpServletResponse</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer">WsTransportServer</a> → HttpServlet</dd></dl></div>
+    </li><li name="javax.servlet.http.HttpServlet#doHead" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="doHead(x$1:javax.servlet.http.HttpServletRequest,x$2:javax.servlet.http.HttpServletResponse):Unit"></a>
+      <a id="doHead(HttpServletRequest,HttpServletResponse):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">doHead</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="javax.servlet.http.HttpServletRequest">HttpServletRequest</span></span>, <span name="arg1">arg1: <span class="extype" name="javax.servlet.http.HttpServletResponse">HttpServletResponse</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="javax.servlet.http">javax.servlet.http</span>] </dd><dt>Definition Classes</dt><dd>HttpServlet</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="javax.servlet.http.HttpServlet#doOptions" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="doOptions(x$1:javax.servlet.http.HttpServletRequest,x$2:javax.servlet.http.HttpServletResponse):Unit"></a>
+      <a id="doOptions(HttpServletRequest,HttpServletResponse):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">doOptions</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="javax.servlet.http.HttpServletRequest">HttpServletRequest</span></span>, <span name="arg1">arg1: <span class="extype" name="javax.servlet.http.HttpServletResponse">HttpServletResponse</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="javax.servlet.http">javax.servlet.http</span>] </dd><dt>Definition Classes</dt><dd>HttpServlet</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="javax.servlet.http.HttpServlet#doPost" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="doPost(x$1:javax.servlet.http.HttpServletRequest,x$2:javax.servlet.http.HttpServletResponse):Unit"></a>
+      <a id="doPost(HttpServletRequest,HttpServletResponse):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">doPost</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="javax.servlet.http.HttpServletRequest">HttpServletRequest</span></span>, <span name="arg1">arg1: <span class="extype" name="javax.servlet.http.HttpServletResponse">HttpServletResponse</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="javax.servlet.http">javax.servlet.http</span>] </dd><dt>Definition Classes</dt><dd>HttpServlet</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="javax.servlet.http.HttpServlet#doPut" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="doPut(x$1:javax.servlet.http.HttpServletRequest,x$2:javax.servlet.http.HttpServletResponse):Unit"></a>
+      <a id="doPut(HttpServletRequest,HttpServletResponse):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">doPut</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="javax.servlet.http.HttpServletRequest">HttpServletRequest</span></span>, <span name="arg1">arg1: <span class="extype" name="javax.servlet.http.HttpServletResponse">HttpServletResponse</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="javax.servlet.http">javax.servlet.http</span>] </dd><dt>Definition Classes</dt><dd>HttpServlet</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="javax.servlet.http.HttpServlet#doTrace" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="doTrace(x$1:javax.servlet.http.HttpServletRequest,x$2:javax.servlet.http.HttpServletResponse):Unit"></a>
+      <a id="doTrace(HttpServletRequest,HttpServletResponse):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">doTrace</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="javax.servlet.http.HttpServletRequest">HttpServletRequest</span></span>, <span name="arg1">arg1: <span class="extype" name="javax.servlet.http.HttpServletResponse">HttpServletResponse</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="javax.servlet.http">javax.servlet.http</span>] </dd><dt>Definition Classes</dt><dd>HttpServlet</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#doWebSocketConnect" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="doWebSocketConnect(request:javax.servlet.http.HttpServletRequest,protocol:String):org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WebSocketTransport"></a>
+      <a id="doWebSocketConnect(HttpServletRequest,String):WebSocketTransport"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">doWebSocketConnect</span><span class="params">(<span name="request">request: <span class="extype" name="javax.servlet.http.HttpServletRequest">HttpServletRequest</span></span>, <span name="protocol">protocol: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="WebSocketTransportFactory$$WebSocketTransport.html" class="extype" name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WebSocketTransport">WebSocketTransport</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer">WsTransportServer</a> → Acceptor</dd></dl></div>
+    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a>
+      <a id="eq(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
+      <a id="finalize():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#fire_accept" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="fire_accept:Unit"></a>
+      <a id="fire_accept:Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">fire_accept</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#getBinary_transfers" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="getBinary_transfers():Boolean"></a>
+      <a id="getBinary_transfers():Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getBinary_transfers</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#getBlockingExecutor" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getBlockingExecutor():java.util.concurrent.Executor"></a>
+      <a id="getBlockingExecutor():Executor"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getBlockingExecutor</span><span class="params">()</span><span class="result">: <span class="extype" name="java.util.concurrent.Executor">Executor</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer">WsTransportServer</a> → TransportServer</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#getBoundAddress" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getBoundAddress():String"></a>
+      <a id="getBoundAddress():String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getBoundAddress</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer">WsTransportServer</a> → TransportServer</dd></dl></div>
+    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClass():Class[_]"></a>
+      <a id="getClass():Class[_]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#getCors_origin" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="getCors_origin():String"></a>
+      <a id="getCors_origin():String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getCors_origin</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#getDispatchQueue" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getDispatchQueue():org.fusesource.hawtdispatch.DispatchQueue"></a>
+      <a id="getDispatchQueue():DispatchQueue"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getDispatchQueue</span><span class="params">()</span><span class="result">: <span class="extype" name="org.fusesource.hawtdispatch.DispatchQueue">DispatchQueue</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer">WsTransportServer</a> → TransportServer</dd></dl></div>
+    </li><li name="javax.servlet.GenericServlet#getInitParameter" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getInitParameter(x$1:String):String"></a>
+      <a id="getInitParameter(String):String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getInitParameter</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>GenericServlet → ServletConfig</dd></dl></div>
+    </li><li name="javax.servlet.GenericServlet#getInitParameterNames" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getInitParameterNames():java.util.Enumeration[String]"></a>
+      <a id="getInitParameterNames():Enumeration[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getInitParameterNames</span><span class="params">()</span><span class="result">: <span class="extype" name="java.util.Enumeration">Enumeration</span>[<span class="extype" name="java.lang.String">String</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>GenericServlet → ServletConfig</dd></dl></div>
+    </li><li name="javax.servlet.http.HttpServlet#getLastModified" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getLastModified(x$1:javax.servlet.http.HttpServletRequest):Long"></a>
+      <a id="getLastModified(HttpServletRequest):Long"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getLastModified</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="javax.servlet.http.HttpServletRequest">HttpServletRequest</span></span>)</span><span class="result">: <span class="extype" name="scala.Long">Long</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="javax.servlet.http">javax.servlet.http</span>] </dd><dt>Definition Classes</dt><dd>HttpServlet</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#getMax_binary_message_size" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="getMax_binary_message_size():Int"></a>
+      <a id="getMax_binary_message_size():Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getMax_binary_message_size</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#getMax_idle_time" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="getMax_idle_time():Int"></a>
+      <a id="getMax_idle_time():Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getMax_idle_time</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#getMax_text_message_size" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="getMax_text_message_size():Int"></a>
+      <a id="getMax_text_message_size():Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getMax_text_message_size</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="javax.servlet.GenericServlet#getServletConfig" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getServletConfig():javax.servlet.ServletConfig"></a>
+      <a id="getServletConfig():ServletConfig"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getServletConfig</span><span class="params">()</span><span class="result">: <span class="extype" name="javax.servlet.ServletConfig">ServletConfig</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>GenericServlet → Servlet</dd></dl></div>
+    </li><li name="javax.servlet.GenericServlet#getServletContext" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getServletContext():javax.servlet.ServletContext"></a>
+      <a id="getServletContext():ServletContext"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getServletContext</span><span class="params">()</span><span class="result">: <span class="extype" name="javax.servlet.ServletContext">ServletContext</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>GenericServlet → ServletConfig</dd></dl></div>
+    </li><li name="javax.servlet.GenericServlet#getServletInfo" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getServletInfo():String"></a>
+      <a id="getServletInfo():String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getServletInfo</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>GenericServlet → Servlet</dd></dl></div>
+    </li><li name="javax.servlet.GenericServlet#getServletName" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getServletName():String"></a>
+      <a id="getServletName():String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getServletName</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>GenericServlet → ServletConfig</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#getSocketAddress" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getSocketAddress():java.net.InetSocketAddress"></a>
+      <a id="getSocketAddress():InetSocketAddress"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getSocketAddress</span><span class="params">()</span><span class="result">: <span class="extype" name="java.net.InetSocketAddress">InetSocketAddress</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer">WsTransportServer</a> → TransportServer</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#getTransportServerListener" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="getTransportServerListener():org.fusesource.hawtdispatch.transport.TransportServerListener"></a>
+      <a id="getTransportServerListener():TransportServerListener"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getTransportServerListener</span><span class="params">()</span><span class="result">: <span class="extype" name="org.fusesource.hawtdispatch.transport.TransportServerListener">TransportServerListener</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.eclipse.jetty.websocket.WebSocketServlet#init" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="init():Unit"></a>
+      <a id="init():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">init</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>WebSocketServlet → GenericServlet</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="javax.servlet.GenericServlet#init" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="init(x$1:javax.servlet.ServletConfig):Unit"></a>
+      <a id="init(ServletConfig):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">init</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="javax.servlet.ServletConfig">ServletConfig</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>GenericServlet → Servlet</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="javax.servlet.GenericServlet#log" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="log(x$1:String,x$2:Throwable):Unit"></a>
+      <a id="log(String,Throwable):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">log</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="java.lang.String">String</span></span>, <span name="arg1">arg1: <span class="extype" name="java.lang.Throwable">Throwable</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>GenericServlet</dd></dl></div>
+    </li><li name="javax.servlet.GenericServlet#log" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="log(x$1:String):Unit"></a>
+      <a id="log(String):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">log</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>GenericServlet</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#max_binary_message_size" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="max_binary_message_size:Int"></a>
+      <a id="max_binary_message_size:Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">max_binary_message_size</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#max_idle_time" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="max_idle_time:Int"></a>
+      <a id="max_idle_time:Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">max_idle_time</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#max_text_message_size" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="max_text_message_size:Int"></a>
+      <a id="max_text_message_size:Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">max_text_message_size</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a>
+      <a id="ne(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
+      <a id="notify():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
+      <a id="notifyAll():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#pending_connects" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="pending_connects:java.util.concurrent.ArrayBlockingQueue[org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WebSocketTransport]"></a>
+      <a id="pending_connects:ArrayBlockingQueue[WebSocketTransport]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">pending_connects</span><span class="result">: <span class="extype" name="java.util.concurrent.ArrayBlockingQueue">ArrayBlockingQueue</span>[<a href="WebSocketTransportFactory$$WebSocketTransport.html" class="extype" name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WebSocketTransport">WebSocketTransport</a>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#resume" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="resume():Unit"></a>
+      <a id="resume():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">resume</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer">WsTransportServer</a> → TransportServer</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.BaseService#schedule_reoccurring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="schedule_reoccurring(time:Long,unit:java.util.concurrent.TimeUnit)(func:=&gt;Unit):Unit"></a>
+      <a id="schedule_reoccurring(Long,TimeUnit)(⇒Unit):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">schedule_reoccurring</span><span class="params">(<span name="time">time: <span class="extype" name="scala.Long">Long</span></span>, <span name="unit">unit: <span class="extype" name="java.util.concurrent.TimeUnit">TimeUnit</span></span>)</span><span class="params">(<span name="func">func: ⇒ <span class="extype" name="scala.Unit">Unit</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>BaseService</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#server" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="server:org.eclipse.jetty.server.Server"></a>
+      <a id="server:Server"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">server</span><span class="result">: <span class="extype" name="org.eclipse.jetty.server.Server">Server</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.eclipse.jetty.websocket.WebSocketServlet#service" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="service(x$1:javax.servlet.http.HttpServletRequest,x$2:javax.servlet.http.HttpServletResponse):Unit"></a>
+      <a id="service(HttpServletRequest,HttpServletResponse):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">service</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="javax.servlet.http.HttpServletRequest">HttpServletRequest</span></span>, <span name="arg1">arg1: <span class="extype" name="javax.servlet.http.HttpServletResponse">HttpServletResponse</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="org.eclipse.jetty.websocket">org.eclipse.jetty.websocket</span>] </dd><dt>Definition Classes</dt><dd>WebSocketServlet → HttpServlet</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="javax.servlet.http.HttpServlet#service" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="service(x$1:javax.servlet.ServletRequest,x$2:javax.servlet.ServletResponse):Unit"></a>
+      <a id="service(ServletRequest,ServletResponse):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">service</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="javax.servlet.ServletRequest">ServletRequest</span></span>, <span name="arg1">arg1: <span class="extype" name="javax.servlet.ServletResponse">ServletResponse</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>HttpServlet → GenericServlet → Servlet</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.BaseService#service_failure" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="service_failure():Throwable"></a>
+      <a id="service_failure():Throwable"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">service_failure</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Throwable">Throwable</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>BaseService → Service</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.BaseService#service_state" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="service_state:BaseService.this.State"></a>
+      <a id="service_state:State"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">service_state</span><span class="result">: <a href="#StateextendsObject" class="extmbr" name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer.State">State</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>BaseService</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#setBinary_transfers" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="setBinary_transfers(x$1:Boolean):Unit"></a>
+      <a id="setBinary_transfers(Boolean):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">setBinary_transfers</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#setBlockingExecutor" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="setBlockingExecutor(x$1:java.util.concurrent.Executor):Unit"></a>
+      <a id="setBlockingExecutor(Executor):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">setBlockingExecutor</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="java.util.concurrent.Executor">Executor</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer">WsTransportServer</a> → TransportServer</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#setCors_origin" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="setCors_origin(x$1:String):Unit"></a>
+      <a id="setCors_origin(String):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">setCors_origin</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#setDispatchQueue" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="setDispatchQueue(x$1:org.fusesource.hawtdispatch.DispatchQueue):Unit"></a>
+      <a id="setDispatchQueue(DispatchQueue):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">setDispatchQueue</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="org.fusesource.hawtdispatch.DispatchQueue">DispatchQueue</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer">WsTransportServer</a> → TransportServer</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#setMax_binary_message_size" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="setMax_binary_message_size(x$1:Int):Unit"></a>
+      <a id="setMax_binary_message_size(Int):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">setMax_binary_message_size</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#setMax_idle_time" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="setMax_idle_time(x$1:Int):Unit"></a>
+      <a id="setMax_idle_time(Int):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">setMax_idle_time</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#setMax_text_message_size" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="setMax_text_message_size(x$1:Int):Unit"></a>
+      <a id="setMax_text_message_size(Int):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">setMax_text_message_size</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#setTransportServerListener" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="setTransportServerListener(x$1:org.fusesource.hawtdispatch.transport.TransportServerListener):Unit"></a>
+      <a id="setTransportServerListener(TransportServerListener):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">setTransportServerListener</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="org.fusesource.hawtdispatch.transport.TransportServerListener">TransportServerListener</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer">WsTransportServer</a> → TransportServer</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#set_broker" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="set_broker(value:org.apache.activemq.apollo.broker.Broker):Unit"></a>
+      <a id="set_broker(Broker):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">set_broker</span><span class="params">(<span name="value">value: <a href="../Broker.html" class="extype" name="org.apache.activemq.apollo.broker.Broker">Broker</a></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer">WsTransportServer</a> → <a href="../BrokerAware.html" class="extype" name="org.apache.activemq.apollo.broker.BrokerAware">BrokerAware</a></dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#start" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="start(on_completed:Runnable):Unit"></a>
+      <a id="start(Runnable):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">start</span><span class="params">(<span name="on_completed">on_completed: <span class="extype" name="java.lang.Runnable">Runnable</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer">WsTransportServer</a> → TransportServer</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.BaseService#start" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="start(on_completed:org.fusesource.hawtdispatch.Task):Unit"></a>
+      <a id="start(Task):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">start</span><span class="params">(<span name="on_completed">on_completed: <span class="extype" name="org.fusesource.hawtdispatch.Task">Task</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>BaseService → Service</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#stop" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="stop(on_completed:Runnable):Unit"></a>
+      <a id="stop(Runnable):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">stop</span><span class="params">(<span name="on_completed">on_completed: <span class="extype" name="java.lang.Runnable">Runnable</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer">WsTransportServer</a> → TransportServer</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.util.BaseService#stop" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="stop(on_completed:org.fusesource.hawtdispatch.Task):Unit"></a>
+      <a id="stop(Task):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">stop</span><span class="params">(<span name="on_completed">on_completed: <span class="extype" name="org.fusesource.hawtdispatch.Task">Task</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>BaseService → Service</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#suspend" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="suspend():Unit"></a>
+      <a id="suspend():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">suspend</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer">WsTransportServer</a> → TransportServer</dd></dl></div>
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
+      <a id="synchronized[T0](⇒T0):T0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#transportServerListener" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="transportServerListener:org.fusesource.hawtdispatch.transport.TransportServerListener"></a>
+      <a id="transportServerListener:TransportServerListener"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">var</span>
+      </span>
+      <span class="symbol">
+        <span class="name">transportServerListener</span><span class="result">: <span class="extype" name="org.fusesource.hawtdispatch.transport.TransportServerListener">TransportServerListener</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.apache.activemq.apollo.broker.jetty.WebSocketTransportFactory.WsTransportServer#uri" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="uri:java.net.URI"></a>
+      <a id="uri:URI"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">uri</span><span class="result">: <span class="extype" name="java.net.URI">URI</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
+      <a id="wait():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a>
+      <a id="wait(Long,Int):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a>
+      <a id="wait(Long):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.Serializable">
+              <h3>Inherited from <span class="extype" name="scala.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="scala.Product">
+              <h3>Inherited from <span class="extype" name="scala.Product">Product</span></h3>
+            </div><div class="parent" name="scala.Equals">
+              <h3>Inherited from <span class="extype" name="scala.Equals">Equals</span></h3>
+            </div><div class="parent" name="org.apache.activemq.apollo.broker.BrokerAware">
+              <h3>Inherited from <a href="../BrokerAware.html" class="extype" name="org.apache.activemq.apollo.broker.BrokerAware">BrokerAware</a></h3>
+            </div><div class="parent" name="org.fusesource.hawtdispatch.transport.TransportServer">
+              <h3>Inherited from <span class="extype" name="org.fusesource.hawtdispatch.transport.TransportServer">TransportServer</span></h3>
+            </div><div class="parent" name="org.apache.activemq.apollo.util.BaseService">
+              <h3>Inherited from <span class="extype" name="org.apache.activemq.apollo.util.BaseService">BaseService</span></h3>
+            </div><div class="parent" name="org.apache.activemq.apollo.util.Dispatched">
+              <h3>Inherited from <span class="extype" name="org.apache.activemq.apollo.util.Dispatched">Dispatched</span></h3>
+            </div><div class="parent" name="org.apache.activemq.apollo.util.Service">
+              <h3>Inherited from <span class="extype" name="org.apache.activemq.apollo.util.Service">Service</span></h3>
+            </div><div class="parent" name="org.eclipse.jetty.websocket.WebSocketServlet">
+              <h3>Inherited from <span class="extype" name="org.eclipse.jetty.websocket.WebSocketServlet">WebSocketServlet</span></h3>
+            </div><div class="parent" name="org.eclipse.jetty.websocket.WebSocketFactory.Acceptor">
+              <h3>Inherited from <span class="extype" name="org.eclipse.jetty.websocket.WebSocketFactory.Acceptor">Acceptor</span></h3>
+            </div><div class="parent" name="javax.servlet.http.HttpServlet">
+              <h3>Inherited from <span class="extype" name="javax.servlet.http.HttpServlet">HttpServlet</span></h3>
+            </div><div class="parent" name="javax.servlet.GenericServlet">
+              <h3>Inherited from <span class="extype" name="javax.servlet.GenericServlet">GenericServlet</span></h3>
+            </div><div class="parent" name="java.io.Serializable">
+              <h3>Inherited from <span class="extype" name="java.io.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="javax.servlet.ServletConfig">
+              <h3>Inherited from <span class="extype" name="javax.servlet.ServletConfig">ServletConfig</span></h3>
+            </div><div class="parent" name="javax.servlet.Servlet">
+              <h3>Inherited from <span class="extype" name="javax.servlet.Servlet">Servlet</span></h3>
+            </div><div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>

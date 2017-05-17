@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd"> 
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  Architecture
+-->
+<html lang="en">
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta content="ActiveMQ's next generation of messaging" name="description"/>
+    <meta content="messaging,stomp,jms,activemq,apollo" name="keywords"/>
+    <meta content="Apollo" name="author"/>
+    <script src="../../scripts/jquery.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../styles/impact/css/pygmentize.css"/>
+    <link type="text/css" rel="stylesheet" href="../../styles/impact/css/site.css"/>
+    <title>Apollo 1.0 Beta 2 Released</title>
+  </head>
+  <body>
+    <div id="navigation">
+      <div class="wrapper">
+<ul>
+<li><a href="../../index.html">Apollo 1.7.1</a></li>
+<li><a href="../../community/developers.html">Developers</a></li>
+<li><a href="../../community/index.html">Community</a></li>
+<li><a href="../../download.html">Download</a></li>
+</ul>        <div></div>
+      </div>
+    </div>
+    <div id="content">
+      <div class="wrapper">
+<p>The <a href="http://activemq.apache.org">Apache ActiveMQ Project</a> is pleased to announce the 
+availability of Apollo 1.0 Beta 2. ActiveMQ Apollo is a faster, more reliable, easier 
+to maintain messaging broker built from the foundations of the original ActiveMQ. It is
+focused on being the fastest most reliable STOMP 1.1 and 1.0 server available.</p>
+
+<p>This Beta release features:</p>
+
+<ul>
+<li><a href="http://stomp.github.com/stomp-specification-1.0.html">Stomp 1.0</a> Protocol
+Support</li>
+<li><a href="http://stomp.github.com/stomp-specification-1.1.html">Stomp 1.1</a> Protocol
+Support</li>
+<li><a href="http://activemq.apache.org/apollo/documentation/user-manual.html#Destination&#95;Types">Topics and Queues</a></li>
+<li><a href="http://activemq.apache.org/apollo/documentation/user-manual.html#Browsing&#95;Subscriptions">Queue Browsers</a></li>
+<li><a href="http://activemq.apache.org/apollo/documentation/user-manual.html#Topic&#95;Durable&#95;Subscriptions">Durable Subscriptions on Topics</a></li>
+<li><a href="http://activemq.apache.org/apollo/documentation/user-manual.html#Reliable&#95;Messaging">Reliable Messaging</a></li>
+<li>Message swapping</li>
+<li><a href="http://activemq.apache.org/apollo/documentation/user-manual.html#Message&#95;Selectors">Message Selectors</a></li>
+<li><a href="http://activemq.apache.org/apollo/documentation/user-manual.html#Authentication">JAAS Authentication</a></li>
+<li><a href="http://activemq.apache.org/apollo/documentation/user-manual.html#Authorization">ACL Authorization</a></li>
+<li><a href="http://activemq.apache.org/apollo/documentation/user-manual.html#Using&#95;SSL&#95;TLS">SSL/TLS Support</a></li>
+<li>REST based management</li>
+</ul>
+
+<p>Further information:</p>
+
+<ul>
+<li><a href="http://activemq.apache.org/apollo/download.html">Download</a></li>
+<li><a href="http://activemq.apache.org/apollo/documentation">Documentation</a></li>
+</ul>
+
+<p><a href="http://activemq.apache.org/community/index.html">Feedback</a> is always welcome! </p>
+
+<p>Change since the last beta include:</p>
+
+<ul>
+<li>Enable the jvmassert scala compiler plugin so that asserts are disabled by default at runtime unless enabled with the JVM -ea flag.</li>
+<li>Reduce verbosity of the internal debug message.</li>
+<li>Used the latest release of the stomp JMS client.</li>
+<li>Don't assume all connectors will be AcceptingConnectors.</li>
+<li>If the user sets the <code>JVM_FLAGS</code> or <code>JMX_OPTS</code> then, don't use our defaults.</li>
+<li>Source the <code>etc/apollo.profile</code> if it exists.</li>
+<li>Protect against NPE.</li>
+<li>Configure the receive buffer size on the server socket so that it get properly set on the sockets that get accepted.</li>
+<li>Doco: Adding more config details about transport protocols</li>
+<li>Doco: Better looking downloads page.</li>
+<li>Doco: Have the links look different than the headers.</li>
+<li>Rename the multi protocol to any since that reads better from the point of view of <code>config: protocol="any"</code></li>
+<li>Simpler tcp transport option setup.</li>
+<li>Make the stomp max allowed headers sizes and friends configurable.</li>
+<li>Only trim headers in STOMP 1.0</li>
+<li>Making more socket options configurable on the tcp transport.</li>
+<li>Delay shutting down on disconnect to allow the receipt to be sent back to the client.</li>
+<li>Implemented an <code>apollo-broker-service</code> script which can be used to start/stop and manage a broker that is run in the background.</li>
+<li>Fixes <a href="https://issues.apache.org/jira/browse/AMQ-3295">AMQ-3295</a> : better logging messages.</li>
+<li>Simplify setting up the session refiller.</li>
+<li>display the base dir.</li>
+<li>Simpler getting started guide.</li>
+<li>Report the apollo install location when starting up the broker.</li>
+<li>Better dispatch execution assertion checking to catch usage errors.</li>
+<li>Add a linked assertion check to provide a friendlier usage error message.</li>
+<li>Fixes <a href="https://issues.apache.org/jira/browse/AMQ-3267">/AMQ-3267</a> - Make it able run Apollo without setting env variables</li>
+<li>Fixes <a href="https://issues.apache.org/jira/browse/AMQ-3265">AMQ-3265</a> : Added a <code>Waiting for messages...</code> console message to all the listener examples.</li>
+<li>Fixes <a href="https://issues.apache.org/jira/browse/AMQ-3264">AMQ-3264</a> : Add an <code>bin/apollo --help</code></li>
+<li>Add a shutdown hook which stops the broker.</li>
+<li>Adding a toString method to queues of easier debugging.</li>
+<li>Display more DBD store stats: # of pending stores.</li>
+</ul>
+        <div></div>
+      </div>
+    </div>
+  </body>
+</html>

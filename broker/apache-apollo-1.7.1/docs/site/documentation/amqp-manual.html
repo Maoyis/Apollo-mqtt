@@ -1,0 +1,474 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd"> 
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  Architecture
+-->
+<html lang="en">
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta content="ActiveMQ's next generation of messaging" name="description"/>
+    <meta content="messaging,stomp,jms,activemq,apollo" name="keywords"/>
+    <meta content="Apollo" name="author"/>
+    <script src="../scripts/jquery.js"></script>
+    <link type="text/css" rel="stylesheet" href="../styles/impact/css/pygmentize.css"/>
+    <link type="text/css" rel="stylesheet" href="../styles/impact/css/site.css"/>
+    <title></title>
+  </head>
+  <body>
+    <div id="navigation">
+      <div class="wrapper">
+<ul>
+<li><a href="../index.html">Apollo 1.7.1</a></li>
+<li><a href="../community/developers.html">Developers</a></li>
+<li><a href="../community/index.html">Community</a></li>
+<li><a href="../download.html">Download</a></li>
+</ul>        <div></div>
+      </div>
+    </div>
+    <div id="content">
+      <div class="wrapper">
+<h1 id = "Apollo_1_7_1_AMQP_Protocol_Manual">Apollo 1.7.1 AMQP Protocol Manual</h1>
+
+<p><div class="toc"><ul style="list-style:none;">
+  <li><a href="#Using_the_AMQP_Protocol">Using the AMQP Protocol</a></li>
+  <li><ul style="list-style:none;">
+    <li><a href="#AMPQ_Protocol_Options">AMPQ Protocol Options</a></li>
+    <li><a href="#Connecting">Connecting</a></li>
+    <li><a href="#Destination_Types">Destination Types</a></li>
+    <li><a href="#Reliable_Messaging">Reliable Messaging</a></li>
+    <li><a href="#Message_Expiration">Message Expiration</a></li>
+    <li><a href="#Topic_Durable_Subscriptions">Topic Durable Subscriptions</a></li>
+    <li><a href="#Browsing_Queues">Browsing Queues</a></li>
+    <li><a href="#Temporary_Destinations">Temporary Destinations</a></li>
+    <li><a href="#Destination_Wildcards">Destination Wildcards</a></li>
+    <li><a href="#Composite_Destinations">Composite Destinations</a></li>
+    <li><a href="#Message_Selectors">Message Selectors</a></li>
+    <li><a href="#Destination_Name_Restrictions">Destination Name Restrictions</a></li>
+  </ul></li>
+</ul></div></p>
+
+<h2 id = "Using_the_AMQP_Protocol">Using the AMQP Protocol</h2>
+
+<p>Clients can connect to Apollo using the
+<a href="http://amqp.github.com/">AMQP</a> protocol.  AMQP's mission is
+&ldquo;To become the standard protocol for interoperability between 
+all messaging middleware&rdquo;.  Apollo implements version 1.0 of 
+AMQP which has become an OASIS Standard.</p>
+
+<p>It is recommend that you use an AMQP 1.0 client library like the one provided
+by the <a href="http://qpid.apache.org/proton/">Apache Qpid Proton</a> project in
+order to access this server or any other AMQP 1.0 server.</p>
+
+<p>AMQP clients can connect to any of the default connectors that the default
+Apollo configuration opens up, but since AMQP has the IANA-assigned 
+port of 5672 and 5671 for SSL secured AMQP, you might want to add the following
+configuration elements to your Apollo config file so that AMQP clients can more easily 
+connect to Apollo.</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+&lt;connector id=&quot;amqp&quot; bind=&quot;tcp://0.0.0.0:5672&quot;/&gt;
+&lt;connector id=&quot;amqps&quot; bind=&quot;ssl://0.0.0.0:5671&quot;/&gt;
+</code></pre></div>
+
+<h3 id = "AMPQ_Protocol_Options">AMPQ Protocol Options</h3>
+
+<p>You can use the <code>amqp</code> configuration element within the <code>connector</code> element
+in the <code>apollo.xml</code> configuration file to change the default settings used
+in the AMQP protocol implementation.  The <code>amqp</code> element supports the 
+following configuration attributes:</p>
+
+<ul>
+<li><code>max_frame_size</code> : The maximum allowed size of an AMQP frame. Defaults 
+to <code>100M</code>.</li>
+<li><code>trace</code> : Set to <code>true</code> if you want to enabled AMQP frame tracing to get logged. Defaults 
+to <code>false</code>.</li>
+<li><code>buffer_size</code> : How much each sender or receiver will buffer between
+the client and the broker. If not set, it will be auto tuned between <code>640k</code>
+and <code>20k</code> depending on the number of connections open on the broker.</li>
+<li><code>die_delay</code> : The amount of time to delay in milliseconds after an AMQP connection is <br/>
+closed before the socket is closed/reset.</li>
+</ul>
+
+<p>The amqp configuration element can also be used to control how the destination 
+headers are parsed and interpreted.  The supported attributes are:</p>
+
+<ul>
+<li><code>queue_prefix</code> : Defaults to <code>queue://</code></li>
+<li><code>topic_prefix</code> : Defaults to <code>topic://</code></li>
+<li><code>path_separator</code> : Defaults to <code>.</code></li>
+<li><code>destination_separator</code> : Defaults to <code>,</code></li>
+<li><code>any_child_wildcard</code> : Defaults to <code>*</code></li>
+<li><code>regex_wildcard_start</code> : Defaults to <code>{</code></li>
+<li><code>regex_wildcard_end</code> : Defaults to <code>}</code></li>
+<li><code>any_descendant_wildcard</code> : Defaults to <code>**</code></li>
+</ul>
+
+<p>Example:</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+&lt;connector id=&quot;tcp&quot; bind=&quot;tcp://0.0.0.0:5672&quot;&gt;
+  &lt;amqp max_frame_size=&quot;4M&quot;/&gt;
+&lt;/connector&gt;
+</code></pre></div>
+
+<h3 id = "Connecting">Connecting</h3>
+
+<p>The default broker configuration secures access to the broker so that only
+the <code>admin</code> user can connect.  The default password for the <code>admin</code> user 
+is <code>password</code>.  Your client must use PLAIN Sasl to pass the credentials.</p>
+
+<p>If the client does not specify the remote host when in the AMQP Open frame,
+the client will be connected to the first virtual host defined in
+it's configuration.  If a remote host is specified, then connection will be closed
+with an error if it cannot find a virtual with that match name defined. Therefore,
+it is critical that the virtual hosts configuration define all the 
+possible host names that clients may connect to host with.</p>
+
+<h3 id = "Destination_Types">Destination Types</h3>
+
+<p>Apollo supports three types of destinations, queues, topics, and
+durable subscriptions.</p>
+
+<p>The difference between queues and topics is how messages are delivered to
+consumers. A queue will load balance it's messages over the connected
+subscribers so that only one subscriber gets a message. Topics replicate
+every message sent to it to all the connected subscribers.  Queues hold 
+on to unconsumed messages even when there are no receivers attached,
+while a topic will drop messages when there are no connected receivers.</p>
+
+<p>A durable subscription allows you to create a subscription against a topic
+which will queue messages even after the client disconnects.  Clients
+can reconnect and consume the queued message originating from the topic
+at a later time.</p>
+
+<p>If you want to send or subscribe to a queue, topic, or durable
+subscription the AMQP address should be prefixed with <code>queue://</code>,
+<code>topic://</code> or <code>dsub://</code> respectively.</p>
+
+<!-- TODO: not supported yet via AMQP protocol
+### Topic Retained Messages
+
+If a message sent to a Topic has the `retain:set` header, then
+the message will be 'remembered' by the topic so that if a new
+subscription arrives, the last retained message is sent 
+to the subscription.  For example if you want a topic 
+to remember the last price published you can send a message 
+that looks like:
+
+
+You can also send a new message with the `retain:remove` header
+to have the topic forget about the last retained message.
+
+Note: retained messages are not retained between broker restarts.
+-->
+
+<h3 id = "Reliable_Messaging">Reliable Messaging</h3>
+
+<p>Apollo supports reliable messaging by allowing messages to be
+durable so that they can be recovered if there is failure which kills
+the broker.  Processing durable messages has orders of magnitude more
+overhead than non-durable variety.  You should only mark messages durable
+if you can't afford to loose the message.</p>
+
+<p>Durable messages should be sent either as part of a transaction or
+not pre-settled so that the client can be notified when the durable
+message has been fully received the the broker.</p>
+
+<h3 id = "Message_Expiration">Message Expiration</h3>
+
+<p>Apollo supports expiring old messages.  Unconsumed expired messages 
+are automatically removed from the queue.  You just need to specify when
+the message expires by setting the message header.</p>
+
+<h3 id = "Topic_Durable_Subscriptions">Topic Durable Subscriptions</h3>
+
+<p>A durable subscription is a queue which is subscribed to a topic so that even
+if the client which created the durable subscription is not online, he can
+still get a copy of all the messages sent to the topic when he comes back
+online. Multiple clients can subscribe to the same durable subscription and
+since it's backed by a queue, those subscribers will have the topic's messages
+load balanced across them.</p>
+
+<p>To create or reattach to a a durable subscription with AMQP, you create an AMQP
+receiver link and use the Link name to identify the durable subscription.  The link source
+durable property must be set to DURABLE and the expiry policy must be set to NEVER.</p>
+
+<p>If you want the durable subscription to be destroyed, change the 
+source expiry policy to LINK_DETACH and then close the link.</p>
+
+<p>If the durable subscription already exists you can address it directly using
+<code>dsub://</code> prefix on the <code>destination</code> header. For example, send a message to
+the previously created <code>mysub</code> durable subscription, you would message to
+the target address of <code>dsub://mysub</code>.</p>
+
+<p>Similarly, you can also receive messages from the durable subscription by using 
+the source address of <code>dsub://mysub</code>,</p>
+
+<p>Unlike typical AMQP link id's which are local to the AMQP client's
+connection, the durable subscription id's are global across a virtual host. If
+two different connections setup receivers against the same durable subscription 
+id, then messages from the durable subscription will get load balanced across the two 
+connections.</p>
+
+<h3 id = "Browsing_Queues">Browsing Queues</h3>
+
+<p>To browse messages on a queue without consuming them, the receiver
+should set the distribution mode attribute of the source to COPY.</p>
+
+<!--
+TODO: Perhaps talk about link draining to detect end of browse.
+-->
+
+<!-- Not supported yet 
+### Queue Message Sequences
+
+As messages are added to a queue in a broker, they are assigned an
+incrementing sequence number. Messages delivered to subscribers can be updated
+to include the sequence number if the `include-seq` header is added to the
+`SUBSCRIBE` frame. This header should be set to a header name which will be
+added messages delivered to hold value of the sequence number.
+
+Example:
+
+    SUBSCRIBE
+    id:mysub
+    destination:/queue/foo
+    include-seq:seq
+
+    ^@
+
+Then you can expect to receive messages like:
+
+    MESSAGE
+    subscription:mysub
+    destination:/queue/foo
+    seq:1
+
+    Hello
+    ^@
+    MESSAGE
+    subscription:mysub
+    destination:/queue/foo
+    seq:2
+
+    World
+    ^@
+
+Furthermore, you can configure the `SUBSCRIBE` frame so that the subscription
+only receives messages that have a sequence id that is equal to or greater
+than a requested value by using the `from-seq` header. Example:
+
+    SUBSCRIBE
+    id:mysub
+    destination:/queue/foo
+    from-seq:10
+
+    ^@
+
+If the `from-seq` is set to `-1`, then the subscription will receive messages
+from the tail of the queue. In other words, it will only receive new messages
+sent to the queue.
+
+Note: You can only use the `from-seq` header with normal destinations. If you
+attempt to use it with a wildcard or composite destination then the connection
+will be closed due to invalid usage.
+
+### Using Queue Browsers to Implement Durable Topic Subscriptions
+
+You can use queue browsers with consumer side message sequence tracking to
+achieve the same semantics as durable topics subscriptions but with a better
+performance profile. Since browsers do not delete messages from a queue, when
+you use multiple browsers against one queue you get the same broadcast effects
+that a topic provides.
+
+In this approach the subscribing application keeps track of the last sequence
+number processed from the subscription. The sequence number is typically
+stored as part of the unit of work which is processing the message. The
+subscription can use the default auto acknowledge mode but still get 'once and
+only once' delivery guarantees since:
+
+ * consuming application records the last message sequence that 
+   was processed
+ * message are not deleted when delivered to the subscriber
+ * on restart consuming application continues receiving from the queue
+   for the last sequence that it received.
+
+The `SUBSCRIBE` frame used to create the browser should add the `include-seq`,
+`from-seq`, and `browser-end` headers so that they can resume receiving
+messages from the queue from the last known sequence. If you are starting a
+new consumer that does not have a last processed sequence number, you can
+either set `from-seq` to:
+
+ * `0` to start receiving at the head of the queue which sends
+   the subscription a copy of all the messages that are currently 
+   queued. 
+ * `-1` to start receiving at the tail of the queue which to skips 
+   over all the message that exist in the queue so that the subscription
+   only receives new messages.
+
+Example:
+
+    SUBSCRIBE
+    id:mysub
+    destination:/queue/foo
+    browser:true
+    browser-end:false
+    include-seq:seq
+    from-seq:0
+
+    ^@
+
+Since this approach does not consume the messages from the queue, you should
+either:
+
+* Send messages to the queue with an expiration time so that they are 
+  automatically delete once the expiration time is reached.
+* Periodically run a normal consumer application which can cursor the queue
+  and delete messages are are deemed no longer needed.
+
+### Exclusive Subscriptions
+
+We maintain the order of messages in queues and dispatch them to
+subscriptions in order. However if you have multiple subscriptions consuming
+from the same queue, you will loose the guarantee of processing the messages
+in order; since the messages may be processed concurrently on different
+subscribers.
+
+Sometimes it is important to guarantee the order in which messages are
+processed. e.g. you don't want to process the update to an order until an
+insert has been done; or to go backwards in time, overwriting an newer update
+of an order with an older one etc.
+
+So what folks have to do in clusters is often to only run one consumer
+process in a cluster to avoid loosing the ordering. The problem with this is
+that if that process goes down, no one is processing the queue any more,
+which can be problem.
+
+Apollo supports exclusive subscriptions which avoids the end user
+having to restrict himself to only running one process. The broker will pick
+a single subscription to get all the messages for a queue to ensure ordering.
+If that subscription fails, the broker will auto failover and choose another
+subscription.
+
+An exclusive subscription is created by adding a `exclusive:true` header
+to the `SUBSCRIBE` frame.  Example:
+
+    SUBSCRIBE
+    id:mysub
+    exclusive:true
+    destination:/queue/foo
+
+    ^@
+-->
+
+<h3 id = "Temporary_Destinations">Temporary Destinations</h3>
+
+<p>Temporary destinations are typically used to receive response messages in
+a request/response messaging exchange.  A temporary destination can only
+be consumed by a subscription created on the connection which is associated
+with the temporary destination.  Once the connection is closed, all associated
+temporary destinations are removed.  To create a temporary destination, set the 
+dynamic attribute on a source or target and do not set the address attribute.  Once
+the link is opened, address will be updated to be temporary address that you should
+use when sending messages.</p>
+
+<p>Temporary destination names actually map to normal queues and topics. They just have
+a <code>temp.&lt;broker&#95;id&gt;.&lt;connection&#95;id&gt;.</code> prefix.  Any destination which starts with
+<code>temp.</code> has a security policy which only allows the connection which created it
+to subscribe from it.  These destinations are also auto deleted once the connection
+is closed.</p>
+
+<h3 id = "Destination_Wildcards">Destination Wildcards</h3>
+
+<p>We support destination wildcards to easily subscribe to multiple destinations
+with one subscription. This concept has been popular in financial market data
+for some time as a way of organizing events (such as price changes) into
+hierarchies and to use wildcards for easy subscription of the range of
+information you're interested in.</p>
+
+<ul>
+<li><code>.</code> is used to separate names in a path</li>
+<li><code>*</code> is used to match any name in a path</li>
+<li><code>{regex}</code> is used to match a path name against a regular expression.</li>
+<li><code>**</code> is used to recursively match path names</li>
+</ul>
+
+<p>For example imagine you are sending price messages from a stock exchange feed.
+You might use some kind of destination naming conventions such as:</p>
+
+<ul>
+<li><code>topic://PRICE.STOCK.NASDAQ.IBM</code> to publish IBM's price on NASDAQ and</li>
+<li><code>topic://PRICE.STOCK.NYSE.SUNW</code> to publish Sun's price on the New York Stock Exchange</li>
+</ul>
+
+<p>A subscriber could then use exact destinations to subscribe to exactly the
+prices it requires. Or it could use wildcards to define hierarchical pattern
+matches to the destinations to subscribe from.</p>
+
+<p>For example using the example above, these subscriptions are possible</p>
+
+<ul>
+<li><code>topic://PRICE.**</code> : Any price for any product on any exchange</li>
+<li><code>topic://PRICE.STOCK.**</code> : Any price for a stock on any exchange</li>
+<li><code>topic://PRICE.STOCK.NASDAQ.*</code> : Any stock price on NASDAQ</li>
+<li><code>topic://PRICE.STOCK.*.IBM</code> : Any IBM stock price on any exchange</li>
+<li><code>topic://PRICE.STOCK.*.I*</code> : Any stock price starting with 'I' on any exchange</li>
+<li><code>topic://PRICE.STOCK.*.*{[0-9]}</code> : Any stock price that ends in a digit on any exchange</li>
+</ul>
+
+<p>Destination wildcards can only be used in a SUBSCRIBE frame.</p>
+
+<h3 id = "Composite_Destinations">Composite Destinations</h3>
+
+<p>You can use composite destinations to send or subscribe to multiple
+destinations at one time. You use separator of <code>,</code> between destination
+names.  For example to send one message to 2 queues and 1 topic, you would
+use an address of 'queue://a,queue://b,topic://c'</p>
+
+<h3 id = "Message_Selectors">Message Selectors</h3>
+
+<p>Message selectors allow a receiver to only receive a subset of the
+messages sent to a destination.  The selector acts like a filter which
+is applied against the message properties and only those messages
+which match pass through to the subscription.  </p>
+
+<p>The broker currently only support JMS style selectors.  These selectors
+are defined using SQL 92 syntax.</p>
+
+<p>Here is an example selector:</p>
+
+<pre><code>type = 'car' AND color = 'blue' AND weight &gt; 2500</code></pre>
+
+<p>To use the selector just set filter attribute of the source to a map which contains
+a <code>jms-selector</code> symbol key mapped to your selector string value.</p>
+
+<h3 id = "Destination_Name_Restrictions">Destination Name Restrictions</h3>
+
+<p>Destination names are restricted to using the characters <code>a-z</code>, <code>A-Z</code>, <code>0-9</code>,
+<code>_</code>, <code>-</code> <code>%</code>, <code>~</code>, <code>:</code>, ' ', '(', ')' or <code>.</code> in addition to composite separator <code>,</code> and the wild
+card <code>*</code>.  Any other characters must be UTF-8 and then URL encoded if you wish to 
+preserve their significance.</p>
+
+<p>External Resources: </p>
+
+<ul>
+<li><a href="http://docs.oasis-open.org/amqp/core/v1.0/os/amqp-core-complete-v1.0-os.pdf">AMQP 1.0 Specification</a></li>
+</ul>
+        <div></div>
+      </div>
+    </div>
+  </body>
+</html>

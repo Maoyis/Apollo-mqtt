@@ -1,0 +1,1155 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="http://activemq.apache.org/schema/activemq/apollo" xmlns:tns="http://activemq.apache.org/schema/activemq/apollo" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="access_rule" type="tns:accessRuleDTO"/>
+
+  <xs:element name="aggregate_connection_metrics" type="tns:aggregateConnectionMetricsDTO"/>
+
+  <xs:element name="aggregate_dest_metrics" type="tns:aggregateDestMetricsDTO"/>
+
+  <xs:element name="amqp" type="tns:amqpDTO"/>
+
+  <xs:element name="amqp_connection_status" type="tns:amqpConnectionStatusDTO"/>
+
+  <xs:element name="auto_gc" type="tns:autoGCServiceDTO"/>
+
+  <xs:element name="bdb_store" type="tns:bdbStoreDTO"/>
+
+  <xs:element name="bdb_store_status" type="tns:bdbStoreStatusDTO"/>
+
+  <xs:element name="bridge" type="tns:bridgeDTO"/>
+
+  <xs:element name="broker" type="tns:brokerDTO"/>
+
+  <xs:element name="broker_status" type="tns:brokerStatusDTO"/>
+
+  <xs:element name="browse_page" type="tns:browsePageDTO"/>
+
+  <xs:element name="cluster_service" type="tns:clusterServiceDTO"/>
+
+  <xs:element name="connection_status" type="tns:connection_status_type"/>
+
+  <xs:element name="connector" type="tns:acceptingConnectorDTO"/>
+
+  <xs:element name="connector_status" type="tns:connectorStatusDTO"/>
+
+  <xs:element name="consumer_load" type="tns:consumerLoadDTO"/>
+
+  <xs:element name="data_table" type="tns:dataPageDTO"/>
+
+  <xs:element name="dest_metrics" type="tns:destMetricsDTO"/>
+
+  <xs:element name="destination_load" type="tns:destinationLoadDTO"/>
+
+  <xs:element name="detect" type="tns:detectDTO"/>
+
+  <xs:element name="dsub" type="tns:durableSubscriptionDTO"/>
+
+  <xs:element name="dsub_destination" type="tns:durableSubscriptionDestinationDTO"/>
+
+  <xs:element name="entry_status" type="tns:entryStatusDTO"/>
+
+  <xs:element name="error" type="tns:errorDTO"/>
+
+  <xs:element name="flow_report" type="tns:loadStatusDTO"/>
+
+  <xs:element name="int_metric" type="tns:intMetricDTO"/>
+
+  <xs:element name="jmx" type="tns:jmxDTO"/>
+
+  <xs:element name="jvm_membership" type="tns:jvmMembershipMonitorDTO"/>
+
+  <xs:element name="jvm_metrics" type="tns:jvmMetricsDTO"/>
+
+  <xs:element name="key_storage" type="tns:keyStorageDTO"/>
+
+  <xs:element name="leveldb_store" type="tns:levelDBStoreDTO"/>
+
+  <xs:element name="leveldb_store_status" type="tns:levelDBStoreStatusDTO"/>
+
+  <xs:element name="link" type="tns:linkDTO"/>
+
+  <xs:element name="ll" type="tns:longIdListDTO"/>
+
+  <xs:element name="log_category" type="tns:logCategoryDTO"/>
+
+  <xs:element name="mqtt" type="tns:mqttDTO"/>
+
+  <xs:element name="mqtt_connection_status" type="tns:mqttConnectionStatusDTO"/>
+
+  <xs:element name="network_manager" type="tns:networkManagerDTO"/>
+
+  <xs:element name="null_store" type="tns:nullStoreDTO"/>
+
+  <xs:element name="openwire" type="tns:openwireDTO"/>
+
+  <xs:element name="openwire_connection_status" type="tns:openwireConnectionStatusDTO"/>
+
+  <xs:element name="principal" type="tns:principalDTO"/>
+
+  <xs:element name="protocol" type="tns:protocol_type"/>
+
+  <xs:element name="protocol_filter" type="tns:simpleProtocolFilterDTO"/>
+
+  <xs:element name="queue" type="tns:queueDTO"/>
+
+  <xs:element name="queue_consumer_link" type="tns:queueConsumerLinkDTO"/>
+
+  <xs:element name="queue_destination" type="tns:queueDestinationDTO"/>
+
+  <xs:element name="queue_status" type="tns:queueStatusDTO"/>
+
+  <xs:element name="rule" type="tns:ruleDTO"/>
+
+  <xs:element name="service" type="tns:simpleCustomServiceDTO"/>
+
+  <xs:element name="service_status" type="tns:serviceStatusDTO"/>
+
+  <xs:element name="simple_store_status" type="tns:simpleStoreStatusDTO"/>
+
+  <xs:element name="sl" nillable="true" type="xs:anyType"/>
+
+  <xs:element name="ssl" type="tns:sslDTO"/>
+
+  <xs:element name="stomp" type="tns:stompDTO"/>
+
+  <xs:element name="stomp_connection_status" type="tns:stompConnectionStatusDTO"/>
+
+  <xs:element name="time_metric" type="tns:timeMetricDTO"/>
+
+  <xs:element name="topic" type="tns:topicDTO"/>
+
+  <xs:element name="topic_destination" type="tns:topicDestinationDTO"/>
+
+  <xs:element name="topic_status" type="tns:topicStatusDTO"/>
+
+  <xs:element name="udp" type="tns:udpDTO"/>
+
+  <xs:element name="value" type="tns:valueDTO"/>
+
+  <xs:element name="virtual_host" type="tns:virtualHostDTO"/>
+
+  <xs:element name="virtual_host_status" type="tns:virtualHostStatusDTO"/>
+
+  <xs:element name="zeroconf_membership" type="tns:zeroconfMembershipMonitorDTO"/>
+
+  <xs:complexType name="amqpConnectionStatusDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:connection_status_type">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="connection_status_type">
+    <xs:complexContent>
+      <xs:extension base="tns:serviceStatusDTO">
+        <xs:sequence/>
+        <xs:attribute name="last_read_size" type="xs:long" use="required"/>
+        <xs:attribute name="last_write_size" type="xs:long" use="required"/>
+        <xs:attribute name="read_counter" type="xs:long" use="required"/>
+        <xs:attribute name="write_counter" type="xs:long" use="required"/>
+        <xs:attribute name="messages_sent" type="xs:long" use="required"/>
+        <xs:attribute name="messages_received" type="xs:long" use="required"/>
+        <xs:attribute name="connector" type="xs:string"/>
+        <xs:attribute name="protocol" type="xs:string"/>
+        <xs:attribute name="protocol_version" type="xs:string"/>
+        <xs:attribute name="remote_address" type="xs:string"/>
+        <xs:attribute name="local_address" type="xs:string"/>
+        <xs:attribute name="protocol_session_id" type="xs:string"/>
+        <xs:attribute name="user" type="xs:string"/>
+        <xs:attribute name="waiting_on" type="xs:string"/>
+        <xs:attribute name="subscription_count" type="xs:int" use="required"/>
+        <xs:attribute name="debug" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="serviceStatusDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:stringIdDTO">
+        <xs:sequence/>
+        <xs:attribute name="state" type="xs:string"/>
+        <xs:attribute name="state_since" type="xs:long" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="stringIdDTO" abstract="true">
+    <xs:sequence/>
+    <xs:attribute name="id" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="amqpDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:protocol_type">
+        <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+          <xs:element ref="tns:protocol_filter" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:choice></xs:choice>
+        <xs:attribute name="trace" type="xs:boolean"/>
+        <xs:attribute name="max_frame_size" type="xs:string"/>
+        <xs:attribute name="queue_prefix" type="xs:string"/>
+        <xs:attribute name="topic_prefix" type="xs:string"/>
+        <xs:attribute name="temp_queue_prefix" type="xs:string"/>
+        <xs:attribute name="temp_topic_prefix" type="xs:string"/>
+        <xs:attribute name="destination_separator" type="xs:string"/>
+        <xs:attribute name="path_separator" type="xs:string"/>
+        <xs:attribute name="any_child_wildcard" type="xs:string"/>
+        <xs:attribute name="any_descendant_wildcard" type="xs:string"/>
+        <xs:attribute name="regex_wildcard_start" type="xs:string"/>
+        <xs:attribute name="regex_wildcard_end" type="xs:string"/>
+        <xs:attribute name="die_delay" type="xs:long"/>
+        <xs:attribute name="buffer_size" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="protocol_type">
+    <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+      <xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:choice></xs:choice>
+  </xs:complexType>
+
+  <xs:complexType name="protocol_filter_type" abstract="true">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="bdbStoreDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:store_type">
+        <xs:sequence/>
+        <xs:attribute name="directory" type="xs:string"/>
+        <xs:attribute name="read_threads" type="xs:int"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="store_type" abstract="true">
+    <xs:sequence/>
+    <xs:attribute name="flush_delay" type="xs:long"/>
+  </xs:complexType>
+
+  <xs:complexType name="bdbStoreStatusDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:store_status_type">
+        <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+          <xs:element name="journal_append_latency" type="tns:timeMetricDTO" minOccurs="0"/>
+          <xs:element name="index_update_latency" type="tns:timeMetricDTO" minOccurs="0"/>
+          <xs:element name="message_load_batch_size" type="tns:intMetricDTO" minOccurs="0"/>
+        </xs:choice></xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="store_status_type" abstract="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+      <xs:element name="message_load_latency" type="tns:timeMetricDTO" minOccurs="0"/>
+      <xs:element name="flush_latency" type="tns:timeMetricDTO" minOccurs="0"/>
+      <xs:element name="pending_stores" type="xs:int"/>
+    </xs:choice></xs:choice>
+    <xs:attribute name="state" type="xs:string"/>
+    <xs:attribute name="kind" type="xs:string"/>
+    <xs:attribute name="location" type="xs:string"/>
+    <xs:attribute name="disk_usage" type="xs:long" use="required"/>
+    <xs:attribute name="state_since" type="xs:long" use="required"/>
+    <xs:attribute name="canceled_message_counter" type="xs:long" use="required"/>
+    <xs:attribute name="flushed_message_counter" type="xs:long" use="required"/>
+    <xs:attribute name="canceled_enqueue_counter" type="xs:long" use="required"/>
+    <xs:attribute name="flushed_enqueue_counter" type="xs:long" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="timeMetricDTO">
+    <xs:sequence/>
+    <xs:attribute name="count" type="xs:long" use="required"/>
+    <xs:attribute name="total" type="xs:long" use="required"/>
+    <xs:attribute name="max" type="xs:long" use="required"/>
+    <xs:attribute name="min" type="xs:long" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="intMetricDTO">
+    <xs:sequence/>
+    <xs:attribute name="count" type="xs:int" use="required"/>
+    <xs:attribute name="total" type="xs:int" use="required"/>
+    <xs:attribute name="max" type="xs:int" use="required"/>
+    <xs:attribute name="min" type="xs:int" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="acceptingConnectorDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:connector_type">
+        <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element ref="tns:protocol"/>
+            <xs:element ref="tns:amqp"/>
+            <xs:element ref="tns:detect"/>
+            <xs:element ref="tns:ssl"/>
+            <xs:element ref="tns:udp"/>
+            <xs:element ref="tns:mqtt"/>
+            <xs:element ref="tns:openwire"/>
+            <xs:element ref="tns:stomp"/>
+          </xs:choice>
+        </xs:choice></xs:choice>
+        <xs:attribute name="bind" type="xs:string"/>
+        <xs:attribute name="protocol" type="xs:string"/>
+        <xs:attribute name="receive_buffer_size" type="xs:string"/>
+        <xs:attribute name="send_buffer_size" type="xs:string"/>
+        <xs:attribute name="receive_buffer_auto_tune" type="xs:boolean"/>
+        <xs:attribute name="send_buffer_auto_tune" type="xs:boolean"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="connector_type" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="tns:serviceDTO">
+        <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+          <xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:choice></xs:choice>
+        <xs:attribute name="connection_limit" type="xs:int"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="serviceDTO" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="tns:stringIdDTO">
+        <xs:sequence/>
+        <xs:attribute name="enabled" type="xs:boolean"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="accessRuleDTO">
+    <xs:sequence/>
+    <xs:attribute name="principal_kind" type="xs:string"/>
+    <xs:attribute name="allow" type="xs:string"/>
+    <xs:attribute name="deny" type="xs:string"/>
+    <xs:attribute name="separator" type="xs:string"/>
+    <xs:attribute name="action" type="xs:string"/>
+    <xs:attribute name="kind" type="xs:string"/>
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="connector" type="xs:string"/>
+    <xs:attribute name="id_regex" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="addUserHeaderDTO">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="separator" type="xs:string"/>
+        <xs:attribute name="kind" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="aggregateConnectionMetricsDTO">
+    <xs:sequence/>
+    <xs:attribute name="current_time" type="xs:long" use="required"/>
+    <xs:attribute name="read_counter" type="xs:long" use="required"/>
+    <xs:attribute name="write_counter" type="xs:long" use="required"/>
+    <xs:attribute name="subscription_count" type="xs:long" use="required"/>
+    <xs:attribute name="objects" type="xs:long" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="aggregateDestMetricsDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:destMetricsDTO">
+        <xs:sequence/>
+        <xs:attribute name="objects" type="xs:int" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="destMetricsDTO">
+    <xs:sequence/>
+    <xs:attribute name="current_time" type="xs:long" use="required"/>
+    <xs:attribute name="enqueue_item_counter" type="xs:long" use="required"/>
+    <xs:attribute name="enqueue_size_counter" type="xs:long" use="required"/>
+    <xs:attribute name="enqueue_ts" type="xs:long" use="required"/>
+    <xs:attribute name="dequeue_item_counter" type="xs:long" use="required"/>
+    <xs:attribute name="dequeue_size_counter" type="xs:long" use="required"/>
+    <xs:attribute name="dequeue_ts" type="xs:long" use="required"/>
+    <xs:attribute name="producer_counter" type="xs:long" use="required"/>
+    <xs:attribute name="consumer_counter" type="xs:long" use="required"/>
+    <xs:attribute name="producer_count" type="xs:long" use="required"/>
+    <xs:attribute name="consumer_count" type="xs:long" use="required"/>
+    <xs:attribute name="expired_item_counter" type="xs:long" use="required"/>
+    <xs:attribute name="expired_size_counter" type="xs:long" use="required"/>
+    <xs:attribute name="expired_ts" type="xs:long" use="required"/>
+    <xs:attribute name="nack_item_counter" type="xs:long" use="required"/>
+    <xs:attribute name="nack_size_counter" type="xs:long" use="required"/>
+    <xs:attribute name="nack_ts" type="xs:long" use="required"/>
+    <xs:attribute name="queue_size" type="xs:long" use="required"/>
+    <xs:attribute name="queue_items" type="xs:long" use="required"/>
+    <xs:attribute name="swapped_in_size_max" type="xs:long" use="required"/>
+    <xs:attribute name="swapped_in_size" type="xs:long" use="required"/>
+    <xs:attribute name="swapped_in_items" type="xs:long" use="required"/>
+    <xs:attribute name="swapping_in_size" type="xs:long" use="required"/>
+    <xs:attribute name="swapping_out_size" type="xs:long" use="required"/>
+    <xs:attribute name="swap_out_item_counter" type="xs:long" use="required"/>
+    <xs:attribute name="swap_out_size_counter" type="xs:long" use="required"/>
+    <xs:attribute name="swap_in_item_counter" type="xs:long" use="required"/>
+    <xs:attribute name="swap_in_size_counter" type="xs:long" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="authenticationDTO">
+    <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+      <xs:element name="acl_principal_kind" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="user_principal_kind" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:choice></xs:choice>
+    <xs:attribute name="enabled" type="xs:boolean"/>
+    <xs:attribute name="domain" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="autoGCServiceDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:service_type">
+        <xs:sequence/>
+        <xs:attribute name="interval" type="xs:int"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="service_type" abstract="true">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="brokerDTO">
+    <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+      <xs:element name="notes" type="xs:string" minOccurs="0"/>
+      <xs:element ref="tns:virtual_host" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="tns:connector" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="client_address" type="xs:string" minOccurs="0"/>
+      <xs:element ref="tns:key_storage"/>
+      <xs:element ref="tns:access_rule" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="web_admin" type="tns:webAdminDTO" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="authentication" type="tns:authenticationDTO" minOccurs="0"/>
+      <xs:element ref="tns:log_category" minOccurs="0"/>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="tns:auto_gc"/>
+        <xs:element ref="tns:service"/>
+        <xs:element ref="tns:jmx"/>
+        <xs:element ref="tns:network_manager"/>
+      </xs:choice>
+      <xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:choice></xs:choice>
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="validation" type="xs:string"/>
+    <xs:attribute name="security_factory" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="virtualHostDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:serviceDTO">
+        <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+          <xs:element name="host_name" type="xs:string" maxOccurs="unbounded"/>
+          <xs:choice>
+            <xs:element ref="tns:bdb_store"/>
+            <xs:element ref="tns:null_store"/>
+            <xs:element ref="tns:leveldb_store"/>
+          </xs:choice>
+          <xs:element ref="tns:access_rule" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="tns:topic" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="tns:queue" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="tns:dsub" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="authentication" type="tns:authenticationDTO" minOccurs="0"/>
+          <xs:element ref="tns:log_category" minOccurs="0"/>
+          <xs:element name="heap_bypass" type="xs:string" minOccurs="0"/>
+          <xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:choice></xs:choice>
+        <xs:attribute name="auto_create_destinations" type="xs:boolean"/>
+        <xs:attribute name="purge_on_startup" type="xs:boolean"/>
+        <xs:attribute name="regroup_connections" type="xs:boolean"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="topicDTO">
+    <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+      <xs:element name="subscription" type="tns:queueSettingsDTO" minOccurs="0"/>
+      <xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:choice></xs:choice>
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="auto_delete_after" type="xs:int"/>
+    <xs:attribute name="slow_consumer_policy" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="queueSettingsDTO">
+    <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+      <xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:choice></xs:choice>
+    <xs:attribute name="tail_buffer" type="xs:string"/>
+    <xs:attribute name="persistent" type="xs:boolean"/>
+    <xs:attribute name="round_robin" type="xs:boolean"/>
+    <xs:attribute name="message_group_graceful_handoff" type="xs:boolean"/>
+    <xs:attribute name="swap" type="xs:boolean"/>
+    <xs:attribute name="swap_range_size" type="xs:int"/>
+    <xs:attribute name="quota" type="xs:string"/>
+    <xs:attribute name="quota_messages" type="xs:long"/>
+    <xs:attribute name="full_policy" type="xs:string"/>
+    <xs:attribute name="fast_delivery_rate" type="xs:string"/>
+    <xs:attribute name="catchup_enqueue_rate" type="xs:string"/>
+    <xs:attribute name="max_enqueue_rate" type="xs:string"/>
+    <xs:attribute name="dlq" type="xs:string"/>
+    <xs:attribute name="nak_limit" type="xs:int"/>
+    <xs:attribute name="dlq_expired" type="xs:boolean"/>
+  </xs:complexType>
+
+  <xs:complexType name="queueDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:queueSettingsDTO">
+        <xs:sequence/>
+        <xs:attribute name="id" type="xs:string"/>
+        <xs:attribute name="auto_delete_after" type="xs:int"/>
+        <xs:attribute name="mirrored" type="xs:boolean"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="durableSubscriptionDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:queueDTO">
+        <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+          <xs:element name="topic" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:choice></xs:choice>
+        <xs:attribute name="id_regex" type="xs:string"/>
+        <xs:attribute name="topic" type="xs:string"/>
+        <xs:attribute name="selector" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="logCategoryDTO">
+    <xs:sequence/>
+    <xs:attribute name="console" type="xs:string"/>
+    <xs:attribute name="audit" type="xs:string"/>
+    <xs:attribute name="connection" type="xs:string"/>
+    <xs:attribute name="security" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="keyStorageDTO">
+    <xs:sequence/>
+    <xs:attribute name="file" type="xs:string"/>
+    <xs:attribute name="password" type="xs:string"/>
+    <xs:attribute name="key_alias" type="xs:string"/>
+    <xs:attribute name="key_password" type="xs:string"/>
+    <xs:attribute name="store_type" type="xs:string"/>
+    <xs:attribute name="trust_algorithm" type="xs:string"/>
+    <xs:attribute name="key_algorithm" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="webAdminDTO">
+    <xs:sequence/>
+    <xs:attribute name="bind" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="brokerStatusDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:serviceStatusDTO">
+        <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+          <xs:element name="home_location" type="xs:string" minOccurs="0"/>
+          <xs:element name="base_location" type="xs:string" minOccurs="0"/>
+          <xs:element ref="tns:jvm_metrics" minOccurs="0"/>
+          <xs:element name="virtual_host" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="connector" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="connection" type="tns:longIdLabeledDTO" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:choice></xs:choice>
+        <xs:attribute name="version" type="xs:string"/>
+        <xs:attribute name="current_time" type="xs:long" use="required"/>
+        <xs:attribute name="connection_counter" type="xs:long" use="required"/>
+        <xs:attribute name="connected" type="xs:long" use="required"/>
+        <xs:attribute name="messages_sent" type="xs:long" use="required"/>
+        <xs:attribute name="messages_received" type="xs:long" use="required"/>
+        <xs:attribute name="read_counter" type="xs:long" use="required"/>
+        <xs:attribute name="write_counter" type="xs:long" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="jvmMetricsDTO">
+    <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+      <xs:element name="heap_memory" type="tns:memoryMetricsDTO" minOccurs="0"/>
+      <xs:element name="non_heap_memory" type="tns:memoryMetricsDTO" minOccurs="0"/>
+    </xs:choice></xs:choice>
+    <xs:attribute name="classes_loaded" type="xs:int" use="required"/>
+    <xs:attribute name="classes_unloaded" type="xs:long" use="required"/>
+    <xs:attribute name="threads_current" type="xs:int" use="required"/>
+    <xs:attribute name="threads_peak" type="xs:int" use="required"/>
+    <xs:attribute name="os_arch" type="xs:string"/>
+    <xs:attribute name="os_name" type="xs:string"/>
+    <xs:attribute name="os_memory_total" type="xs:long" use="required"/>
+    <xs:attribute name="os_memory_free" type="xs:long" use="required"/>
+    <xs:attribute name="os_swap_total" type="xs:long" use="required"/>
+    <xs:attribute name="os_swap_free" type="xs:long" use="required"/>
+    <xs:attribute name="os_fd_open" type="xs:long" use="required"/>
+    <xs:attribute name="os_fd_max" type="xs:long" use="required"/>
+    <xs:attribute name="os_load_average" type="xs:double" use="required"/>
+    <xs:attribute name="os_cpu_time" type="xs:long" use="required"/>
+    <xs:attribute name="os_processors" type="xs:int" use="required"/>
+    <xs:attribute name="runtime_name" type="xs:string"/>
+    <xs:attribute name="jvm_name" type="xs:string"/>
+    <xs:attribute name="uptime" type="xs:long" use="required"/>
+    <xs:attribute name="start_time" type="xs:long" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="memoryMetricsDTO">
+    <xs:sequence/>
+    <xs:attribute name="used" type="xs:long" use="required"/>
+    <xs:attribute name="alloc" type="xs:long" use="required"/>
+    <xs:attribute name="max" type="xs:long" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="longIdLabeledDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:longIdDTO">
+        <xs:sequence/>
+        <xs:attribute name="label" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="longIdDTO">
+    <xs:sequence/>
+    <xs:attribute name="id" type="xs:long" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="browsePageDTO">
+    <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+      <xs:element name="messages" type="tns:messageStatusDTO" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:choice></xs:choice>
+    <xs:attribute name="first_seq" type="xs:long" use="required"/>
+    <xs:attribute name="last_seq" type="xs:long" use="required"/>
+    <xs:attribute name="total_messages" type="xs:long" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="messageStatusDTO">
+    <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+      <xs:element name="entry" type="tns:entryStatusDTO" minOccurs="0"/>
+      <xs:element name="expiration" type="xs:long"/>
+      <xs:element name="persistent" type="xs:boolean"/>
+      <xs:element name="codec" type="xs:string" minOccurs="0"/>
+      <xs:element name="headers">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+            <xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+              <xs:complexType>
+                <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+                  <xs:element name="key" minOccurs="0" type="xs:string"/>
+                  <xs:element name="value" minOccurs="0" type="xs:anyType"/>
+                </xs:choice></xs:choice>
+              </xs:complexType>
+            </xs:element>
+          </xs:choice></xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="base64_body" type="xs:string" minOccurs="0"/>
+      <xs:element name="body_truncated" type="xs:boolean"/>
+    </xs:choice></xs:choice>
+  </xs:complexType>
+
+  <xs:complexType name="entryStatusDTO">
+    <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+      <xs:element name="acquirer" type="tns:queueConsumerLinkDTO" minOccurs="0"/>
+    </xs:choice></xs:choice>
+    <xs:attribute name="seq" type="xs:long" use="required"/>
+    <xs:attribute name="count" type="xs:int" use="required"/>
+    <xs:attribute name="size" type="xs:int" use="required"/>
+    <xs:attribute name="state" type="xs:string"/>
+    <xs:attribute name="consumer_count" type="xs:int" use="required"/>
+    <xs:attribute name="is_prefetched" type="xs:boolean" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="queueConsumerLinkDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:linkDTO">
+        <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+          <xs:element name="position" type="xs:long" minOccurs="0"/>
+          <xs:element name="acquired_count" type="xs:int" minOccurs="0"/>
+          <xs:element name="acquired_size" type="xs:long" minOccurs="0"/>
+          <xs:element name="total_ack_count" type="xs:long" minOccurs="0"/>
+          <xs:element name="total_nack_count" type="xs:long" minOccurs="0"/>
+          <xs:element name="ack_item_rate" type="xs:double" minOccurs="0"/>
+          <xs:element name="ack_size_rate" type="xs:double" minOccurs="0"/>
+        </xs:choice></xs:choice>
+        <xs:attribute name="waiting_on" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="linkDTO">
+    <xs:sequence/>
+    <xs:attribute name="kind" type="xs:string"/>
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="label" type="xs:string"/>
+    <xs:attribute name="enqueue_item_counter" type="xs:long" use="required"/>
+    <xs:attribute name="enqueue_size_counter" type="xs:long" use="required"/>
+    <xs:attribute name="enqueue_tsr" type="xs:long" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="connectorStatusDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:serviceStatusDTO">
+        <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+          <xs:element name="connection" type="tns:longIdLabeledDTO" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:choice></xs:choice>
+        <xs:attribute name="local_address" type="xs:string"/>
+        <xs:attribute name="protocol" type="xs:string"/>
+        <xs:attribute name="connection_counter" type="xs:long" use="required"/>
+        <xs:attribute name="connected" type="xs:long" use="required"/>
+        <xs:attribute name="messages_sent" type="xs:long" use="required"/>
+        <xs:attribute name="messages_received" type="xs:long" use="required"/>
+        <xs:attribute name="read_counter" type="xs:long" use="required"/>
+        <xs:attribute name="write_counter" type="xs:long" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="dataPageDTO">
+    <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+      <xs:element name="header" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="row" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:choice></xs:choice>
+    <xs:attribute name="page" type="xs:int" use="required"/>
+    <xs:attribute name="page_size" type="xs:int" use="required"/>
+    <xs:attribute name="total_pages" type="xs:int" use="required"/>
+    <xs:attribute name="total_rows" type="xs:long" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="destination" abstract="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+      <xs:element name="path" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:choice></xs:choice>
+    <xs:attribute name="name" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="queueDestinationDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:destination">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="durableSubscriptionDestinationDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:destination">
+        <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+          <xs:element name="topic" type="tns:topicDestinationDTO" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:choice></xs:choice>
+        <xs:attribute name="selector" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="topicDestinationDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:destination">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="detectDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:protocol_type">
+        <xs:sequence/>
+        <xs:attribute name="timeout" type="xs:long"/>
+        <xs:attribute name="protocols" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="errorDTO">
+    <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+      <xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:choice></xs:choice>
+    <xs:attribute name="code" type="xs:string"/>
+    <xs:attribute name="message" type="xs:string"/>
+    <xs:attribute name="resource" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="longIdListDTO">
+    <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+      <xs:element name="item" type="tns:longIdLabeledDTO" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:choice></xs:choice>
+  </xs:complexType>
+
+  <xs:complexType name="nullStoreDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:store_type">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="principalDTO">
+    <xs:sequence/>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="kind" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="queueStatusDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:serviceStatusDTO">
+        <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+          <xs:element name="config" type="tns:queueSettingsDTO" minOccurs="0"/>
+          <xs:element name="binding" type="tns:destination" minOccurs="0"/>
+          <xs:element name="metrics" type="tns:destMetricsDTO" minOccurs="0"/>
+          <xs:element name="entry" type="tns:entryStatusDTO" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="producer" type="tns:linkDTO" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="consumer" type="tns:queueConsumerLinkDTO" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:choice></xs:choice>
+        <xs:attribute name="max_enqueue_rate" type="xs:int"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="security_type" abstract="true">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="simpleCustomServiceDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:service_type">
+        <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+          <xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:choice></xs:choice>
+        <xs:attribute name="id" type="xs:string"/>
+        <xs:attribute name="kind" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="simpleProtocolFilterDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:protocol_filter_type">
+        <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+          <xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:choice></xs:choice>
+        <xs:attribute name="kind" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="simpleStoreStatusDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:store_status_type">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="sslDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:protocol_type">
+        <xs:sequence/>
+        <xs:attribute name="client_auth" type="xs:string"/>
+        <xs:attribute name="version" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="stringIdLabeledDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:stringIdDTO">
+        <xs:sequence/>
+        <xs:attribute name="label" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="stringIdListDTO">
+    <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+      <xs:element name="item" type="tns:stringIdLabeledDTO" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:choice></xs:choice>
+  </xs:complexType>
+
+  <xs:complexType name="stringListDTO">
+    <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+      <xs:element name="item" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:choice></xs:choice>
+  </xs:complexType>
+
+  <xs:complexType name="topicStatusDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:serviceStatusDTO">
+        <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+          <xs:element name="config" type="tns:topicDTO" minOccurs="0"/>
+          <xs:element name="retained" type="xs:long"/>
+          <xs:element name="producer" type="tns:linkDTO" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="consumer" type="tns:linkDTO" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="dsub" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="metrics" type="tns:destMetricsDTO" minOccurs="0"/>
+        </xs:choice></xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="udpDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:protocol_type">
+        <xs:sequence/>
+        <xs:attribute name="buffer_size" type="xs:string"/>
+        <xs:attribute name="topic" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:simpleType name="valueDTO">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:complexType name="virtualHostStatusDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:serviceStatusDTO">
+        <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+          <xs:element name="topic" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="queue" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="dsub" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="host_names" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:choice></xs:choice>
+        <xs:attribute name="store" type="xs:boolean" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="jmxDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:service_type">
+        <xs:sequence/>
+        <xs:attribute name="enabled" type="xs:boolean"/>
+        <xs:attribute name="admin_url" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="levelDBStoreDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:store_type">
+        <xs:sequence/>
+        <xs:attribute name="directory" type="xs:string"/>
+        <xs:attribute name="read_threads" type="xs:int"/>
+        <xs:attribute name="sync" type="xs:boolean"/>
+        <xs:attribute name="paranoid_checks" type="xs:boolean"/>
+        <xs:attribute name="fail_if_locked" type="xs:boolean"/>
+        <xs:attribute name="verify_checksums" type="xs:boolean"/>
+        <xs:attribute name="log_size" type="xs:string"/>
+        <xs:attribute name="index_max_open_files" type="xs:int"/>
+        <xs:attribute name="index_block_restart_interval" type="xs:int"/>
+        <xs:attribute name="index_write_buffer_size" type="xs:string"/>
+        <xs:attribute name="index_block_size" type="xs:string"/>
+        <xs:attribute name="index_cache_size" type="xs:string"/>
+        <xs:attribute name="index_compression" type="xs:string"/>
+        <xs:attribute name="log_compression" type="xs:string"/>
+        <xs:attribute name="index_factory" type="xs:string"/>
+        <xs:attribute name="auto_compaction_ratio" type="xs:int"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="levelDBStoreStatusDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:store_status_type">
+        <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+          <xs:element name="journal_append_latency" type="tns:timeMetricDTO" minOccurs="0"/>
+          <xs:element name="index_update_latency" type="tns:timeMetricDTO" minOccurs="0"/>
+          <xs:element name="message_load_batch_size" type="tns:intMetricDTO" minOccurs="0"/>
+          <xs:element name="leveldb_stats" type="xs:string" minOccurs="0"/>
+          <xs:element name="last_checkpoint_pos" type="xs:long"/>
+          <xs:element name="last_append_pos" type="xs:long"/>
+          <xs:element name="log_stats" type="xs:string" minOccurs="0"/>
+        </xs:choice></xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="mqttConnectionStatusDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:connection_status_type">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="mqttDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:protocol_type">
+        <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+          <xs:element ref="tns:protocol_filter" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:choice></xs:choice>
+        <xs:attribute name="max_message_length" type="xs:int"/>
+        <xs:attribute name="queue_prefix" type="xs:string"/>
+        <xs:attribute name="path_separator" type="xs:string"/>
+        <xs:attribute name="any_child_wildcard" type="xs:string"/>
+        <xs:attribute name="any_descendant_wildcard" type="xs:string"/>
+        <xs:attribute name="regex_wildcard_start" type="xs:string"/>
+        <xs:attribute name="regex_wildcard_end" type="xs:string"/>
+        <xs:attribute name="part_pattern" type="xs:string"/>
+        <xs:attribute name="die_delay" type="xs:long"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="bridgeDTO">
+    <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+      <xs:element ref="tns:rule" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:choice></xs:choice>
+  </xs:complexType>
+
+  <xs:complexType name="ruleDTO">
+    <xs:sequence/>
+    <xs:attribute name="include" type="xs:string"/>
+    <xs:attribute name="exclude" type="xs:string"/>
+    <xs:attribute name="kind" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="clusterMemberDTO">
+    <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+      <xs:element name="service" type="tns:clusterServiceDTO" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:choice></xs:choice>
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="cluster" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="clusterServiceDTO">
+    <xs:sequence/>
+    <xs:attribute name="kind" type="xs:string"/>
+    <xs:attribute name="address" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="consumerLoadDTO">
+    <xs:sequence/>
+    <xs:attribute name="user" type="xs:string"/>
+    <xs:attribute name="selector" type="xs:string"/>
+    <xs:attribute name="ack_item_rate" type="xs:double"/>
+    <xs:attribute name="ack_size_rate" type="xs:double"/>
+  </xs:complexType>
+
+  <xs:complexType name="destinationLoadDTO">
+    <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+      <xs:element name="consumer" type="tns:consumerLoadDTO" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:choice></xs:choice>
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="message_count" type="xs:long"/>
+    <xs:attribute name="message_size" type="xs:long"/>
+    <xs:attribute name="message_count_enqueue_counter" type="xs:long"/>
+    <xs:attribute name="message_size_enqueue_counter" type="xs:long"/>
+    <xs:attribute name="message_count_dequeue_counter" type="xs:long"/>
+    <xs:attribute name="message_size_dequeue_counter" type="xs:long"/>
+  </xs:complexType>
+
+  <xs:complexType name="jvmMembershipMonitorDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:membership_monitor_type">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="membership_monitor_type" abstract="true">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="loadStatusDTO">
+    <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+      <xs:element name="queue" type="tns:destinationLoadDTO" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="topic" type="tns:destinationLoadDTO" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:choice></xs:choice>
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="timestamp" type="xs:long" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="networkManagerDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:service_type">
+        <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+          <xs:element name="self" type="tns:clusterMemberDTO" minOccurs="0"/>
+          <xs:element name="member" type="tns:clusterMemberDTO" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element ref="tns:jvm_membership"/>
+            <xs:element ref="tns:zeroconf_membership"/>
+          </xs:choice>
+        </xs:choice></xs:choice>
+        <xs:attribute name="user" type="xs:string"/>
+        <xs:attribute name="password" type="xs:string"/>
+        <xs:attribute name="duplex" type="xs:boolean"/>
+        <xs:attribute name="monitoring_interval" type="xs:int"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="zeroconfMembershipMonitorDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:membership_monitor_type">
+        <xs:sequence/>
+        <xs:attribute name="address" type="xs:string"/>
+        <xs:attribute name="group" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="openwireConnectionStatusDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:connection_status_type">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="openwireDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:protocol_type">
+        <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+          <xs:element name="version" type="xs:int" minOccurs="0"/>
+        </xs:choice></xs:choice>
+        <xs:attribute name="stack_trace" type="xs:boolean"/>
+        <xs:attribute name="cache" type="xs:boolean"/>
+        <xs:attribute name="cache_size" type="xs:int"/>
+        <xs:attribute name="tight_encoding" type="xs:boolean"/>
+        <xs:attribute name="tcp_no_delay" type="xs:boolean"/>
+        <xs:attribute name="max_inactivity_duration" type="xs:long"/>
+        <xs:attribute name="max_inactivity_duration_initial_delay" type="xs:long"/>
+        <xs:attribute name="max_frame_size" type="xs:long"/>
+        <xs:attribute name="buffer_size" type="xs:string"/>
+        <xs:attribute name="add_jmsxuserid" type="xs:boolean"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="stompConnectionStatusDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:connection_status_type">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="stompDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:protocol_type">
+        <xs:choice minOccurs="0" maxOccurs="unbounded"><xs:choice>
+          <xs:element name="add_user_header" type="tns:addUserHeaderDTO" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="tns:protocol_filter" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:choice></xs:choice>
+        <xs:attribute name="add_user_header" type="xs:string"/>
+        <xs:attribute name="add_timestamp_header" type="xs:string"/>
+        <xs:attribute name="add_redeliveries_header" type="xs:string"/>
+        <xs:attribute name="max_header_length" type="xs:string"/>
+        <xs:attribute name="max_headers" type="xs:int"/>
+        <xs:attribute name="max_data_length" type="xs:string"/>
+        <xs:attribute name="queue_prefix" type="xs:string"/>
+        <xs:attribute name="topic_prefix" type="xs:string"/>
+        <xs:attribute name="temp_queue_prefix" type="xs:string"/>
+        <xs:attribute name="temp_topic_prefix" type="xs:string"/>
+        <xs:attribute name="destination_separator" type="xs:string"/>
+        <xs:attribute name="path_separator" type="xs:string"/>
+        <xs:attribute name="any_child_wildcard" type="xs:string"/>
+        <xs:attribute name="any_descendant_wildcard" type="xs:string"/>
+        <xs:attribute name="regex_wildcard_start" type="xs:string"/>
+        <xs:attribute name="regex_wildcard_end" type="xs:string"/>
+        <xs:attribute name="die_delay" type="xs:long"/>
+        <xs:attribute name="buffer_size" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>
+

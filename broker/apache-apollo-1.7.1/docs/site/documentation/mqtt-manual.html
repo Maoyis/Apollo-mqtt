@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd"> 
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  Architecture
+-->
+<html lang="en">
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta content="ActiveMQ's next generation of messaging" name="description"/>
+    <meta content="messaging,stomp,jms,activemq,apollo" name="keywords"/>
+    <meta content="Apollo" name="author"/>
+    <script src="../scripts/jquery.js"></script>
+    <link type="text/css" rel="stylesheet" href="../styles/impact/css/pygmentize.css"/>
+    <link type="text/css" rel="stylesheet" href="../styles/impact/css/site.css"/>
+    <title></title>
+  </head>
+  <body>
+    <div id="navigation">
+      <div class="wrapper">
+<ul>
+<li><a href="../index.html">Apollo 1.7.1</a></li>
+<li><a href="../community/developers.html">Developers</a></li>
+<li><a href="../community/index.html">Community</a></li>
+<li><a href="../download.html">Download</a></li>
+</ul>        <div></div>
+      </div>
+    </div>
+    <div id="content">
+      <div class="wrapper">
+<h1 id = "Apollo_1_7_1_MQTT_Protocol_Manual">Apollo 1.7.1 MQTT Protocol Manual</h1>
+
+<p><div class="toc"><ul style="list-style:none;">
+  <li><a href="#The_MQTT_Protocol">The MQTT Protocol</a></li>
+  <li><ul style="list-style:none;">
+    <li><a href="#MQTT_Protocol_Options">MQTT Protocol Options</a></li>
+    <li><a href="#Client_Libraries">Client Libraries</a></li>
+    <li><a href="#Connecting">Connecting</a></li>
+    <li><a href="#Destination_Types">Destination Types</a></li>
+    <li><a href="#Clean_Sessions">Clean Sessions</a></li>
+    <li><a href="#Topic_Retained_Messages">Topic Retained Messages</a></li>
+    <li><a href="#Last_Will_and_Testament_Message">Last Will and Testament Message</a></li>
+    <li><a href="#Reliable_Messaging">Reliable Messaging</a></li>
+    <li><ul style="list-style:none;">
+      <li><a href="#At_Most_Once">At Most Once</a></li>
+      <li><a href="#At_Least_Once">At Least Once</a></li>
+      <li><a href="#Exactly_Once">Exactly Once</a></li>
+    </ul></li>
+    <li><a href="#Wildcard_Subscriptions">Wildcard Subscriptions</a></li>
+    <li><a href="#Keep_Alive">Keep Alive</a></li>
+    <li><a href="#Destination_Name_Restrictions">Destination Name Restrictions</a></li>
+  </ul></li>
+</ul></div></p>
+
+<h2 id = "The_MQTT_Protocol">The MQTT Protocol</h2>
+
+<p>Apollo allows clients to connect using the MQTT which is an open-source protocol specification
+intended for limited-resource devices on unreliable networks using a publish-subscribe domain.
+These types of devices usually require a small footprint and are not well suited for text-based protocols such as
+HTTP or STOMP or even traditional binary protocols such as Openwire or AMQP. MQTT is a compact binary protocol that
+is optimized for these types of limited devices and unreliable networks.</p>
+
+<p>In previous releases, MQTT was supported in Apollo as a separate plugin. As of now, that plugin has become part
+of the main development trunk and MQTT support is available out of the box without any other configuration or
+packaging of third-party plugins.</p>
+
+<p>Since MQTT is a wire-level protocol, any client that implements the protocol should be able to connect to Apollo
+and also interoperate with other MQTT-compatibe message brokers.</p>
+
+<p>To learn more about the details of MQTT, see <a href="http://public.dhe.ibm.com/software/dw/webservices/ws-mqtt/mqtt-v3r1.html">the MQTT Specification</a></p>
+
+<h3 id = "MQTT_Protocol_Options">MQTT Protocol Options</h3>
+
+<p>To start using the MQTT protocol, use a valid MQTT v3.1 client and connect to the port on which Apollo is listening.
+Apollo will do protocol detection and will automatically recognize the MQTT payloads and treat the connection
+as an MQTT connection. You don't have to open a special port for MQTT (or STOMP, Openwire, AMQP, etc. they can
+all be auto-detected). To force specific protocols over a certain connector there are two ways you can do this.
+You can choose to not use protocol detection at all and set the connector to be specifically for mqtt:</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+&lt;connector id=&quot;tcp&quot; bind=&quot;tcp://0.0.0.0:61613&quot; protocol=&quot;mqtt&quot;/&gt;
+</code></pre></div>
+
+<p>Alternatively, you can limit which protocols can be &ldquo;detected&rdquo; using the <code>&lt;detect&gt;</code> configuration element like this:</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+&lt;connector id=&quot;tcp&quot; bind=&quot;tcp://0.0.0.0:61613&quot;&gt;
+  &lt;detect protocols=&quot;mqtt openwire&quot; /&gt;
+&lt;/connector&gt;
+</code></pre></div>
+
+<p>The <code>protocols</code> attribute in the <code>&lt;detect&gt;</code> element takes space delimited protoco values.
+The <code>protocol</code> attribtue of the <code>&lt;connector&gt;</code> element takes a single protocol, not space delimited. It defaults to
+<code>any</code></p>
+
+<p>If you wish to tune the MQTT defaults, you can use the <code>mqtt</code> configuration element within the <code>connector</code> element
+in the <code>apollo.xml</code> configuration file :</p>
+
+<div class="syntax"><pre name='code' class='brush: xml; gutter: false;'><code>
+&lt;connector id=&quot;tcp&quot; bind=&quot;tcp://0.0.0.0:61613&quot;&gt;
+  &lt;mqtt max_message_length=&quot;1000&quot; /&gt;
+&lt;/connector&gt;
+</code></pre></div>
+
+<p>The <code>mqtt</code> element supports the following configuration attributes:</p>
+
+<ul>
+<li><code>max_message_length</code> : The size (in bytes) of the largest message that can be sent to the broker. Defaults to 100MB</li>
+<li><code>protocol_filters</code> : A filter which can filter frames being sent/received to and from a client.  It can modify the frame or even drop it.</li>
+<li><code>die_delay</code> : How long after a connection is deemed to be &ldquo;dead&rdquo; before the connection actually closes; default: 5000ms</li>
+</ul>
+
+<p>The mqtt configuration element can also be used to control how the destination
+headers are parsed and interpreted.  The supported attributes are:</p>
+
+<ul>
+<li><code>queue_prefix</code> : a tag used to identify destination types; default: null</li>
+<li><code>path_separator</code> : used to separate segments in a destination name; default: <code>/</code></li>
+<li><code>any_child_wildcard</code> : indicate all child-level destinations that match the wildcard; default: <code>+</code></li>
+<li><code>any_descendant_wildcard</code> : indicate destinations that match the wildcard recursively; default: <code>#</code></li>
+<li><code>regex_wildcard_start</code> : pattern used to identify the start of a regex</li>
+<li><code>regex_wildcard_end</code> : pattern used to identify the end of a regex</li>
+<li><code>part_pattern</code> : allows you to specify a regex that constrains the naming of topics. default: <code>[ a-zA-Z0-9\_\-\%\~\:\(\)]+</code></li>
+</ul>
+
+<h3 id = "Client_Libraries">Client Libraries</h3>
+
+<p>Apollo supports v3.1 of the MQTT protocol. The following clients will work:</p>
+
+<ul>
+<li>Java : <a href="https://github.com/fusesource/mqtt-client">mqtt-client</a>, <a href="https://github.com/AlbinTheander/MeQanTT">MeQanTT</a></li>
+<li>C : <a href="http://mosquitto.org/man/libmosquitto-3.html">libmosquitto</a></li>
+<li>Erlang : <a href="https://github.com/squaremo/erlmqtt">erlmqtt</a>, <a href="http://code.google.com/p/my-mqtt4erl/">my-mqtt4erl</a></li>
+<li>.NET : <a href="http://sourceforge.net/projects/mqttdotnet/">MQTTDotNet</a>, <a href="https://github.com/markallanson/nmqtt">nMQTT</a></li>
+<li>Perl : <a href="https://github.com/beanz/net-mqtt-perl">net-mqtt-perl</a>, [anyevent-mqtt-perl]https://github.com/beanz/anyevent-mqtt-perl()</li>
+<li>Python : <a href="https://github.com/iwanbk/nyamuk">nyamuk</a></li>
+<li>Ruby : <a href="https://github.com/njh/ruby-mqtt">mqtt-ruby</a>, <a href="https://rubygems.org/gems/em-mqtt">ruby-em-mqtt</a></li>
+<li>Javascript : <a href="http://ceit.uq.edu.au/content/simple-mqtt-cient-nodejs">Node.js MQTT Client</a></li>
+<li>Delphi : <a href="http://jamiei.com/blog/code/mqtt-client-library-for-delphi/">TMQTTCLient</a></li>
+<li>Device specific: <a href="http://knolleary.net/arduino-client-for-mqtt/">Arduino</a>, <a href="http://ceit.uq.edu.au/content/mqttclient-mbed-version-20">mbed</a>, <a href="http://github.com/njh/NanodeMQTT/">Nanode</a>, Netduino</li>
+</ul>
+
+<p>To see an up-to-date listing of client libraries, please
+<a href="http://mqtt.org/software">the MQTT website for its software</a> listings</p>
+
+<p>The Apollo distribution ships with an <code>examples</code> directory
+where you can find some simple examples of how to use some of those
+clients to send and receive messages from a broker instance.</p>
+
+<h3 id = "Connecting">Connecting</h3>
+
+<p>The default broker configuration secures access to the broker so that only
+the <code>admin</code> user can connect.  The default password for the <code>admin</code> user
+is <code>password</code>.</p>
+
+<p>MQTT clients cannot specify a Virtual Host (see <a href="user-manual.html#Virtual&#95;Hosts">the section on Virtual Hosts in the user guide</a>)
+so the default virtual host will be used. This is usually the first Virtual Host defined in the Apollo.xml configuration
+file.</p>
+
+<h3 id = "Destination_Types">Destination Types</h3>
+
+<p>The MQTT protocol is a publish/subscribe protocol. It does not permit true point-to-point messaging
+achieved using Queues. Therefore Apollo allows only the use of Topics for MQTT messaging.
+The concept of a subscription and durable subscription to Topics is similar to what you'd find in
+other protocols and is controlled by the MQTT CONNECT frame's <code>clean session</code> attribute.</p>
+
+<h3 id = "Clean_Sessions">Clean Sessions</h3>
+
+<p>When a client sends a connect frame with the <code>clean session</code> flag set to cleared (false), any previously used session with
+the same client_id will be re-used. This means while the client was away, that subscription could have received
+messages. This is the equivalent of a durable subscription in Apollo.</p>
+
+<p>If the <code>clean session</code> flag is set (true), then a new session will be started and any sessions tha may have been
+lingering would be removed. This is equivalent to a normal topic subscription in Apollo.</p>
+
+<h3 id = "Topic_Retained_Messages">Topic Retained Messages</h3>
+
+<p>If a message has been published with the retain flag set, then
+the message will be 'remembered' by the topic so that if a new
+subscription arrives, the last retained message is sent
+to the subscription.  For example if you're publishing
+measurements and you want the last mesasurement published to
+always be available to a client that subscribes to the topic,
+you can set the retain flag on the PUBLISH frame.</p>
+
+<p>Note: retained messages are not retained between broker restarts for
+Quality of Service setting of AT MOST ONCE (QoS=0).</p>
+
+<h3 id = "Last_Will_and_Testament_Message">Last Will and Testament Message</h3>
+
+<p>You can set a <code>will</code> message and assocaited QoS for the message when a client
+first connects to Apollo. The will message is basically a message that
+will only get sent if there is an unexpected error with the connection and it must be dropped.
+This can be useful in situations where you have devices that could drop but
+when they do, you want to know. So if a medical sensor client drops from the broker,
+a will message could be sent to an &ldquo;alarm&rdquo; Topic and handled by the system as
+a high-priority alert.</p>
+
+<h3 id = "Reliable_Messaging">Reliable Messaging</h3>
+
+<p>MQTT allows a client to publish a message with the following Quality of Service parameters (QoS):</p>
+
+<ul>
+<li>At Most Once (QoS=0)</li>
+<li>At Least Once (QoS=1)</li>
+<li>Exactly Once (QoS=2)</li>
+</ul>
+
+<h4 id = "At_Most_Once">At Most Once</h4>
+
+<p>This QoS will attempt to deliver the message to a client, but it will
+have the lowest reliability of the three options. If you publish
+with a QoS=0, At Most Once, then the broker will not send back an Ack
+saying it received the message, nor will it retry if the broker fails.
+This QoS is most similar to non-persistent messages in, for example, JMS.</p>
+
+<h4 id = "At_Least_Once">At Least Once</h4>
+
+<p>This QoS setting will ensure that the message is delivered at least once to
+clients. When publishing with this setting, Apollo will send back
+a PUBACK frame which acknowledges that the broker has received the message
+and has taken &ldquo;ownership&rdquo; for delivering the message. If the client that
+published the message with QoS=1 does not recieve the PUBACK in a specified
+period of time, the client may wish to re-publish the message again with the
+DUP flag set on the PUBLISH frame. It's possible the broker received the
+first attempt to publish the message and subsequently published it to
+listening clients. So if the PUBACK got lost somehwere and the client
+sends the message again, there will be no duplicate detection, and the
+broker will send the message again to the topic's subscribers.</p>
+
+<h4 id = "Exactly_Once">Exactly Once</h4>
+
+<p>This QoS is the strongest level of reliability afforded by the MQTT
+protocol. This assures the publisher that its message will not only
+get to its intended subscribers, but that the message will not be duplicated
+as it could with QoS=1. This QoS, however, comes with increased network
+overhead.</p>
+
+<p>When a message is published, the broker will store the message ID and
+send the message to the Topic where it would be persisted if there are
+any durable subscriptions. It will then send the PUBREC frame back to
+the client implying the broker has received the message. At this point
+the broker will expect the client to send the PUBREL frame to clear
+the message ID from its session state and complete the send with the
+broker sending a PUBCOMP.</p>
+
+<h3 id = "Wildcard_Subscriptions">Wildcard Subscriptions</h3>
+
+<p>Wild cards can be used in destination names when subscribing as a consumer. This allows you to subscribe
+to multiple destinations or hierarchy of destinations.</p>
+
+<ul>
+<li><code>/</code> is used to separate names in a path</li>
+<li><code>+</code> is used to match any name in a path</li>
+<li><code>#</code> is used to recursively match path names</li>
+</ul>
+
+<p>For example using the above, these subscriptions are possible</p>
+
+<ul>
+<li><code>PRICE/#</code> : Any price for any product on any exchange</li>
+<li><code>PRICE/STOCK/#</code> : Any price for a stock on any exchange</li>
+<li><code>PRICE/STOCK/NASDAQ/+</code> : Any stock price on NASDAQ</li>
+<li><code>PRICE/STOCK/+/IBM</code> : Any IBM stock price on any exchange</li>
+</ul>
+
+<h3 id = "Keep_Alive">Keep Alive</h3>
+
+<p>Apollo will only set a keep-alive/heart-beat monitor if the client has specified a <code>keepAlive</code> value in the
+CONNECT frame. If one is specified, the actual value used by Apollo will be 1.5 * the keep alive value. This is
+in keeping with the MQTT spec.</p>
+
+<h3 id = "Destination_Name_Restrictions">Destination Name Restrictions</h3>
+
+<p>Destination names are restricted to using the characters <code>a-z</code>, <code>A-Z</code>, <code>0-9</code>,
+<code>_</code>, <code>-</code> <code>%</code>, <code>~</code>, <code>:</code>, ' ', '(', ')' or <code>.</code> in addition to composite separator <code>,</code> and the wild
+card <code>*</code>.  Any other characters must be UTF-8 and then URL encoded if you wish to
+preserve their significance.</p>
+        <div></div>
+      </div>
+    </div>
+  </body>
+</html>
