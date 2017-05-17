@@ -155,6 +155,7 @@
 进一步开发看你想用哪一种语言咯，mqtt个人感觉在弱网络环境下进行实时通讯是一个绝佳选择（例如被用于智能家居上）
 
 ## demo简介
+
 demo是之前随意写来研究MQTT各个特性的，所以有些粗糙，但用于了解和体验MQTT还是可以的，其中证书无法通用便删掉了同时也注释了ssl部分。
 
 ![demo](img/app.png)
@@ -165,6 +166,11 @@ demo是之前随意写来研究MQTT各个特性的，所以有些粗糙，但用
 
 下载后如果需要真机运行，请现更改 LoginVC与ChartVC 文件中 的 HOST 值
 
+*PS: MyBroker文件夹放置的broker应该无效，请删除后重新生成*
+			
+			cd broker
+			apache-apollo-1.7.1/bin/apollo create MyBroker
+		
 
 
 
