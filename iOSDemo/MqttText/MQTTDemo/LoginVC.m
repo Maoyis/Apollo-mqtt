@@ -37,6 +37,8 @@
     }
     
 }
+#define CL_DEFAULE_USER_NAME        @"337e494ed13b41298bde29537c18daf5"
+#define CL_DEFAULE_PASS             @"d1e1929b4a074e16a121aeb2744c8b2e"
 - (void)signIn:(UIButton *)sender{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // 会话链接并设置超时时间
@@ -81,14 +83,14 @@
         [ak show];
         return NO;
     }else{
-        self.session.userName = _un.text;
+        self.session.userName = CL_DEFAULE_USER_NAME;//_un.text;
     }
     if ([_ps.text isEqualToString:@""]) {
         AKAlertView* ak= [AKAlertView alertView:@"提示" des:@"请输入密码"  type:AKAlertFaild effect:AKAlertEffectDrop sureTitle:@"确定" cancelTitle:@"取消"];
         [ak show];
         return NO;
     }else{
-        self.session.password = _ps.text;
+        self.session.password = CL_DEFAULE_PASS;//_ps.text;
     }
     return YES;
     
@@ -107,8 +109,8 @@
 }
 - (void)initSession{
     MQTTCFSocketTransport *transport = [[MQTTCFSocketTransport alloc] init];
-    transport.host = HOST;
-    transport.port = PORT;
+    transport.host = @"192.168.9.200";//HOST;
+    transport.port = 1883;//PORT;
     //创建一个任务
     self.session = [[MQTTSession alloc] init];
     //设置任务的传输类型
@@ -123,13 +125,13 @@
     //_session.certificates = @[ [NSData dataWithContentsOfFile:certificate] ];
 
     
-    self.session.userName = @"admin";
-    self.session.password = @"password";
-    BOOL isSuccess1 = [self.session connectAndWaitToHost:HOST
-                                  port:PORT
+    self.session.userName = CL_DEFAULE_USER_NAME;//@"admin";
+    self.session.password = CL_DEFAULE_PASS;//@"password";
+    BOOL isSuccess1 = [self.session connectAndWaitToHost:@"192.168.9.200"
+                                  port:1883
                               usingSSL:NO
                                timeout:30];
-    [_session connectToHost:HOST port:PORT usingSSL:NO];
+    [_session connectToHost:transport.host port:transport.port usingSSL:NO];
 }
 -(void)initView{
     [self.act startAnimating];

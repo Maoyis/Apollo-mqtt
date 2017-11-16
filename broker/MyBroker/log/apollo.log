@@ -1,0 +1,17 @@
+2017-07-15 13:38:29,931 | INFO  | OS     : Mac OS X 10.12.5 | 
+2017-07-15 13:38:29,934 | INFO  | JVM    : Java HotSpot(TM) 64-Bit Server VM 1.8.0_131 (Oracle Corporation) | 
+2017-07-15 13:38:29,934 | INFO  | Apollo : 1.7.1 (at: /Users/lqx/GIt/Document/Server/Mqtt-Apollo/broker/apache-apollo-1.7.1) | 
+2017-07-15 13:38:29,935 | INFO  | OS is restricting the open file limit to: 6250 | 
+2017-07-15 13:38:29,936 | WARN  | Please increase the process file limit using 'ulimit -n 8500' or configure lower connection limits on the broker connectors. | 
+2017-07-15 13:38:35,207 | INFO  | Starting store: leveldb store at /Users/lqx/GIt/Document/Server/Mqtt-Apollo/broker/MyBroker/data | 
+2017-07-15 13:38:35,479 | INFO  | Opening the log file took: 173.94 ms | 
+2017-07-15 13:38:35,553 | INFO  | Accepting connections at: tcp://0.0.0.0:61613 | 
+2017-07-15 13:38:35,553 | INFO  | Accepting connections at: tls://0.0.0.0:61614 | 
+2017-07-15 13:38:35,587 | INFO  | Accepting connections at: ws://0.0.0.0:61623/ | 
+2017-07-15 13:38:35,599 | INFO  | Accepting connections at: wss://0.0.0.0:61624/ | 
+2017-07-15 13:38:36,554 | INFO  | Administration interface available at: https://127.0.0.1:61681/ | 
+2017-07-15 13:38:36,554 | INFO  | Administration interface available at: http://127.0.0.1:61680/ | 
+2017-07-15 13:41:52,655 | INFO  | Stopped connector at: tcp://0.0.0.0:61613 | 
+2017-07-15 13:41:52,655 | INFO  | Stopped connector at: tls://0.0.0.0:61614 | 
+2017-07-15 13:41:52,667 | INFO  | Stopped connector at: wss://0.0.0.0:61624 | 
+2017-07-15 13:41:52,667 | INFO  | Stopped connector at: ws://0.0.0.0:61623 | 

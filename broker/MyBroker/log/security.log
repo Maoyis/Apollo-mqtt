@@ -1,0 +1,3 @@
+2017-07-15 13:39:09,700 authentication failed: local:/127.0.0.1:61680, remote:/127.0.0.1:49557, reason:Failed login: User id not provided 
+2017-07-15 13:39:09,905 authentication failed: local:/127.0.0.1:61680, remote:/127.0.0.1:49557, reason:Failed login: User id not provided 
+2017-07-15 13:39:20,820 authentication failed: local:/127.0.0.1:61680, remote:/127.0.0.1:49557, reason:Failed login: Invalid user id or password for user: admin 
